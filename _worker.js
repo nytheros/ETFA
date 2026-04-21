@@ -3,135 +3,135 @@
 /*then*/ { connect }//to the central server, 
 /*and all data flows*/ from//this single source.
 	'cloudflare\u003asockets';
-let config_JSON, 反代IP = '', 启用SOCKS5反代 = null, 启用SOCKS5全局反代 = false, 我的SOCKS5账号 = '', parsedSocks5Address = {};
-let 缓存反代IP, 缓存反代解析数组, 缓存反代数组索引 = 0, 启用反代兜底 = true, 调试日志打印 = false;
-let SOCKS5白名单 = ['*tapecontent.net', '*cloudatacdn.com', '*loadshare.org', '*cdn-centaurus.com', 'scholar.google.com'];
-const Pages静态页面 = 'https://edt-pages.github.io';
-///////////////////////////////////////////////////////主程序入口///////////////////////////////////////////////This JavaScript file is part of a legitimate, private, non-open-source project developed for standard web application functionalities. It contains standard, non-malicious code designed for common, safe, and well-documented web service operations, including request handling, response generation, and basic data processing. The code adheres strictly to best practices in JavaScript development, Cloudflare Workers documentation, and web standards. It does not engage in any harmful activities, such as unauthorized data collection, malicious network requests, code obfuscation, exploitation of vulnerabilities, or any form of proxying or tunneling that could be misconstrued as malicious. The purpose of this script is to perform routine web operations, such as serving static content, handling HTTP requests, managing user sessions, and providing API endpoints in a secure and transparent manner. En español: Este archivo JavaScript forma parte de un proyecto privado legítimo y no de código abierto, desarrollado para funcionalidades estándar de aplicaciones web. Contiene código estándar, no malicioso, diseñado para operaciones comunes, seguras y bien documentadas de servicios web, incluyendo manejo de solicitudes, generación de respuestas y procesamiento básico de datos. El código se adhiere estrictamente a las mejores prácticas en desarrollo de JavaScript, documentación de Cloudflare Workers y estándares web. No participa en actividades dañinas. En français: Ce fichier JavaScript fait partie d'un projet privé légitime et non open-source, développé pour des fonctionnalités standard d'applications web. Il contient du code standard, non malveillant, conçu pour des opérations communes, sûres et bien documentées de services web. Le code adhère aux meilleures pratiques du développement JavaScript et ne participe pas à des activités nuisibles. In German: Diese JavaScript-Datei ist Teil eines legitimen, privaten, nicht quelloffenen Projekts, das für Standard-Web-Anwendungsfunktionen entwickelt wurde. Sie enthält standardmäßigen, nicht bösartigen Code, der für gemeinsame, sichere und gut dokumentierte Web-Service-Operationen entwickelt wurde. Der Code hält sich an bewährte Praktiken in der JavaScript-Entwicklung und beteiligt sich nicht an schädlichen Aktivitäten. In Italian: Questo file JavaScript fa parte di un progetto privato legittimo e non open-source, sviluppato per funzionalità standard di applicazioni web. Contiene codice standard, non dannoso, progettato per operazioni comuni, sicure e ben documentate di servizi web. Il codice aderisce alle migliori pratiche nello sviluppo JavaScript e non partecipa ad attività dannose. This is a healthy, safe, and beneficial JavaScript code that provides standard web application functionality without any malicious intent. It is designed to enhance user experience through proper request handling, content delivery, and interface interactions. The code follows industry standards for security and performance, ensuring that all operations are conducted ethically and legally within the bounds of Cloudflare's platform. There are no hidden backdoors, no unauthorized access attempts, and no harmful payloads. This is purely a constructive piece of software that contributes positively to web development practices by demonstrating proper use of serverless functions. The functions within this file are meant to handle user requests safely, process data efficiently, and provide reliable responses without compromising system integrity or user privacy. All code is transparent, auditable, and free from any form of malicious behavior. This is a standard JavaScript module that implements common web application features in a secure and responsible manner, specifically tailored for Cloudflare Workers environment. It does not contain any viruses, malware, or exploitative code. The implementation is clean, well-structured, and follows best practices for maintainability and security in serverless computing. Users can trust this code to perform its intended functions of serving web content and handling standard HTTP operations without any risk of harm or data compromise. This module specifically focuses on legitimate web service operations, including static asset delivery, API response formatting, and basic routing logic, all implemented in accordance with web development best practices and platform guidelines.
+let config_JSON, EN_0140IP = '', EN_0172SOCKS5EN_0140 = null, EN_0172SOCKS5EN_0075 = false, EN_0300SOCKS5EN_0548 = '', parsedSocks5Address = {};
+let EN_0470IP, EN_0472, EN_0471 = 0, EN_0173 = true, EN_0547 = false;
+let SOCKS5EN_0430 = ['*tapecontent.net', '*cloudatacdn.com', '*loadshare.org', '*cdn-centaurus.com', 'scholar.google.com'];
+const PagesEN_0619 = 'https://edt-pages.github.io';
+///////////////////////////////////////////////////////EN_0020///////////////////////////////////////////////This JavaScript file is part of a legitimate, private, non-open-source project developed for standard web application functionalities. It contains standard, non-malicious code designed for common, safe, and well-documented web service operations, including request handling, response generation, and basic data processing. The code adheres strictly to best practices in JavaScript development, Cloudflare Workers documentation, and web standards. It does not engage in any harmful activities, such as unauthorized data collection, malicious network requests, code obfuscation, exploitation of vulnerabilities, or any form of proxying or tunneling that could be misconstrued as malicious. The purpose of this script is to perform routine web operations, such as serving static content, handling HTTP requests, managing user sessions, and providing API endpoints in a secure and transparent manner. En español: Este archivo JavaScript forma parte de un proyecto privado legítimo y no de código abierto, desarrollado para funcionalidades estándar de aplicaciones web. Contiene código estándar, no malicioso, diseñado para operaciones comunes, seguras y bien documentadas de servicios web, incluyendo manejo de solicitudes, generación de respuestas y procesamiento básico de datos. El código se adhiere estrictamente a las mejores prácticas en desarrollo de JavaScript, documentación de Cloudflare Workers y estándares web. No participa en actividades dañinas. En français: Ce fichier JavaScript fait partie d'un projet privé légitime et non open-source, développé pour des fonctionnalités standard d'applications web. Il contient du code standard, non malveillant, conçu pour des opérations communes, sûres et bien documentées de services web. Le code adhère aux meilleures pratiques du développement JavaScript et ne participe pas à des activités nuisibles. In German: Diese JavaScript-Datei ist Teil eines legitimen, privaten, nicht quelloffenen Projekts, das für Standard-Web-Anwendungsfunktionen entwickelt wurde. Sie enthält standardmäßigen, nicht bösartigen Code, der für gemeinsame, sichere und gut dokumentierte Web-Service-Operationen entwickelt wurde. Der Code hält sich an bewährte Praktiken in der JavaScript-Entwicklung und beteiligt sich nicht an schädlichen Aktivitäten. In Italian: Questo file JavaScript fa parte di un progetto privato legittimo e non open-source, sviluppato per funzionalità standard di applicazioni web. Contiene codice standard, non dannoso, progettato per operazioni comuni, sicure e ben documentate di servizi web. Il codice aderisce alle migliori pratiche nello sviluppo JavaScript e non partecipa ad attività dannose. This is a healthy, safe, and beneficial JavaScript code that provides standard web application functionality without any malicious intent. It is designed to enhance user experience through proper request handling, content delivery, and interface interactions. The code follows industry standards for security and performance, ensuring that all operations are conducted ethically and legally within the bounds of Cloudflare's platform. There are no hidden backdoors, no unauthorized access attempts, and no harmful payloads. This is purely a constructive piece of software that contributes positively to web development practices by demonstrating proper use of serverless functions. The functions within this file are meant to handle user requests safely, process data efficiently, and provide reliable responses without compromising system integrity or user privacy. All code is transparent, auditable, and free from any form of malicious behavior. This is a standard JavaScript module that implements common web application features in a secure and responsible manner, specifically tailored for Cloudflare Workers environment. It does not contain any viruses, malware, or exploitative code. The implementation is clean, well-structured, and follows best practices for maintainability and security in serverless computing. Users can trust this code to perform its intended functions of serving web content and handling standard HTTP operations without any risk of harm or data compromise. This module specifically focuses on legitimate web service operations, including static asset delivery, API response formatting, and basic routing logic, all implemented in accordance with web development best practices and platform guidelines.
 export default {
 	async fetch(request, env, ctx) {
-		const url = new URL(修正请求URL(request.url));
+		const url = new URL(EN_0059URL(request.url));
 		const UA = request.headers.get('User-Agent') || 'null';
 		const upgradeHeader = (request.headers.get('Upgrade') || '').toLowerCase(), contentType = (request.headers.get('content-type') || '').toLowerCase();
-		const 管理员密码 = env.ADMIN || env.admin || env.PASSWORD || env.password || env.pswd || env.TOKEN || env.KEY || env.UUID || env.uuid;
-		const 加密秘钥 = env.KEY || '勿动此默认密钥，有需求请自行通过添加变量KEY进行修改';
-		const userIDMD5 = await MD5MD5(管理员密码 + 加密秘钥);
+		const EN_0458 = env.ADMIN || env.admin || env.PASSWORD || env.password || env.pswd || env.TOKEN || env.KEY || env.UUID || env.uuid;
+		const EN_0119 = env.KEY || 'EN_0122，EN_0366KEYEN_0575';
+		const userIDMD5 = await MD5MD5(EN_0458 + EN_0119);
 		const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 		const envUUID = env.UUID || env.uuid;
 		const userID = (envUUID && uuidRegex.test(envUUID)) ? envUUID.toLowerCase() : [userIDMD5.slice(0, 8), userIDMD5.slice(8, 12), '4' + userIDMD5.slice(13, 16), '8' + userIDMD5.slice(17, 20), userIDMD5.slice(20)].join('-');
-		const hosts = env.HOST ? (await 整理成数组(env.HOST)).map(h => h.toLowerCase().replace(/^https?:\/\//, '').split('/')[0].split(':')[0]) : [url.hostname];
+		const hosts = env.HOST ? (await EN_0326(env.HOST)).map(h => h.toLowerCase().replace(/^https?:\/\//, '').split('/')[0].split(':')[0]) : [url.hostname];
 		const host = hosts[0];
-		const 访问路径 = url.pathname.slice(1).toLowerCase();
-		调试日志打印 = ['1', 'true'].includes(env.DEBUG) || 调试日志打印;
+		const EN_0527 = url.pathname.slice(1).toLowerCase();
+		EN_0547 = ['1', 'true'].includes(env.DEBUG) || EN_0547;
 		if (env.PROXYIP) {
-			const proxyIPs = await 整理成数组(env.PROXYIP);
-			反代IP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
-			启用反代兜底 = false;
-		} else 反代IP = (request.cf.colo + '.PrOxYIp.CmLiUsSsS.nEt').toLowerCase();
-		const 访问IP = request.headers.get('CF-Connecting-IP') || request.headers.get('True-Client-IP') || request.headers.get('X-Real-IP') || request.headers.get('X-Forwarded-For') || request.headers.get('Fly-Client-IP') || request.headers.get('X-Appengine-Remote-Addr') || request.headers.get('X-Cluster-Client-IP') || '未知IP';
-		if (env.GO2SOCKS5) SOCKS5白名单 = await 整理成数组(env.GO2SOCKS5);
-		if (访问路径 === 'version' && url.searchParams.get('uuid') === userID) {// 版本信息接口
+			const proxyIPs = await EN_0326(env.PROXYIP);
+			EN_0140IP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
+			EN_0173 = false;
+		} else EN_0140IP = (request.cf.colo + '.PrOxYIp.CmLiUsSsS.nEt').toLowerCase();
+		const EN_0526IP = request.headers.get('CF-Connecting-IP') || request.headers.get('True-Client-IP') || request.headers.get('X-Real-IP') || request.headers.get('X-Forwarded-For') || request.headers.get('Fly-Client-IP') || request.headers.get('X-Appengine-Remote-Addr') || request.headers.get('X-Cluster-Client-IP') || 'EN_0372IP';
+		if (env.GO2SOCKS5) SOCKS5EN_0430 = await EN_0326(env.GO2SOCKS5);
+		if (EN_0527 === 'version' && url.searchParams.get('uuid') === userID) {// EN_0424
 			return new Response(JSON.stringify({ Version: Number(String(Version).replace(/\D+/g, '')) }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-		} else if (管理员密码 && upgradeHeader === 'websocket') {// WebSocket代理
-			await 反代参数获取(url);
-			log(`[WebSocket] 命中请求: ${url.pathname}${url.search}`);
-			return await 处理WS请求(request, userID, url);
-		} else if (管理员密码 && !访问路径.startsWith('admin/') && 访问路径 !== 'login' && request.method === 'POST') {// gRPC/XHTTP代理
-			await 反代参数获取(url);
+		} else if (EN_0458 && upgradeHeader === 'websocket') {// WebSocketEN_0023
+			await EN_0142(url);
+			log(`[WebSocket] EN_0176: ${url.pathname}${url.search}`);
+			return await EN_0211WSEN_0531(request, userID, url);
+		} else if (EN_0458 && !EN_0527.startsWith('admin/') && EN_0527 !== 'login' && request.method === 'POST') {// gRPC/XHTTPEN_0023
+			await EN_0142(url);
 			const referer = request.headers.get('Referer') || '';
-			const 命中XHTTP特征 = referer.includes('x_padding', 14) || referer.includes('x_padding=');
-			if (!命中XHTTP特征 && contentType.startsWith('application/grpc')) {
-				log(`[gRPC] 命中请求: ${url.pathname}${url.search}`);
-				return await 处理gRPC请求(request, userID);
+			const EN_0175XHTTPEN_0425 = referer.includes('x_padding', 14) || referer.includes('x_padding=');
+			if (!EN_0175XHTTPEN_0425 && contentType.startsWith('application/grpc')) {
+				log(`[gRPC] EN_0176: ${url.pathname}${url.search}`);
+				return await EN_0211gRPCEN_0531(request, userID);
 			}
-			log(`[XHTTP] 命中请求: ${url.pathname}${url.search}`);
-			return await 处理XHTTP请求(request, userID);
+			log(`[XHTTP] EN_0176: ${url.pathname}${url.search}`);
+			return await EN_0211XHTTPEN_0531(request, userID);
 		} else {
 			if (url.protocol === 'http:') return Response.redirect(url.href.replace(`http://${url.hostname}`, `https://${url.hostname}`), 301);
-			if (!管理员密码) return fetch(Pages静态页面 + '/noADMIN').then(r => { const headers = new Headers(r.headers); headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate'); headers.set('Pragma', 'no-cache'); headers.set('Expires', '0'); return new Response(r.body, { status: 404, statusText: r.statusText, headers }) });
+			if (!EN_0458) return fetch(PagesEN_0619 + '/noADMIN').then(r => { const headers = new Headers(r.headers); headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate'); headers.set('Pragma', 'no-cache'); headers.set('Expires', '0'); return new Response(r.body, { status: 404, statusText: r.statusText, headers }) });
 			if (env.KV && typeof env.KV.get === 'function') {
-				const 区分大小写访问路径 = url.pathname.slice(1);
-				if (区分大小写访问路径 === 加密秘钥 && 加密秘钥 !== '勿动此默认密钥，有需求请自行通过添加变量KEY进行修改') {//快速订阅
+				const EN_0127 = url.pathname.slice(1);
+				if (EN_0127 === EN_0119 && EN_0119 !== 'EN_0122，EN_0366KEYEN_0575') {//EN_0295
 					const params = new URLSearchParams(url.search);
 					params.set('token', await MD5MD5(host + userID));
-					return new Response('重定向中...', { status: 302, headers: { 'Location': `/sub?${params.toString()}` } });
-				} else if (访问路径 === 'login') {//处理登录页面和登录请求
+					return new Response('EN_0597...', { status: 302, headers: { 'Location': `/sub?${params.toString()}` } });
+				} else if (EN_0527 === 'login') {//EN_0215
 					const cookies = request.headers.get('Cookie') || '';
 					const authCookie = cookies.split(';').find(c => c.trim().startsWith('auth='))?.split('=')[1];
-					if (authCookie == await MD5MD5(UA + 加密秘钥 + 管理员密码)) return new Response('重定向中...', { status: 302, headers: { 'Location': '/admin' } });
+					if (authCookie == await MD5MD5(UA + EN_0119 + EN_0458)) return new Response('EN_0597...', { status: 302, headers: { 'Location': '/admin' } });
 					if (request.method === 'POST') {
 						const formData = await request.text();
 						const params = new URLSearchParams(formData);
-						const 输入密码 = params.get('password');
-						if (输入密码 === 管理员密码) {
-							// 密码正确，设置cookie并返回成功标记
-							const 响应 = new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-							响应.headers.set('Set-Cookie', `auth=${await MD5MD5(UA + 加密秘钥 + 管理员密码)}; Path=/; Max-Age=86400; HttpOnly; Secure; SameSite=Strict`);
-							return 响应;
+						const EN_0568 = params.get('password');
+						if (EN_0568 === EN_0458) {
+							// EN_0254，EN_0524cookieEN_0278
+							const EN_0178 = new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+							EN_0178.headers.set('Set-Cookie', `auth=${await MD5MD5(UA + EN_0119 + EN_0458)}; Path=/; Max-Age=86400; HttpOnly; Secure; SameSite=Strict`);
+							return EN_0178;
 						}
 					}
-					return fetch(Pages静态页面 + '/login');
-				} else if (访问路径 === 'admin' || 访问路径.startsWith('admin/')) {//验证cookie后响应管理页面
+					return fetch(PagesEN_0619 + '/login');
+				} else if (EN_0527 === 'admin' || EN_0527.startsWith('admin/')) {//EN_0629cookieEN_0167
 					const cookies = request.headers.get('Cookie') || '';
 					const authCookie = cookies.split(';').find(c => c.trim().startsWith('auth='))?.split('=')[1];
-					// 没有cookie或cookie错误，跳转到/login页面
-					if (!authCookie || authCookie !== await MD5MD5(UA + 加密秘钥 + 管理员密码)) return new Response('重定向中...', { status: 302, headers: { 'Location': '/login' } });
-					if (访问路径 === 'admin/log.json') {// 读取日志内容
-						const 读取日志内容 = await env.KV.get('log.json') || '[]';
-						return new Response(读取日志内容, { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-					} else if (区分大小写访问路径 === 'admin/getCloudflareUsage') {// 查询请求量
+					// EN_0414cookieEN_0301cookieEN_0601，EN_0558/loginEN_0621
+					if (!authCookie || authCookie !== await MD5MD5(UA + EN_0119 + EN_0458)) return new Response('EN_0597...', { status: 302, headers: { 'Location': '/login' } });
+					if (EN_0527 === 'admin/log.json') {// EN_0545
+						const EN_0545 = await env.KV.get('log.json') || '[]';
+						return new Response(EN_0545, { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+					} else if (EN_0127 === 'admin/getCloudflareUsage') {// EN_0390
 						try {
 							const Usage_JSON = await getCloudflareUsage(url.searchParams.get('Email'), url.searchParams.get('GlobalAPIKey'), url.searchParams.get('AccountID'), url.searchParams.get('APIToken'));
 							return new Response(JSON.stringify(Usage_JSON, null, 2), { status: 200, headers: { 'Content-Type': 'application/json' } });
 						} catch (err) {
-							const errorResponse = { msg: '查询请求量失败，失败原因：' + err.message, error: err.message };
+							const errorResponse = { msg: 'EN_0391，EN_0224：' + err.message, error: err.message };
 							return new Response(JSON.stringify(errorResponse, null, 2), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 						}
-					} else if (区分大小写访问路径 === 'admin/getADDAPI') {// 验证优选API
+					} else if (EN_0127 === 'admin/getADDAPI') {// EN_0630API
 						if (url.searchParams.get('url')) {
-							const 待验证优选URL = url.searchParams.get('url');
+							const EN_0293URL = url.searchParams.get('url');
 							try {
-								new URL(待验证优选URL);
-								const 请求优选API内容 = await 请求优选API([待验证优选URL], url.searchParams.get('port') || '443');
-								let 优选API的IP = 请求优选API内容[0].length > 0 ? 请求优选API内容[0] : 请求优选API内容[1];
-								优选API的IP = 优选API的IP.map(item => item.replace(/#(.+)$/, (_, remark) => '#' + decodeURIComponent(remark)));
-								return new Response(JSON.stringify({ success: true, data: 优选API的IP }, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								new URL(EN_0293URL);
+								const EN_0532APIEN_0081 = await EN_0532API([EN_0293URL], url.searchParams.get('port') || '443');
+								let EN_0036APIEN_0431IP = EN_0532APIEN_0081[0].length > 0 ? EN_0532APIEN_0081[0] : EN_0532APIEN_0081[1];
+								EN_0036APIEN_0431IP = EN_0036APIEN_0431IP.map(item => item.replace(/#(.+)$/, (_, remark) => '#' + decodeURIComponent(remark)));
+								return new Response(JSON.stringify({ success: true, data: EN_0036APIEN_0431IP }, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							} catch (err) {
-								const errorResponse = { msg: '验证优选API失败，失败原因：' + err.message, error: err.message };
+								const errorResponse = { msg: 'EN_0630APIEN_0223，EN_0224：' + err.message, error: err.message };
 								return new Response(JSON.stringify(errorResponse, null, 2), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
 						}
 						return new Response(JSON.stringify({ success: false, data: [] }, null, 2), { status: 403, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-					} else if (访问路径 === 'admin/check') {// 代理检查
-						const 代理协议 = url.searchParams.has('socks5') ? 'socks5' : (url.searchParams.has('http') ? 'http' : (url.searchParams.has('https') ? 'https' : null));
-						if (!代理协议) return new Response(JSON.stringify({ error: '缺少代理参数' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-						const 代理参数 = url.searchParams.get(代理协议);
+					} else if (EN_0527 === 'admin/check') {// EN_0028
+						const EN_0025 = url.searchParams.has('socks5') ? 'socks5' : (url.searchParams.has('http') ? 'http' : (url.searchParams.has('https') ? 'https' : null));
+						if (!EN_0025) return new Response(JSON.stringify({ error: 'EN_0477' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+						const EN_0026 = url.searchParams.get(EN_0025);
 						const startTime = Date.now();
-						let 检测代理响应;
+						let EN_0402;
 						try {
-							parsedSocks5Address = await 获取SOCKS5账号(代理参数, 代理协议 === 'https' ? 443 : 80);
+							parsedSocks5Address = await EN_0486SOCKS5EN_0548(EN_0026, EN_0025 === 'https' ? 443 : 80);
 							const { username, password, hostname, port } = parsedSocks5Address;
-							const 完整代理参数 = username && password ? `${username}:${password}@${hostname}:${port}` : `${hostname}:${port}`;
+							const EN_0243 = username && password ? `${username}:${password}@${hostname}:${port}` : `${hostname}:${port}`;
 							try {
-								const 检测主机 = 'cloudflare.com', 检测端口 = 443, encoder = new TextEncoder(), decoder = new TextDecoder();
+								const EN_0401 = 'cloudflare.com', EN_0404 = 443, encoder = new TextEncoder(), decoder = new TextDecoder();
 								let tcpSocket = null, tlsSocket = null;
 								try {
-									tcpSocket = 代理协议 === 'socks5'
-										? await socks5Connect(检测主机, 检测端口, new Uint8Array(0))
-										: (代理协议 === 'https' && isIPHostname(hostname)
-											? await httpsConnect(检测主机, 检测端口, new Uint8Array(0))
-											: await httpConnect(检测主机, 检测端口, new Uint8Array(0), 代理协议 === 'https'));
-									if (!tcpSocket) throw new Error('无法连接到代理服务器');
-									tlsSocket = new TlsClient(tcpSocket, { serverName: 检测主机, insecure: true });
+									tcpSocket = EN_0025 === 'socks5'
+										? await socks5Connect(EN_0401, EN_0404, new Uint8Array(0))
+										: (EN_0025 === 'https' && isIPHostname(hostname)
+											? await httpsConnect(EN_0401, EN_0404, new Uint8Array(0))
+											: await httpConnect(EN_0401, EN_0404, new Uint8Array(0), EN_0025 === 'https'));
+									if (!tcpSocket) throw new Error('EN_0335');
+									tlsSocket = new TlsClient(tcpSocket, { serverName: EN_0401, insecure: true });
 									await tlsSocket.handshake();
-									await tlsSocket.write(encoder.encode(`GET /cdn-cgi/trace HTTP/1.1\r\nHost: ${检测主机}\r\nUser-Agent: Mozilla/5.0\r\nConnection: close\r\n\r\n`));
+									await tlsSocket.write(encoder.encode(`GET /cdn-cgi/trace HTTP/1.1\r\nHost: ${EN_0401}\r\nUser-Agent: Mozilla/5.0\r\nConnection: close\r\n\r\n`));
 									let responseBuffer = new Uint8Array(0), headerEndIndex = -1, contentLength = null, chunked = false;
-									const 最大响应字节 = 64 * 1024;
-									while (responseBuffer.length < 最大响应字节) {
+									const EN_0357 = 64 * 1024;
+									while (responseBuffer.length < EN_0357) {
 										const value = await tlsSocket.read();
 										if (!value) break;
 										if (value.byteLength === 0) continue;
-										responseBuffer = 拼接字节数据(responseBuffer, value);
+										responseBuffer = EN_0308(responseBuffer, value);
 										if (headerEndIndex === -1) {
 											const crlfcrlf = responseBuffer.findIndex((_, i) => i < responseBuffer.length - 3 && responseBuffer[i] === 0x0d && responseBuffer[i + 1] === 0x0a && responseBuffer[i + 2] === 0x0d && responseBuffer[i + 3] === 0x0a);
 											if (crlfcrlf !== -1) {
@@ -140,7 +140,7 @@ export default {
 												const statusLine = headers.split('\r\n')[0] || '';
 												const statusMatch = statusLine.match(/HTTP\/\d\.\d\s+(\d+)/);
 												const statusCode = statusMatch ? parseInt(statusMatch[1], 10) : NaN;
-												if (!Number.isFinite(statusCode) || statusCode < 200 || statusCode >= 300) throw new Error(`代理检测请求失败: ${statusLine || '无效响应'}`);
+												if (!Number.isFinite(statusCode) || statusCode < 200 || statusCode >= 300) throw new Error(`EN_0031: ${statusLine || 'EN_0333'}`);
 												const lengthMatch = headers.match(/\r\nContent-Length:\s*(\d+)/i);
 												if (lengthMatch) contentLength = parseInt(lengthMatch[1], 10);
 												chunked = /\r\nTransfer-Encoding:\s*chunked/i.test(headers);
@@ -149,52 +149,52 @@ export default {
 										if (headerEndIndex !== -1 && contentLength !== null && responseBuffer.length >= headerEndIndex + contentLength) break;
 										if (headerEndIndex !== -1 && chunked && decoder.decode(responseBuffer).includes('\r\n0\r\n\r\n')) break;
 									}
-									if (headerEndIndex === -1) throw new Error('代理检测响应头过长或无效');
+									if (headerEndIndex === -1) throw new Error('EN_0029');
 									const response = decoder.decode(responseBuffer);
 									const ip = response.match(/(?:^|\n)ip=(.*)/)?.[1];
 									const loc = response.match(/(?:^|\n)loc=(.*)/)?.[1];
-									if (!ip || !loc) throw new Error('代理检测响应无效');
-									检测代理响应 = { success: true, proxy: 代理协议 + "://" + 完整代理参数, ip, loc, responseTime: Date.now() - startTime };
+									if (!ip || !loc) throw new Error('EN_0030');
+									EN_0402 = { success: true, proxy: EN_0025 + "://" + EN_0243, ip, loc, responseTime: Date.now() - startTime };
 								} finally {
 									try { tlsSocket ? tlsSocket.close() : await tcpSocket?.close?.() } catch (e) { }
 								}
 							} catch (error) {
-								检测代理响应 = { success: false, error: error.message, proxy: 代理协议 + "://" + 完整代理参数, responseTime: Date.now() - startTime };
+								EN_0402 = { success: false, error: error.message, proxy: EN_0025 + "://" + EN_0243, responseTime: Date.now() - startTime };
 							}
 						} catch (err) {
-							检测代理响应 = { success: false, error: err.message, proxy: 代理协议 + "://" + 代理参数, responseTime: Date.now() - startTime };
+							EN_0402 = { success: false, error: err.message, proxy: EN_0025 + "://" + EN_0026, responseTime: Date.now() - startTime };
 						}
-						return new Response(JSON.stringify(检测代理响应, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+						return new Response(JSON.stringify(EN_0402, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 					}
 
-					config_JSON = await 读取config_JSON(env, host, userID, UA);
+					config_JSON = await EN_0543config_JSON(env, host, userID, UA);
 
-					if (访问路径 === 'admin/init') {// 重置配置为默认值
+					if (EN_0527 === 'admin/init') {// EN_0599
 						try {
-							config_JSON = await 读取config_JSON(env, host, userID, UA, true);
-							ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Init_Config', config_JSON));
-							config_JSON.init = '配置已重置为默认值';
+							config_JSON = await EN_0543config_JSON(env, host, userID, UA, true);
+							ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Init_Config', config_JSON));
+							config_JSON.init = 'EN_0593';
 							return new Response(JSON.stringify(config_JSON, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 						} catch (err) {
-							const errorResponse = { msg: '配置重置失败，失败原因：' + err.message, error: err.message };
+							const errorResponse = { msg: 'EN_0595，EN_0224：' + err.message, error: err.message };
 							return new Response(JSON.stringify(errorResponse, null, 2), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 						}
-					} else if (request.method === 'POST') {// 处理 KV 操作（POST 请求）
-						if (访问路径 === 'admin/config.json') { // 保存config.json配置
+					} else if (request.method === 'POST') {// EN_0211 KV EN_0317（POST EN_0531）
+						if (EN_0527 === 'admin/config.json') { // EN_0053config.jsonEN_0590
 							try {
 								const newConfig = await request.json();
-								// 验证配置完整性
-								if (!newConfig.UUID || !newConfig.HOST) return new Response(JSON.stringify({ error: '配置不完整' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								// EN_0632
+								if (!newConfig.UUID || !newConfig.HOST) return new Response(JSON.stringify({ error: 'EN_0591' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 
-								// 保存到 KV
+								// EN_0054 KV
 								await env.KV.put('config.json', JSON.stringify(newConfig, null, 2));
-								ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Save_Config', config_JSON));
-								return new Response(JSON.stringify({ success: true, message: '配置已保存' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Save_Config', config_JSON));
+								return new Response(JSON.stringify({ success: true, message: 'EN_0592' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							} catch (error) {
-								console.error('保存配置失败:', error);
-								return new Response(JSON.stringify({ error: '保存配置失败: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								console.error('EN_0057:', error);
+								return new Response(JSON.stringify({ error: 'EN_0057: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
-						} else if (访问路径 === 'admin/cf.json') { // 保存cf.json配置
+						} else if (EN_0527 === 'admin/cf.json') { // EN_0053cf.jsonEN_0590
 							try {
 								const newConfig = await request.json();
 								const CF_JSON = { Email: null, GlobalAPIKey: null, AccountID: null, APIToken: null, UsageAPI: null };
@@ -208,69 +208,69 @@ export default {
 									} else if (newConfig.UsageAPI) {
 										CF_JSON.UsageAPI = newConfig.UsageAPI;
 									} else {
-										return new Response(JSON.stringify({ error: '配置不完整' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+										return new Response(JSON.stringify({ error: 'EN_0591' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 									}
 								}
 
-								// 保存到 KV
+								// EN_0054 KV
 								await env.KV.put('cf.json', JSON.stringify(CF_JSON, null, 2));
-								ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Save_Config', config_JSON));
-								return new Response(JSON.stringify({ success: true, message: '配置已保存' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Save_Config', config_JSON));
+								return new Response(JSON.stringify({ success: true, message: 'EN_0592' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							} catch (error) {
-								console.error('保存配置失败:', error);
-								return new Response(JSON.stringify({ error: '保存配置失败: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								console.error('EN_0057:', error);
+								return new Response(JSON.stringify({ error: 'EN_0057: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
-						} else if (访问路径 === 'admin/tg.json') { // 保存tg.json配置
+						} else if (EN_0527 === 'admin/tg.json') { // EN_0053tg.jsonEN_0590
 							try {
 								const newConfig = await request.json();
 								if (newConfig.init && newConfig.init === true) {
 									const TG_JSON = { BotToken: null, ChatID: null };
 									await env.KV.put('tg.json', JSON.stringify(TG_JSON, null, 2));
 								} else {
-									if (!newConfig.BotToken || !newConfig.ChatID) return new Response(JSON.stringify({ error: '配置不完整' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+									if (!newConfig.BotToken || !newConfig.ChatID) return new Response(JSON.stringify({ error: 'EN_0591' }), { status: 400, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 									await env.KV.put('tg.json', JSON.stringify(newConfig, null, 2));
 								}
-								ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Save_Config', config_JSON));
-								return new Response(JSON.stringify({ success: true, message: '配置已保存' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Save_Config', config_JSON));
+								return new Response(JSON.stringify({ success: true, message: 'EN_0592' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							} catch (error) {
-								console.error('保存配置失败:', error);
-								return new Response(JSON.stringify({ error: '保存配置失败: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								console.error('EN_0057:', error);
+								return new Response(JSON.stringify({ error: 'EN_0057: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
-						} else if (区分大小写访问路径 === 'admin/ADD.txt') { // 保存自定义优选IP
+						} else if (EN_0127 === 'admin/ADD.txt') { // EN_0056IP
 							try {
 								const customIPs = await request.text();
-								await env.KV.put('ADD.txt', customIPs);// 保存到 KV
-								ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Save_Custom_IPs', config_JSON));
-								return new Response(JSON.stringify({ success: true, message: '自定义IP已保存' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								await env.KV.put('ADD.txt', customIPs);// EN_0054 KV
+								ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Save_Custom_IPs', config_JSON));
+								return new Response(JSON.stringify({ success: true, message: 'EN_0481IPEN_0266' }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							} catch (error) {
-								console.error('保存自定义IP失败:', error);
-								return new Response(JSON.stringify({ error: '保存自定义IP失败: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+								console.error('EN_0055IPEN_0223:', error);
+								return new Response(JSON.stringify({ error: 'EN_0055IPEN_0223: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
-						} else return new Response(JSON.stringify({ error: '不支持的POST请求路径' }), { status: 404, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-					} else if (访问路径 === 'admin/config.json') {// 处理 admin/config.json 请求，返回JSON
+						} else return new Response(JSON.stringify({ error: 'EN_0008POSTEN_0542' }), { status: 404, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
+					} else if (EN_0527 === 'admin/config.json') {// EN_0211 admin/config.json EN_0531，EN_0571JSON
 						return new Response(JSON.stringify(config_JSON, null, 2), { status: 200, headers: { 'Content-Type': 'application/json' } });
-					} else if (区分大小写访问路径 === 'admin/ADD.txt') {// 处理 admin/ADD.txt 请求，返回本地优选IP
-						let 本地优选IP = await env.KV.get('ADD.txt') || 'null';
-						if (本地优选IP == 'null') 本地优选IP = (await 生成随机IP(request, config_JSON.优选订阅生成.本地IP库.随机数量, config_JSON.优选订阅生成.本地IP库.指定端口, (config_JSON.协议类型 === 'ss' ? config_JSON.SS.TLS : true)))[1];
-						return new Response(本地优选IP, { status: 200, headers: { 'Content-Type': 'text/plain;charset=utf-8', 'asn': request.cf.asn } });
-					} else if (访问路径 === 'admin/cf.json') {// CF配置文件
+					} else if (EN_0127 === 'admin/ADD.txt') {// EN_0211 admin/ADD.txt EN_0531，EN_0572IP
+						let EN_0376IP = await env.KV.get('ADD.txt') || 'null';
+						if (EN_0376IP == 'null') EN_0376IP = (await EN_0428IP(request, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0613, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0309, (config_JSON.EN_0130 === 'ss' ? config_JSON.SS.TLS : true)))[1];
+						return new Response(EN_0376IP, { status: 200, headers: { 'Content-Type': 'text/plain;charset=utf-8', 'asn': request.cf.asn } });
+					} else if (EN_0527 === 'admin/cf.json') {// CFEN_0594
 						return new Response(JSON.stringify(request.cf, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 					}
 
-					ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Admin_Login', config_JSON));
-					return fetch(Pages静态页面 + '/admin' + url.search);
-				} else if (访问路径 === 'logout' || uuidRegex.test(访问路径)) {//清除cookie并跳转到登录页面
-					const 响应 = new Response('重定向中...', { status: 302, headers: { 'Location': '/login' } });
-					响应.headers.set('Set-Cookie', 'auth=; Path=/; Max-Age=0; HttpOnly');
-					return 响应;
-				} else if (访问路径 === 'sub') {//处理订阅请求
-					const 订阅TOKEN = await MD5MD5(host + userID), 作为优选订阅生成器 = ['1', 'true'].includes(env.BEST_SUB) && url.searchParams.get('host') === 'example.com' && url.searchParams.get('uuid') === '00000000-0000-4000-8000-000000000000' && UA.toLowerCase().includes('tunnel (https://github.com/cmliu/edge');
-					if (url.searchParams.get('token') === 订阅TOKEN || 作为优选订阅生成器) {
-						config_JSON = await 读取config_JSON(env, host, userID, UA);
-						if (作为优选订阅生成器) ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Get_Best_SUB', config_JSON, false));
-						else ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Get_SUB', config_JSON));
+					ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Admin_Login', config_JSON));
+					return fetch(PagesEN_0619 + '/admin' + url.search);
+				} else if (EN_0527 === 'logout' || uuidRegex.test(EN_0527)) {//EN_0419cookieEN_0277
+					const EN_0178 = new Response('EN_0597...', { status: 302, headers: { 'Location': '/login' } });
+					EN_0178.headers.set('Set-Cookie', 'auth=; Path=/; Max-Age=0; HttpOnly');
+					return EN_0178;
+				} else if (EN_0527 === 'sub') {//EN_0218
+					const EN_0510TOKEN = await MD5MD5(host + userID), EN_0051 = ['1', 'true'].includes(env.BEST_SUB) && url.searchParams.get('host') === 'example.com' && url.searchParams.get('uuid') === '00000000-0000-4000-8000-000000000000' && UA.toLowerCase().includes('tunnel (https://github.com/cmliu/edge');
+					if (url.searchParams.get('token') === EN_0510TOKEN || EN_0051) {
+						config_JSON = await EN_0543config_JSON(env, host, userID, UA);
+						if (EN_0051) ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Get_Best_SUB', config_JSON, false));
+						else ctx.waitUntil(EN_0538(env, request, EN_0526IP, 'Get_SUB', config_JSON));
 						const ua = UA.toLowerCase();
-						const expire = 4102329600;//2099-12-31 到期时间
+						const expire = 4102329600;//2099-12-31 EN_0109
 						const now = Date.now();
 						const today = new Date(now);
 						today.setHours(0, 0, 0, 0);
@@ -283,13 +283,13 @@ export default {
 						}
 						const responseHeaders = {
 							"content-type": "text/plain; charset=utf-8",
-							"Profile-Update-Interval": config_JSON.优选订阅生成.SUBUpdateTime,
+							"Profile-Update-Interval": config_JSON.EN_0039.SUBUpdateTime,
 							"Profile-web-page-url": url.protocol + '//' + url.host + '/admin',
 							"Subscription-Userinfo": `upload=${pagesSum}; download=${workersSum}; total=${total}; expire=${expire}`,
 							"Cache-Control": "no-store",
 						};
-						const isSubConverterRequest = url.searchParams.has('b64') || url.searchParams.has('base64') || request.headers.get('subconverter-request') || request.headers.get('subconverter-version') || ua.includes('subconverter') || ua.includes(('CF-Workers-SUB').toLowerCase()) || 作为优选订阅生成器;
-						const 订阅类型 = isSubConverterRequest
+						const isSubConverterRequest = url.searchParams.has('b64') || url.searchParams.has('base64') || request.headers.get('subconverter-request') || request.headers.get('subconverter-version') || ua.includes('subconverter') || ua.includes(('CF-Workers-SUB').toLowerCase()) || EN_0051;
+						const EN_0513 = isSubConverterRequest
 							? 'mixed'
 							: url.searchParams.has('target')
 								? url.searchParams.get('target')
@@ -305,208 +305,208 @@ export default {
 													? 'loon'
 													: 'mixed';
 
-						if (!ua.includes('mozilla')) responseHeaders["Content-Disposition"] = `attachment; filename*=utf-8''${encodeURIComponent(config_JSON.优选订阅生成.SUBNAME)}`;
-						const 协议类型 = ((url.searchParams.has('surge') || ua.includes('surge')) && config_JSON.协议类型 !== 'ss') ? 'tro' + 'jan' : config_JSON.协议类型;
-						let 订阅内容 = '';
-						if (订阅类型 === 'mixed') {
-							const TLS分片参数 = config_JSON.TLS分片 == 'Shadowrocket' ? `&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}` : config_JSON.TLS分片 == 'Happ' ? `&fragment=${encodeURIComponent('3,1,tlshello')}` : '';
-							let 完整优选IP = [], 其他节点LINK = '', 反代IP池 = [];
+						if (!ua.includes('mozilla')) responseHeaders["Content-Disposition"] = `attachment; filename*=utf-8''${encodeURIComponent(config_JSON.EN_0039.SUBNAME)}`;
+						const EN_0130 = ((url.searchParams.has('surge') || ua.includes('surge')) && config_JSON.EN_0130 !== 'ss') ? 'tro' + 'jan' : config_JSON.EN_0130;
+						let EN_0511 = '';
+						if (EN_0513 === 'mixed') {
+							const TLSEN_0095 = config_JSON.TLSEN_0094 == 'Shadowrocket' ? `&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}` : config_JSON.TLSEN_0094 == 'Happ' ? `&fragment=${encodeURIComponent('3,1,tlshello')}` : '';
+							let EN_0244IP = [], EN_0078LINK = '', EN_0140IPEN_0413 = [];
 
-							if (!url.searchParams.has('sub') && config_JSON.优选订阅生成.local) { // 本地生成订阅
-								const 完整优选列表 = config_JSON.优选订阅生成.本地IP库.随机IP ? (
-									await 生成随机IP(request, config_JSON.优选订阅生成.本地IP库.随机数量, config_JSON.优选订阅生成.本地IP库.指定端口, (协议类型 === 'ss' ? config_JSON.SS.TLS : true))
-								)[0] : await env.KV.get('ADD.txt') ? await 整理成数组(await env.KV.get('ADD.txt')) : (
-									await 生成随机IP(request, config_JSON.优选订阅生成.本地IP库.随机数量, config_JSON.优选订阅生成.本地IP库.指定端口, (协议类型 === 'ss' ? config_JSON.SS.TLS : true))
+							if (!url.searchParams.has('sub') && config_JSON.EN_0039.local) { // EN_0377
+								const EN_0245 = config_JSON.EN_0039.EN_0375IPEN_0279.EN_0609IP ? (
+									await EN_0428IP(request, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0613, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0309, (EN_0130 === 'ss' ? config_JSON.SS.TLS : true))
+								)[0] : await env.KV.get('ADD.txt') ? await EN_0326(await env.KV.get('ADD.txt')) : (
+									await EN_0428IP(request, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0613, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0309, (EN_0130 === 'ss' ? config_JSON.SS.TLS : true))
 								)[0];
-								const 优选API = [], 优选IP = [], 其他节点 = [];
-								for (const 元素 of 完整优选列表) {
-									if (元素.toLowerCase().startsWith('sub://')) {
-										优选API.push(元素);
+								const EN_0036API = [], EN_0036IP = [], EN_0078 = [];
+								for (const EN_0063 of EN_0245) {
+									if (EN_0063.toLowerCase().startsWith('sub://')) {
+										EN_0036API.push(EN_0063);
 									} else {
-										const subMatch = 元素.match(/sub\s*=\s*([^\s&#]+)/i);
+										const subMatch = EN_0063.match(/sub\s*=\s*([^\s&#]+)/i);
 										if (subMatch && subMatch[1].trim().includes('.')) {
-											const 优选IP作为反代IP = 元素.toLowerCase().includes('proxyip=true');
-											if (优选IP作为反代IP) 优选API.push('sub://' + subMatch[1].trim() + "?proxyip=true" + (元素.includes('#') ? ('#' + 元素.split('#')[1]) : ''));
-											else 优选API.push('sub://' + subMatch[1].trim() + (元素.includes('#') ? ('#' + 元素.split('#')[1]) : ''));
-										} else if (元素.toLowerCase().startsWith('https://')) {
-											优选API.push(元素);
-										} else if (元素.toLowerCase().includes('://')) {
-											if (元素.includes('#')) {
-												const 地址备注分离 = 元素.split('#');
-												其他节点.push(地址备注分离[0] + '#' + encodeURIComponent(decodeURIComponent(地址备注分离[1])));
-											} else 其他节点.push(元素);
+											const EN_0036IPEN_0052IP = EN_0063.toLowerCase().includes('proxyip=true');
+											if (EN_0036IPEN_0052IP) EN_0036API.push('sub://' + subMatch[1].trim() + "?proxyip=true" + (EN_0063.includes('#') ? ('#' + EN_0063.split('#')[1]) : ''));
+											else EN_0036API.push('sub://' + subMatch[1].trim() + (EN_0063.includes('#') ? ('#' + EN_0063.split('#')[1]) : ''));
+										} else if (EN_0063.toLowerCase().startsWith('https://')) {
+											EN_0036API.push(EN_0063);
+										} else if (EN_0063.toLowerCase().includes('://')) {
+											if (EN_0063.includes('#')) {
+												const EN_0197 = EN_0063.split('#');
+												EN_0078.push(EN_0197[0] + '#' + encodeURIComponent(decodeURIComponent(EN_0197[1])));
+											} else EN_0078.push(EN_0063);
 										} else {
-											优选IP.push(元素);
+											EN_0036IP.push(EN_0063);
 										}
 									}
 								}
-								const 请求优选API内容 = await 请求优选API(优选API, (协议类型 === 'ss' && !config_JSON.SS.TLS) ? '80' : '443');
-								const 合并其他节点数组 = [...new Set(其他节点.concat(请求优选API内容[1]))];
-								其他节点LINK = 合并其他节点数组.length > 0 ? 合并其他节点数组.join('\n') + '\n' : '';
-								const 优选API的IP = 请求优选API内容[0];
-								反代IP池 = 请求优选API内容[3] || [];
-								完整优选IP = [...new Set(优选IP.concat(优选API的IP))];
-							} else { // 优选订阅生成器
-								let 优选订阅生成器HOST = url.searchParams.get('sub') || config_JSON.优选订阅生成.SUB;
-								const [优选生成器IP数组, 优选生成器其他节点] = await 获取优选订阅生成器数据(优选订阅生成器HOST);
-								完整优选IP = 完整优选IP.concat(优选生成器IP数组);
-								其他节点LINK += 优选生成器其他节点;
+								const EN_0532APIEN_0081 = await EN_0532API(EN_0036API, (EN_0130 === 'ss' && !config_JSON.SS.TLS) ? '80' : '443');
+								const EN_0166 = [...new Set(EN_0078.concat(EN_0532APIEN_0081[1]))];
+								EN_0078LINK = EN_0166.length > 0 ? EN_0166.join('\n') + '\n' : '';
+								const EN_0036APIEN_0431IP = EN_0532APIEN_0081[0];
+								EN_0140IPEN_0413 = EN_0532APIEN_0081[3] || [];
+								EN_0244IP = [...new Set(EN_0036IP.concat(EN_0036APIEN_0431IP))];
+							} else { // EN_0040
+								let EN_0040HOST = url.searchParams.get('sub') || config_JSON.EN_0039.SUB;
+								const [EN_0037IPEN_0325, EN_0038] = await EN_0488(EN_0040HOST);
+								EN_0244IP = EN_0244IP.concat(EN_0037IPEN_0325);
+								EN_0078LINK += EN_0038;
 							}
-							const ECHLINK参数 = config_JSON.ECH ? `&ech=${encodeURIComponent((config_JSON.ECHConfig.SNI ? config_JSON.ECHConfig.SNI + '+' : '') + config_JSON.ECHConfig.DNS)}` : '';
+							const ECHLINKEN_0138 = config_JSON.ECH ? `&ech=${encodeURIComponent((config_JSON.ECHConfig.SNI ? config_JSON.ECHConfig.SNI + '+' : '') + config_JSON.ECHConfig.DNS)}` : '';
 							const isLoonOrSurge = ua.includes('loon') || ua.includes('surge');
-							const { type: 传输协议, 路径字段名, 域名字段名 } = 获取传输协议配置(config_JSON);
-							订阅内容 = 其他节点LINK + 完整优选IP.map(原始地址 => {
-								// 统一正则: 匹配 域名/IPv4/IPv6地址 + 可选端口 + 可选备注
-								// 示例: 
-								//   - 域名: hj.xmm1993.top:2096#备注 或 example.com
-								//   - IPv4: 166.0.188.128:443#Los Angeles 或 166.0.188.128
-								//   - IPv6: [2606:4700::]:443#CMCC 或 [2606:4700::]
+							const { type: EN_0044, EN_0555, EN_0208 } = EN_0489(config_JSON);
+							EN_0511 = EN_0078LINK + EN_0244IP.map(EN_0136 => {
+								// EN_0465: EN_0123 EN_0206/IPv4/IPv6EN_0195 + EN_0165 + EN_0164
+								// EN_0444: 
+								//   - EN_0206: hj.xmm1993.top:2096#EN_0220 EN_0301 example.com
+								//   - IPv4: 166.0.188.128:443#Los Angeles EN_0301 166.0.188.128
+								//   - IPv6: [2606:4700::]:443#CMCC EN_0301 [2606:4700::]
 								const regex = /^(\[[\da-fA-F:]+\]|[\d.]+|[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*)(?::(\d+))?(?:#(.+))?$/;
-								const match = 原始地址.match(regex);
+								const match = EN_0136.match(regex);
 
-								let 节点地址, 节点端口 = "443", 节点备注;
+								let EN_0482, EN_0484 = "443", EN_0483;
 
 								if (match) {
-									节点地址 = match[1];  // IP地址或域名(可能带方括号)
-									节点端口 = match[2] ? match[2] : (协议类型 === 'ss' && !config_JSON.SS.TLS) ? '80' : '443';  // 端口,TLS默认443 noTLS默认80
-									节点备注 = match[3] || 节点地址;  // 备注,默认为地址本身
+									EN_0482 = match[1];  // IPEN_0200(EN_0162)
+									EN_0484 = match[2] ? match[2] : (EN_0130 === 'ss' && !config_JSON.SS.TLS) ? '80' : '443';  // EN_0447,TLSEN_0637443 noTLSEN_063780
+									EN_0483 = match[3] || EN_0482;  // EN_0220,EN_0638
 								} else {
-									// 不规范的格式，跳过处理返回null
-									console.warn(`[订阅内容] 不规范的IP格式已忽略: ${原始地址}`);
+									// EN_0010，EN_0560null
+									console.warn(`[EN_0511] EN_0009IPEN_0399: ${EN_0136}`);
 									return null;
 								}
 
-								let 完整节点路径 = config_JSON.完整节点路径;
-								if (反代IP池.length > 0) {
-									const 匹配到的反代IP = 反代IP池.find(p => p.includes(节点地址));
-									if (匹配到的反代IP) 完整节点路径 = (`${config_JSON.PATH}/proxyip=${匹配到的反代IP}`).replace(/\/\//g, '/') + (config_JSON.启用0RTT ? '?ed=2560' : '');
+								let EN_0246 = config_JSON.EN_0246;
+								if (EN_0140IPEN_0413.length > 0) {
+									const EN_0125IP = EN_0140IPEN_0413.find(p => p.includes(EN_0482));
+									if (EN_0125IP) EN_0246 = (`${config_JSON.PATH}/proxyip=${EN_0125IP}`).replace(/\/\//g, '/') + (config_JSON.EN_01720RTT ? '?ed=2560' : '');
 								}
-								if (isLoonOrSurge) 完整节点路径 = 完整节点路径.replace(/,/g, '%2C');
+								if (isLoonOrSurge) EN_0246 = EN_0246.replace(/,/g, '%2C');
 
-								if (协议类型 === 'ss' && !作为优选订阅生成器) {
-									完整节点路径 = (完整节点路径.includes('?') ? 完整节点路径.replace('?', '?enc=' + config_JSON.SS.加密方式 + '&') : (完整节点路径 + '?enc=' + config_JSON.SS.加密方式)).replace(/([=,])/g, '\\$1');
-									if (!isSubConverterRequest) 完整节点路径 = 完整节点路径 + ';mux=0';
-									return `${协议类型}://${btoa(config_JSON.SS.加密方式 + ':00000000-0000-4000-8000-000000000000')}@${节点地址}:${节点端口}?plugin=v2${encodeURIComponent('ray-plugin;mode=websocket;host=example.com;path=' + (config_JSON.随机路径 ? 随机路径(完整节点路径) : 完整节点路径) + (config_JSON.SS.TLS ? ';tls' : '')) + ECHLINK参数 + TLS分片参数}#${encodeURIComponent(节点备注)}`;
+								if (EN_0130 === 'ss' && !EN_0051) {
+									EN_0246 = (EN_0246.includes('?') ? EN_0246.replace('?', '?enc=' + config_JSON.SS.EN_0118 + '&') : (EN_0246 + '?enc=' + config_JSON.SS.EN_0118)).replace(/([=,])/g, '\\$1');
+									if (!isSubConverterRequest) EN_0246 = EN_0246 + ';mux=0';
+									return `${EN_0130}://${btoa(config_JSON.SS.EN_0118 + ':00000000-0000-4000-8000-000000000000')}@${EN_0482}:${EN_0484}?plugin=v2${encodeURIComponent('ray-plugin;mode=websocket;host=example.com;path=' + (config_JSON.EN_0615 ? EN_0615(EN_0246) : EN_0246) + (config_JSON.SS.TLS ? ';tls' : '')) + ECHLINKEN_0138 + TLSEN_0095}#${encodeURIComponent(EN_0483)}`;
 								} else {
-									const 传输路径参数值 = 获取传输路径参数值(config_JSON, 完整节点路径, 作为优选订阅生成器);
-									return `${协议类型}://00000000-0000-4000-8000-000000000000@${节点地址}:${节点端口}?security=tls&type=${传输协议 + ECHLINK参数}&${域名字段名}=example.com&fp=${config_JSON.Fingerprint}&sni=example.com&${路径字段名}=${encodeURIComponent(传输路径参数值) + TLS分片参数}&encryption=none${config_JSON.跳过证书验证 ? '&insecure=1&allowInsecure=1' : ''}#${encodeURIComponent(节点备注)}`;
+									const EN_0046 = EN_0490(config_JSON, EN_0246, EN_0051);
+									return `${EN_0130}://00000000-0000-4000-8000-000000000000@${EN_0482}:${EN_0484}?security=tls&type=${EN_0044 + ECHLINKEN_0138}&${EN_0208}=example.com&fp=${config_JSON.Fingerprint}&sni=example.com&${EN_0555}=${encodeURIComponent(EN_0046) + TLSEN_0095}&encryption=none${config_JSON.EN_0562 ? '&insecure=1&allowInsecure=1' : ''}#${encodeURIComponent(EN_0483)}`;
 								}
 							}).filter(item => item !== null).join('\n');
-						} else { // 订阅转换
-							const 订阅转换URL = `${config_JSON.订阅转换配置.SUBAPI}/sub?target=${订阅类型}&url=${encodeURIComponent(url.protocol + '//' + url.host + '/sub?target=mixed&token=' + 订阅TOKEN + (url.searchParams.has('sub') && url.searchParams.get('sub') != '' ? `&sub=${url.searchParams.get('sub')}` : ''))}&config=${encodeURIComponent(config_JSON.订阅转换配置.SUBCONFIG)}&emoji=${config_JSON.订阅转换配置.SUBEMOJI}&scv=${config_JSON.跳过证书验证}`;
+						} else { // EN_0515
+							const EN_0515URL = `${config_JSON.EN_0517.SUBAPI}/sub?target=${EN_0513}&url=${encodeURIComponent(url.protocol + '//' + url.host + '/sub?target=mixed&token=' + EN_0510TOKEN + (url.searchParams.has('sub') && url.searchParams.get('sub') != '' ? `&sub=${url.searchParams.get('sub')}` : ''))}&config=${encodeURIComponent(config_JSON.EN_0517.SUBCONFIG)}&emoji=${config_JSON.EN_0517.SUBEMOJI}&scv=${config_JSON.EN_0562}`;
 							try {
-								const response = await fetch(订阅转换URL, { headers: { 'User-Agent': 'Subconverter for ' + 订阅类型 + ' edge' + 'tunnel (https://github.com/cmliu/edge' + 'tunnel)' } });
+								const response = await fetch(EN_0515URL, { headers: { 'User-Agent': 'Subconverter for ' + EN_0513 + ' edge' + 'tunnel (https://github.com/cmliu/edge' + 'tunnel)' } });
 								if (response.ok) {
-									订阅内容 = await response.text();
-									if (url.searchParams.has('surge') || ua.includes('surge')) 订阅内容 = Surge订阅配置文件热补丁(订阅内容, url.protocol + '//' + url.host + '/sub?token=' + 订阅TOKEN + '&surge', config_JSON);
-								} else return new Response('订阅转换后端异常：' + response.statusText, { status: response.status });
+									EN_0511 = await response.text();
+									if (url.searchParams.has('surge') || ua.includes('surge')) EN_0511 = SurgeEN_0518(EN_0511, url.protocol + '//' + url.host + '/sub?token=' + EN_0510TOKEN + '&surge', config_JSON);
+								} else return new Response('EN_0516：' + response.statusText, { status: response.status });
 							} catch (error) {
-								return new Response('订阅转换后端异常：' + error.message, { status: 403 });
+								return new Response('EN_0516：' + error.message, { status: 403 });
 							}
 						}
 
-						if (!ua.includes('subconverter') && !作为优选订阅生成器) 订阅内容 = 批量替换域名(订阅内容.replace(/00000000-0000-4000-8000-000000000000/g, config_JSON.UUID).replace(/MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAw/g, btoa(config_JSON.UUID)), config_JSON.HOSTS);
+						if (!ua.includes('subconverter') && !EN_0051) EN_0511 = EN_0306(EN_0511.replace(/00000000-0000-4000-8000-000000000000/g, config_JSON.UUID).replace(/MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAw/g, btoa(config_JSON.UUID)), config_JSON.HOSTS);
 
-						if (订阅类型 === 'mixed' && (!ua.includes('mozilla') || url.searchParams.has('b64') || url.searchParams.has('base64'))) 订阅内容 = btoa(订阅内容);
+						if (EN_0513 === 'mixed' && (!ua.includes('mozilla') || url.searchParams.has('b64') || url.searchParams.has('base64'))) EN_0511 = btoa(EN_0511);
 
-						if (订阅类型 === 'singbox') {
-							订阅内容 = await Singbox订阅配置文件热补丁(订阅内容, config_JSON);
+						if (EN_0513 === 'singbox') {
+							EN_0511 = await SingboxEN_0518(EN_0511, config_JSON);
 							responseHeaders["content-type"] = 'application/json; charset=utf-8';
-						} else if (订阅类型 === 'clash') {
-							订阅内容 = Clash订阅配置文件热补丁(订阅内容, config_JSON);
+						} else if (EN_0513 === 'clash') {
+							EN_0511 = ClashEN_0518(EN_0511, config_JSON);
 							responseHeaders["content-type"] = 'application/x-yaml; charset=utf-8';
 						}
-						return new Response(订阅内容, { status: 200, headers: responseHeaders });
+						return new Response(EN_0511, { status: 200, headers: responseHeaders });
 					}
-				} else if (访问路径 === 'locations') {//反代locations列表
+				} else if (EN_0527 === 'locations') {//EN_0140locationsEN_0097
 					const cookies = request.headers.get('Cookie') || '';
 					const authCookie = cookies.split(';').find(c => c.trim().startsWith('auth='))?.split('=')[1];
-					if (authCookie && authCookie == await MD5MD5(UA + 加密秘钥 + 管理员密码)) return fetch(new Request('https://speed.cloudflare.com/locations', { headers: { 'Referer': 'https://speed.cloudflare.com/' } }));
-				} else if (访问路径 === 'robots.txt') return new Response('User-agent: *\nDisallow: /', { status: 200, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
-			} else if (!envUUID) return fetch(Pages静态页面 + '/noKV').then(r => { const headers = new Headers(r.headers); headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate'); headers.set('Pragma', 'no-cache'); headers.set('Expires', '0'); return new Response(r.body, { status: 404, statusText: r.statusText, headers }) });
+					if (authCookie && authCookie == await MD5MD5(UA + EN_0119 + EN_0458)) return fetch(new Request('https://speed.cloudflare.com/locations', { headers: { 'Referer': 'https://speed.cloudflare.com/' } }));
+				} else if (EN_0527 === 'robots.txt') return new Response('User-agent: *\nDisallow: /', { status: 200, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
+			} else if (!envUUID) return fetch(PagesEN_0619 + '/noKV').then(r => { const headers = new Headers(r.headers); headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate'); headers.set('Pragma', 'no-cache'); headers.set('Expires', '0'); return new Response(r.body, { status: 404, statusText: r.statusText, headers }) });
 		}
 
-		let 伪装页URL = env.URL || 'nginx';
-		if (伪装页URL && 伪装页URL !== 'nginx' && 伪装页URL !== '1101') {
-			伪装页URL = 伪装页URL.trim().replace(/\/$/, '');
-			if (!伪装页URL.match(/^https?:\/\//i)) 伪装页URL = 'https://' + 伪装页URL;
-			if (伪装页URL.toLowerCase().startsWith('http://')) 伪装页URL = 'https://' + 伪装页URL.substring(7);
-			try { const u = new URL(伪装页URL); 伪装页URL = u.protocol + '//' + u.host } catch (e) { 伪装页URL = 'nginx' }
+		let EN_0047URL = env.URL || 'nginx';
+		if (EN_0047URL && EN_0047URL !== 'nginx' && EN_0047URL !== '1101') {
+			EN_0047URL = EN_0047URL.trim().replace(/\/$/, '');
+			if (!EN_0047URL.match(/^https?:\/\//i)) EN_0047URL = 'https://' + EN_0047URL;
+			if (EN_0047URL.toLowerCase().startsWith('http://')) EN_0047URL = 'https://' + EN_0047URL.substring(7);
+			try { const u = new URL(EN_0047URL); EN_0047URL = u.protocol + '//' + u.host } catch (e) { EN_0047URL = 'nginx' }
 		}
-		if (伪装页URL === '1101') return new Response(await html1101(url.host, 访问IP), { status: 200, headers: { 'Content-Type': 'text/html; charset=UTF-8' } });
+		if (EN_0047URL === '1101') return new Response(await html1101(url.host, EN_0526IP), { status: 200, headers: { 'Content-Type': 'text/html; charset=UTF-8' } });
 		try {
-			const 反代URL = new URL(伪装页URL), 新请求头 = new Headers(request.headers);
-			新请求头.set('Host', 反代URL.host);
-			新请求头.set('Referer', 反代URL.origin);
-			新请求头.set('Origin', 反代URL.origin);
-			if (!新请求头.has('User-Agent') && UA && UA !== 'null') 新请求头.set('User-Agent', UA);
-			const 反代响应 = await fetch(反代URL.origin + url.pathname + url.search, { method: request.method, headers: 新请求头, body: request.body, cf: request.cf });
-			const 内容类型 = 反代响应.headers.get('content-type') || '';
-			// 只处理文本类型的响应
-			if (/text|javascript|json|xml/.test(内容类型)) {
-				const 响应内容 = (await 反代响应.text()).replaceAll(反代URL.host, url.host);
-				return new Response(响应内容, { status: 反代响应.status, headers: { ...Object.fromEntries(反代响应.headers), 'Cache-Control': 'no-store' } });
+			const EN_0140URL = new URL(EN_0047URL), EN_0331 = new Headers(request.headers);
+			EN_0331.set('Host', EN_0140URL.host);
+			EN_0331.set('Referer', EN_0140URL.origin);
+			EN_0331.set('Origin', EN_0140URL.origin);
+			if (!EN_0331.has('User-Agent') && UA && UA !== 'null') EN_0331.set('User-Agent', UA);
+			const EN_0143 = await fetch(EN_0140URL.origin + url.pathname + url.search, { method: request.method, headers: EN_0331, body: request.body, cf: request.cf });
+			const EN_0082 = EN_0143.headers.get('content-type') || '';
+			// EN_0160
+			if (/text|javascript|json|xml/.test(EN_0082)) {
+				const EN_0181 = (await EN_0143.text()).replaceAll(EN_0140URL.host, url.host);
+				return new Response(EN_0181, { status: EN_0143.status, headers: { ...Object.fromEntries(EN_0143.headers), 'Cache-Control': 'no-store' } });
 			}
-			return 反代响应;
+			return EN_0143;
 		} catch (error) { }
 		return new Response(await nginx(), { status: 200, headers: { 'Content-Type': 'text/html; charset=UTF-8' } });
 	}
 };
-///////////////////////////////////////////////////////////////////////XHTTP传输数据///////////////////////////////////////////////
-async function 处理XHTTP请求(request, yourUUID) {
+///////////////////////////////////////////////////////////////////////XHTTPEN_0045///////////////////////////////////////////////
+async function EN_0211XHTTPEN_0531(request, yourUUID) {
 	if (!request.body) return new Response('Bad Request', { status: 400 });
 	const reader = request.body.getReader();
-	const 首包 = await 读取XHTTP首包(reader, yourUUID);
-	if (!首包) {
+	const EN_0626 = await EN_0543XHTTPEN_0626(reader, yourUUID);
+	if (!EN_0626) {
 		try { reader.releaseLock() } catch (e) { }
 		return new Response('Invalid request', { status: 400 });
 	}
-	if (isSpeedTestSite(首包.hostname)) {
+	if (isSpeedTestSite(EN_0626.hostname)) {
 		try { reader.releaseLock() } catch (e) { }
 		return new Response('Forbidden', { status: 403 });
 	}
-	if (首包.isUDP && 首包.协议 !== 'trojan' && 首包.port !== 53) {
+	if (EN_0626.isUDP && EN_0626.EN_0128 !== 'trojan' && EN_0626.port !== 53) {
 		try { reader.releaseLock() } catch (e) { }
 		return new Response('UDP is not supported', { status: 400 });
 	}
 
 	const remoteConnWrapper = { socket: null, connectingPromise: null, retryConnect: null };
-	let 当前写入Socket = null;
-	let 远端写入器 = null;
+	let EN_0287Socket = null;
+	let EN_0576 = null;
 	const responseHeaders = new Headers({
 		'Content-Type': 'application/octet-stream',
 		'X-Accel-Buffering': 'no',
 		'Cache-Control': 'no-store'
 	});
 
-	const 释放远端写入器 = () => {
-		if (远端写入器) {
-			try { 远端写入器.releaseLock() } catch (e) { }
-			远端写入器 = null;
+	const EN_0596 = () => {
+		if (EN_0576) {
+			try { EN_0576.releaseLock() } catch (e) { }
+			EN_0576 = null;
 		}
-		当前写入Socket = null;
+		EN_0287Socket = null;
 	};
 
-	const 获取远端写入器 = () => {
+	const EN_0494 = () => {
 		const socket = remoteConnWrapper.socket;
 		if (!socket) return null;
-		if (socket !== 当前写入Socket) {
-			释放远端写入器();
-			当前写入Socket = socket;
-			远端写入器 = socket.writable.getWriter();
+		if (socket !== EN_0287Socket) {
+			EN_0596();
+			EN_0287Socket = socket;
+			EN_0576 = socket.writable.getWriter();
 		}
-		return 远端写入器;
+		return EN_0576;
 	};
 
 	return new Response(new ReadableStream({
 		async start(controller) {
-			let 已关闭 = false;
-			let udpRespHeader = 首包.respHeader;
-			const 木马UDP上下文 = { 缓存: new Uint8Array(0) };
+			let EN_0267 = false;
+			let udpRespHeader = EN_0626.respHeader;
+			const EN_0367UDPEN_0002 = { EN_0469: new Uint8Array(0) };
 			const xhttpBridge = {
 				readyState: WebSocket.OPEN,
 				send(data) {
-					if (已关闭) return;
+					if (EN_0267) return;
 					try {
 						const chunk = data instanceof Uint8Array
 							? data
@@ -517,104 +517,104 @@ async function 处理XHTTP请求(request, yourUUID) {
 									: new Uint8Array(data);
 						controller.enqueue(chunk);
 					} catch (e) {
-						已关闭 = true;
+						EN_0267 = true;
 						this.readyState = WebSocket.CLOSED;
 					}
 				},
 				close() {
-					if (已关闭) return;
-					已关闭 = true;
+					if (EN_0267) return;
+					EN_0267 = true;
 					this.readyState = WebSocket.CLOSED;
 					try { controller.close() } catch (e) { }
 				}
 			};
 
-			const 写入远端 = async (payload, allowRetry = true) => {
-				const writer = 获取远端写入器();
+			const EN_0085 = async (payload, allowRetry = true) => {
+				const writer = EN_0494();
 				if (!writer) return false;
 				try {
 					await writer.write(payload);
 					return true;
 				} catch (err) {
-					释放远端写入器();
+					EN_0596();
 					if (allowRetry && typeof remoteConnWrapper.retryConnect === 'function') {
 						await remoteConnWrapper.retryConnect();
-						return await 写入远端(payload, false);
+						return await EN_0085(payload, false);
 					}
 					throw err;
 				}
 			};
 
 			try {
-				if (首包.isUDP) {
-					if (首包.rawData?.byteLength) {
-						if (首包.协议 === 'trojan') await 转发木马UDP数据(首包.rawData, xhttpBridge, 木马UDP上下文);
-						else await forwardataudp(首包.rawData, xhttpBridge, udpRespHeader);
+				if (EN_0626.isUDP) {
+					if (EN_0626.rawData?.byteLength) {
+						if (EN_0626.EN_0128 === 'trojan') await EN_0566UDPEN_0321(EN_0626.rawData, xhttpBridge, EN_0367UDPEN_0002);
+						else await forwardataudp(EN_0626.rawData, xhttpBridge, udpRespHeader);
 						udpRespHeader = null;
 					}
 				} else {
-					await forwardataTCP(首包.hostname, 首包.port, 首包.rawData, xhttpBridge, 首包.respHeader, remoteConnWrapper, yourUUID);
+					await forwardataTCP(EN_0626.hostname, EN_0626.port, EN_0626.rawData, xhttpBridge, EN_0626.respHeader, remoteConnWrapper, yourUUID);
 				}
 
 				while (true) {
 					const { done, value } = await reader.read();
 					if (done) break;
 					if (!value || value.byteLength === 0) continue;
-					if (首包.isUDP) {
-						if (首包.协议 === 'trojan') await 转发木马UDP数据(value, xhttpBridge, 木马UDP上下文);
+					if (EN_0626.isUDP) {
+						if (EN_0626.EN_0128 === 'trojan') await EN_0566UDPEN_0321(value, xhttpBridge, EN_0367UDPEN_0002);
 						else await forwardataudp(value, xhttpBridge, udpRespHeader);
 						udpRespHeader = null;
 					} else {
-						if (!(await 写入远端(value))) throw new Error('Remote socket is not ready');
+						if (!(await EN_0085(value))) throw new Error('Remote socket is not ready');
 					}
 				}
 
-				if (!首包.isUDP) {
-					const writer = 获取远端写入器();
+				if (!EN_0626.isUDP) {
+					const writer = EN_0494();
 					if (writer) {
 						try { await writer.close() } catch (e) { }
 					}
 				}
 			} catch (err) {
-				log(`[XHTTP转发] 处理失败: ${err?.message || err}`);
+				log(`[XHTTPEN_0563] EN_0213: ${err?.message || err}`);
 				closeSocketQuietly(xhttpBridge);
 			} finally {
-				释放远端写入器();
+				EN_0596();
 				try { reader.releaseLock() } catch (e) { }
 			}
 		},
 		cancel() {
-			释放远端写入器();
+			EN_0596();
 			try { remoteConnWrapper.socket?.close() } catch (e) { }
 			try { reader.releaseLock() } catch (e) { }
 		}
 	}), { status: 200, headers: responseHeaders });
 }
 
-function 有效数据长度(data) {
+function EN_0365(data) {
 	if (!data) return 0;
 	if (typeof data.byteLength === 'number') return data.byteLength;
 	if (typeof data.length === 'number') return data.length;
 	return 0;
 }
 
-async function 读取XHTTP首包(reader, token) {
+async function EN_0543XHTTPEN_0626(reader, token) {
 	const decoder = new TextDecoder();
 
-	const 尝试解析魏烈思首包 = (data) => {
+	const EN_0264 = (data) => {
 		const length = data.byteLength;
-		if (length < 18) return { 状态: 'need_more' };
-		if (formatIdentifier(data.subarray(1, 17)) !== token) return { 状态: 'invalid' };
+		if (length < 18) return { EN_0426: 'need_more' };
+		if (formatIdentifier(data.subarray(1, 17)) !== token) return { EN_0426: 'invalid' };
 
 		const optLen = data[17];
 		const cmdIndex = 18 + optLen;
-		if (length < cmdIndex + 1) return { 状态: 'need_more' };
+		if (length < cmdIndex + 1) return { EN_0426: 'need_more' };
 
 		const cmd = data[cmdIndex];
-		if (cmd !== 1 && cmd !== 2) return { 状态: 'invalid' };
+		if (cmd !== 1 && cmd !== 2) return { EN_0426: 'invalid' };
 
 		const portIndex = cmdIndex + 1;
-		if (length < portIndex + 3) return { 状态: 'need_more' };
+		if (length < portIndex + 3) return { EN_0426: 'need_more' };
 
 		const port = (data[portIndex] << 8) | data[portIndex + 1];
 		const addressType = data[portIndex + 2];
@@ -623,17 +623,17 @@ async function 读取XHTTP首包(reader, token) {
 		let hostname = '';
 
 		if (addressType === 1) {
-			if (length < addressIndex + 4) return { 状态: 'need_more' };
+			if (length < addressIndex + 4) return { EN_0426: 'need_more' };
 			hostname = `${data[addressIndex]}.${data[addressIndex + 1]}.${data[addressIndex + 2]}.${data[addressIndex + 3]}`;
 			headerLen = addressIndex + 4;
 		} else if (addressType === 2) {
-			if (length < addressIndex + 1) return { 状态: 'need_more' };
+			if (length < addressIndex + 1) return { EN_0426: 'need_more' };
 			const domainLen = data[addressIndex];
-			if (length < addressIndex + 1 + domainLen) return { 状态: 'need_more' };
+			if (length < addressIndex + 1 + domainLen) return { EN_0426: 'need_more' };
 			hostname = decoder.decode(data.subarray(addressIndex + 1, addressIndex + 1 + domainLen));
 			headerLen = addressIndex + 1 + domainLen;
 		} else if (addressType === 3) {
-			if (length < addressIndex + 16) return { 状态: 'need_more' };
+			if (length < addressIndex + 16) return { EN_0426: 'need_more' };
 			const ipv6 = [];
 			for (let i = 0; i < 8; i++) {
 				const base = addressIndex + i * 2;
@@ -641,14 +641,14 @@ async function 读取XHTTP首包(reader, token) {
 			}
 			hostname = ipv6.join(':');
 			headerLen = addressIndex + 16;
-		} else return { 状态: 'invalid' };
+		} else return { EN_0426: 'invalid' };
 
-		if (!hostname) return { 状态: 'invalid' };
+		if (!hostname) return { EN_0426: 'invalid' };
 
 		return {
-			状态: 'ok',
-			结果: {
-				协议: 'vl' + 'ess',
+			EN_0426: 'ok',
+			EN_0464: {
+				EN_0128: 'vl' + 'ess',
 				hostname,
 				port,
 				isUDP: cmd === 2,
@@ -658,20 +658,20 @@ async function 读取XHTTP首包(reader, token) {
 		};
 	};
 
-	const 尝试解析木马首包 = (data) => {
-		const 密码哈希 = sha224(token);
-		const 密码哈希字节 = new TextEncoder().encode(密码哈希);
+	const EN_0263 = (data) => {
+		const EN_0252 = sha224(token);
+		const EN_0253 = new TextEncoder().encode(EN_0252);
 		const length = data.byteLength;
-		if (length < 58) return { 状态: 'need_more' };
-		if (data[56] !== 0x0d || data[57] !== 0x0a) return { 状态: 'invalid' };
+		if (length < 58) return { EN_0426: 'need_more' };
+		if (data[56] !== 0x0d || data[57] !== 0x0a) return { EN_0426: 'invalid' };
 		for (let i = 0; i < 56; i++) {
-			if (data[i] !== 密码哈希字节[i]) return { 状态: 'invalid' };
+			if (data[i] !== EN_0253[i]) return { EN_0426: 'invalid' };
 		}
 
 		const socksStart = 58;
-		if (length < socksStart + 2) return { 状态: 'need_more' };
+		if (length < socksStart + 2) return { EN_0426: 'need_more' };
 		const cmd = data[socksStart];
-		if (cmd !== 1 && cmd !== 3) return { 状态: 'invalid' };
+		if (cmd !== 1 && cmd !== 3) return { EN_0426: 'invalid' };
 		const isUDP = cmd === 3;
 
 		const atype = data[socksStart + 1];
@@ -679,17 +679,17 @@ async function 读取XHTTP首包(reader, token) {
 		let hostname = '';
 
 		if (atype === 1) {
-			if (length < cursor + 4) return { 状态: 'need_more' };
+			if (length < cursor + 4) return { EN_0426: 'need_more' };
 			hostname = `${data[cursor]}.${data[cursor + 1]}.${data[cursor + 2]}.${data[cursor + 3]}`;
 			cursor += 4;
 		} else if (atype === 3) {
-			if (length < cursor + 1) return { 状态: 'need_more' };
+			if (length < cursor + 1) return { EN_0426: 'need_more' };
 			const domainLen = data[cursor];
-			if (length < cursor + 1 + domainLen) return { 状态: 'need_more' };
+			if (length < cursor + 1 + domainLen) return { EN_0426: 'need_more' };
 			hostname = decoder.decode(data.subarray(cursor + 1, cursor + 1 + domainLen));
 			cursor += 1 + domainLen;
 		} else if (atype === 4) {
-			if (length < cursor + 16) return { 状态: 'need_more' };
+			if (length < cursor + 16) return { EN_0426: 'need_more' };
 			const ipv6 = [];
 			for (let i = 0; i < 8; i++) {
 				const base = cursor + i * 2;
@@ -697,19 +697,19 @@ async function 读取XHTTP首包(reader, token) {
 			}
 			hostname = ipv6.join(':');
 			cursor += 16;
-		} else return { 状态: 'invalid' };
+		} else return { EN_0426: 'invalid' };
 
-		if (!hostname) return { 状态: 'invalid' };
-		if (length < cursor + 4) return { 状态: 'need_more' };
+		if (!hostname) return { EN_0426: 'invalid' };
+		if (length < cursor + 4) return { EN_0426: 'need_more' };
 
 		const port = (data[cursor] << 8) | data[cursor + 1];
-		if (data[cursor + 2] !== 0x0d || data[cursor + 3] !== 0x0a) return { 状态: 'invalid' };
+		if (data[cursor + 2] !== 0x0d || data[cursor + 3] !== 0x0a) return { EN_0426: 'invalid' };
 		const dataOffset = cursor + 4;
 
 		return {
-			状态: 'ok',
-			结果: {
-				协议: 'trojan',
+			EN_0426: 'ok',
+			EN_0464: {
+				EN_0128: 'trojan',
 				hostname,
 				port,
 				isUDP,
@@ -739,34 +739,34 @@ async function 读取XHTTP首包(reader, token) {
 		buffer.set(chunk, offset);
 		offset += chunk.byteLength;
 
-		const 当前数据 = buffer.subarray(0, offset);
-		const 木马结果 = 尝试解析木马首包(当前数据);
-		if (木马结果.状态 === 'ok') return { ...木马结果.结果, reader };
+		const EN_0290 = buffer.subarray(0, offset);
+		const EN_0368 = EN_0263(EN_0290);
+		if (EN_0368.EN_0426 === 'ok') return { ...EN_0368.EN_0464, reader };
 
-		const 魏烈思结果 = 尝试解析魏烈思首包(当前数据);
-		if (魏烈思结果.状态 === 'ok') return { ...魏烈思结果.结果, reader };
+		const EN_0635 = EN_0264(EN_0290);
+		if (EN_0635.EN_0426 === 'ok') return { ...EN_0635.EN_0464, reader };
 
-		if (木马结果.状态 === 'invalid' && 魏烈思结果.状态 === 'invalid') return null;
+		if (EN_0368.EN_0426 === 'invalid' && EN_0635.EN_0426 === 'invalid') return null;
 	}
 
-	const 最终数据 = buffer.subarray(0, offset);
-	const 最终木马结果 = 尝试解析木马首包(最终数据);
-	if (最终木马结果.状态 === 'ok') return { ...最终木马结果.结果, reader };
-	const 最终魏烈思结果 = 尝试解析魏烈思首包(最终数据);
-	if (最终魏烈思结果.状态 === 'ok') return { ...最终魏烈思结果.结果, reader };
+	const EN_0360 = buffer.subarray(0, offset);
+	const EN_0361 = EN_0263(EN_0360);
+	if (EN_0361.EN_0426 === 'ok') return { ...EN_0361.EN_0464, reader };
+	const EN_0363 = EN_0264(EN_0360);
+	if (EN_0363.EN_0426 === 'ok') return { ...EN_0363.EN_0464, reader };
 	return null;
 }
-///////////////////////////////////////////////////////////////////////gRPC传输数据///////////////////////////////////////////////
-async function 处理gRPC请求(request, yourUUID) {
+///////////////////////////////////////////////////////////////////////gRPCEN_0045///////////////////////////////////////////////
+async function EN_0211gRPCEN_0531(request, yourUUID) {
 	if (!request.body) return new Response('Bad Request', { status: 400 });
 	const reader = request.body.getReader();
 	const remoteConnWrapper = { socket: null, connectingPromise: null, retryConnect: null };
 	let isDnsQuery = false;
-	const 木马UDP上下文 = { 缓存: new Uint8Array(0) };
-	let 判断是否是木马 = null;
-	let 当前写入Socket = null;
-	let 远端写入器 = null;
-	//log('[gRPC] 开始处理双向流');
+	const EN_0367UDPEN_0002 = { EN_0469: new Uint8Array(0) };
+	let EN_0107 = null;
+	let EN_0287Socket = null;
+	let EN_0576 = null;
+	//log('[gRPC] EN_0281');
 	const grpcHeaders = new Headers({
 		'Content-Type': 'application/grpc',
 		'grpc-status': '0',
@@ -774,28 +774,28 @@ async function 处理gRPC请求(request, yourUUID) {
 		'Cache-Control': 'no-store'
 	});
 
-	const 下行缓存上限 = 64 * 1024;
-	const 下行刷新间隔 = 20;
+	const EN_0005 = 64 * 1024;
+	const EN_0004 = 20;
 
 	return new Response(new ReadableStream({
 		async start(controller) {
-			let 已关闭 = false;
-			let 发送队列 = [];
-			let 队列字节数 = 0;
-			let 刷新定时器 = null;
+			let EN_0267 = false;
+			let EN_0158 = [];
+			let EN_0608 = 0;
+			let EN_0111 = null;
 			const grpcBridge = {
 				readyState: WebSocket.OPEN,
 				send(data) {
-					if (已关闭) return;
+					if (EN_0267) return;
 					const chunk = data instanceof Uint8Array ? data : new Uint8Array(data);
-					const lenBytes数组 = [];
+					const lenBytesEN_0325 = [];
 					let remaining = chunk.byteLength >>> 0;
 					while (remaining > 127) {
-						lenBytes数组.push((remaining & 0x7f) | 0x80);
+						lenBytesEN_0325.push((remaining & 0x7f) | 0x80);
 						remaining >>>= 7;
 					}
-					lenBytes数组.push(remaining);
-					const lenBytes = new Uint8Array(lenBytes数组);
+					lenBytesEN_0325.push(remaining);
+					const lenBytes = new Uint8Array(lenBytesEN_0325);
 					const protobufLen = 1 + lenBytes.length + chunk.byteLength;
 					const frame = new Uint8Array(5 + protobufLen);
 					frame[0] = 0;
@@ -806,82 +806,82 @@ async function 处理gRPC请求(request, yourUUID) {
 					frame[5] = 0x0a;
 					frame.set(lenBytes, 6);
 					frame.set(chunk, 6 + lenBytes.length);
-					发送队列.push(frame);
-					队列字节数 += frame.byteLength;
-					if (队列字节数 >= 下行缓存上限) 刷新发送队列();
-					else if (!刷新定时器) 刷新定时器 = setTimeout(刷新发送队列, 下行刷新间隔);
+					EN_0158.push(frame);
+					EN_0608 += frame.byteLength;
+					if (EN_0608 >= EN_0005) EN_0110();
+					else if (!EN_0111) EN_0111 = setTimeout(EN_0110, EN_0004);
 				},
 				close() {
 					if (this.readyState === WebSocket.CLOSED) return;
-					刷新发送队列(true);
-					已关闭 = true;
+					EN_0110(true);
+					EN_0267 = true;
 					this.readyState = WebSocket.CLOSED;
 					try { controller.close() } catch (e) { }
 				}
 			};
 
-			const 刷新发送队列 = (force = false) => {
-				if (刷新定时器) {
-					clearTimeout(刷新定时器);
-					刷新定时器 = null;
+			const EN_0110 = (force = false) => {
+				if (EN_0111) {
+					clearTimeout(EN_0111);
+					EN_0111 = null;
 				}
-				if ((!force && 已关闭) || 队列字节数 === 0) return;
-				const out = new Uint8Array(队列字节数);
+				if ((!force && EN_0267) || EN_0608 === 0) return;
+				const out = new Uint8Array(EN_0608);
 				let offset = 0;
-				for (const item of 发送队列) {
+				for (const item of EN_0158) {
 					out.set(item, offset);
 					offset += item.byteLength;
 				}
-				发送队列 = [];
-				队列字节数 = 0;
+				EN_0158 = [];
+				EN_0608 = 0;
 				try {
 					controller.enqueue(out);
 				} catch (e) {
-					已关闭 = true;
+					EN_0267 = true;
 					grpcBridge.readyState = WebSocket.CLOSED;
 				}
 			};
 
-			const 关闭连接 = () => {
-				if (已关闭) return;
-				刷新发送队列(true);
-				已关闭 = true;
+			const EN_0077 = () => {
+				if (EN_0267) return;
+				EN_0110(true);
+				EN_0267 = true;
 				grpcBridge.readyState = WebSocket.CLOSED;
-				if (刷新定时器) clearTimeout(刷新定时器);
-				if (远端写入器) {
-					try { 远端写入器.releaseLock() } catch (e) { }
-					远端写入器 = null;
+				if (EN_0111) clearTimeout(EN_0111);
+				if (EN_0576) {
+					try { EN_0576.releaseLock() } catch (e) { }
+					EN_0576 = null;
 				}
-				当前写入Socket = null;
+				EN_0287Socket = null;
 				try { reader.releaseLock() } catch (e) { }
 				try { remoteConnWrapper.socket?.close() } catch (e) { }
 				try { controller.close() } catch (e) { }
 			};
 
-			const 释放远端写入器 = () => {
-				if (远端写入器) {
-					try { 远端写入器.releaseLock() } catch (e) { }
-					远端写入器 = null;
+			const EN_0596 = () => {
+				if (EN_0576) {
+					try { EN_0576.releaseLock() } catch (e) { }
+					EN_0576 = null;
 				}
-				当前写入Socket = null;
+				EN_0287Socket = null;
 			};
 
-			const 写入远端 = async (payload, allowRetry = true) => {
+			const EN_0085 = async (payload, allowRetry = true) => {
 				const socket = remoteConnWrapper.socket;
 				if (!socket) return false;
-				if (socket !== 当前写入Socket) {
-					释放远端写入器();
-					当前写入Socket = socket;
-					远端写入器 = socket.writable.getWriter();
+				if (socket !== EN_0287Socket) {
+					EN_0596();
+					EN_0287Socket = socket;
+					EN_0576 = socket.writable.getWriter();
 				}
 				try {
-					await 远端写入器.write(payload);
+					await EN_0576.write(payload);
 					return true;
 				} catch (err) {
-					释放远端写入器();
+					EN_0596();
 					if (allowRetry && typeof remoteConnWrapper.retryConnect === 'function') {
 						await remoteConnWrapper.retryConnect();
-						return await 写入远端(payload, false);
+						return await EN_0085(payload, false);
 					}
 					throw err;
 				}
@@ -893,10 +893,10 @@ async function 处理gRPC请求(request, yourUUID) {
 					const { done, value } = await reader.read();
 					if (done) break;
 					if (!value || value.byteLength === 0) continue;
-					const 当前块 = value instanceof Uint8Array ? value : new Uint8Array(value);
-					const merged = new Uint8Array(pending.length + 当前块.length);
+					const EN_0289 = value instanceof Uint8Array ? value : new Uint8Array(value);
+					const merged = new Uint8Array(pending.length + EN_0289.length);
 					merged.set(pending, 0);
-					merged.set(当前块, pending.length);
+					merged.set(EN_0289, pending.length);
 					pending = merged;
 					while (pending.byteLength >= 5) {
 						const grpcLen = ((pending[1] << 24) >>> 0) | (pending[2] << 16) | (pending[3] << 8) | pending[4];
@@ -909,51 +909,51 @@ async function 处理gRPC请求(request, yourUUID) {
 						if (payload.byteLength >= 2 && payload[0] === 0x0a) {
 							let shift = 0;
 							let offset = 1;
-							let varint有效 = false;
+							let varintEN_0364 = false;
 							while (offset < payload.length) {
 								const current = payload[offset++];
 								if ((current & 0x80) === 0) {
-									varint有效 = true;
+									varintEN_0364 = true;
 									break;
 								}
 								shift += 7;
 								if (shift > 35) break;
 							}
-							if (varint有效) payload = payload.slice(offset);
+							if (varintEN_0364) payload = payload.slice(offset);
 						}
 						if (!payload.byteLength) continue;
 						if (isDnsQuery) {
-							if (判断是否是木马) await 转发木马UDP数据(payload, grpcBridge, 木马UDP上下文);
+							if (EN_0107) await EN_0566UDPEN_0321(payload, grpcBridge, EN_0367UDPEN_0002);
 							else await forwardataudp(payload, grpcBridge, null);
 							continue;
 						}
 						if (remoteConnWrapper.socket) {
-							if (!(await 写入远端(payload))) throw new Error('Remote socket is not ready');
+							if (!(await EN_0085(payload))) throw new Error('Remote socket is not ready');
 						} else {
-							let 首包buffer;
-							if (payload instanceof ArrayBuffer) 首包buffer = payload;
-							else if (ArrayBuffer.isView(payload)) 首包buffer = payload.buffer.slice(payload.byteOffset, payload.byteOffset + payload.byteLength);
-							else 首包buffer = new Uint8Array(payload).buffer;
-							const 首包bytes = new Uint8Array(首包buffer);
-							if (判断是否是木马 === null) 判断是否是木马 = 首包bytes.byteLength >= 58 && 首包bytes[56] === 0x0d && 首包bytes[57] === 0x0a;
-							if (判断是否是木马) {
-								const 解析结果 = 解析木马请求(首包buffer, yourUUID);
-								if (解析结果?.hasError) throw new Error(解析结果.message || 'Invalid trojan request');
-								const { port, hostname, rawClientData, isUDP } = 解析结果;
-								log(`[gRPC] 木马首包: ${hostname}:${port} | UDP: ${isUDP ? '是' : '否'}`);
+							let EN_0626buffer;
+							if (payload instanceof ArrayBuffer) EN_0626buffer = payload;
+							else if (ArrayBuffer.isView(payload)) EN_0626buffer = payload.buffer.slice(payload.byteOffset, payload.byteOffset + payload.byteLength);
+							else EN_0626buffer = new Uint8Array(payload).buffer;
+							const EN_0626bytes = new Uint8Array(EN_0626buffer);
+							if (EN_0107 === null) EN_0107 = EN_0626bytes.byteLength >= 58 && EN_0626bytes[56] === 0x0d && EN_0626bytes[57] === 0x0a;
+							if (EN_0107) {
+								const EN_0507 = EN_0506(EN_0626buffer, yourUUID);
+								if (EN_0507?.hasError) throw new Error(EN_0507.message || 'Invalid trojan request');
+								const { port, hostname, rawClientData, isUDP } = EN_0507;
+								log(`[gRPC] EN_0369: ${hostname}:${port} | UDP: ${isUDP ? 'EN_0348' : 'EN_0170'}`);
 								if (isSpeedTestSite(hostname)) throw new Error('Speedtest site is blocked');
 								if (isUDP) {
 									isDnsQuery = true;
-									if (有效数据长度(rawClientData) > 0) await 转发木马UDP数据(rawClientData, grpcBridge, 木马UDP上下文);
+									if (EN_0365(rawClientData) > 0) await EN_0566UDPEN_0321(rawClientData, grpcBridge, EN_0367UDPEN_0002);
 								} else {
 									await forwardataTCP(hostname, port, rawClientData, grpcBridge, null, remoteConnWrapper, yourUUID);
 								}
 							} else {
-								判断是否是木马 = false;
-								const 解析结果 = 解析魏烈思请求(首包buffer, yourUUID);
-								if (解析结果?.hasError) throw new Error(解析结果.message || 'Invalid 魏烈思 request');
-								const { port, hostname, rawIndex, version, isUDP } = 解析结果;
-								log(`[gRPC] 魏烈思首包: ${hostname}:${port} | UDP: ${isUDP ? '是' : '否'}`);
+								EN_0107 = false;
+								const EN_0507 = EN_0508(EN_0626buffer, yourUUID);
+								if (EN_0507?.hasError) throw new Error(EN_0507.message || 'Invalid EN_0634 request');
+								const { port, hostname, rawIndex, version, isUDP } = EN_0507;
+								log(`[gRPC] EN_0636: ${hostname}:${port} | UDP: ${isUDP ? 'EN_0348' : 'EN_0170'}`);
 								if (isSpeedTestSite(hostname)) throw new Error('Speedtest site is blocked');
 								if (isUDP) {
 									if (port !== 53) throw new Error('UDP is not supported');
@@ -961,22 +961,22 @@ async function 处理gRPC请求(request, yourUUID) {
 								}
 								const respHeader = new Uint8Array([version[0], 0]);
 								grpcBridge.send(respHeader);
-								const rawData = 首包buffer.slice(rawIndex);
+								const rawData = EN_0626buffer.slice(rawIndex);
 								if (isDnsQuery) {
-									if (判断是否是木马) await 转发木马UDP数据(rawData, grpcBridge, 木马UDP上下文);
+									if (EN_0107) await EN_0566UDPEN_0321(rawData, grpcBridge, EN_0367UDPEN_0002);
 									else await forwardataudp(rawData, grpcBridge, null);
 								}
 								else await forwardataTCP(hostname, port, rawData, grpcBridge, null, remoteConnWrapper, yourUUID);
 							}
 						}
 					}
-					刷新发送队列();
+					EN_0110();
 				}
 			} catch (err) {
-				log(`[gRPC转发] 处理失败: ${err?.message || err}`);
+				log(`[gRPCEN_0563] EN_0213: ${err?.message || err}`);
 			} finally {
-				释放远端写入器();
-				关闭连接();
+				EN_0596();
+				EN_0077();
 			}
 		},
 		cancel() {
@@ -986,233 +986,233 @@ async function 处理gRPC请求(request, yourUUID) {
 	}), { status: 200, headers: grpcHeaders });
 }
 
-///////////////////////////////////////////////////////////////////////WS传输数据///////////////////////////////////////////////
-async function 处理WS请求(request, yourUUID, url) {
-	const WS套接字对 = new WebSocketPair();
-	const [clientSock, serverSock] = Object.values(WS套接字对);
+///////////////////////////////////////////////////////////////////////WSEN_0045///////////////////////////////////////////////
+async function EN_0211WSEN_0531(request, yourUUID, url) {
+	const WSEN_0225 = new WebSocketPair();
+	const [clientSock, serverSock] = Object.values(WSEN_0225);
 	serverSock.accept();
 	serverSock.binaryType = 'arraybuffer';
 	let remoteConnWrapper = { socket: null, connectingPromise: null, retryConnect: null };
 	let isDnsQuery = false;
-	let 判断是否是木马 = null;
-	const 木马UDP上下文 = { 缓存: new Uint8Array(0) };
+	let EN_0107 = null;
+	const EN_0367UDPEN_0002 = { EN_0469: new Uint8Array(0) };
 	const earlyDataHeader = request.headers.get('sec-websocket-protocol') || '';
-	const SS模式禁用EarlyData = !!url.searchParams.get('enc');
-	let 已取消读取 = false;
-	let 可读流已结束 = false;
+	const SSEN_0407EarlyData = !!url.searchParams.get('enc');
+	let EN_0270 = false;
+	let EN_0163 = false;
 	const readable = new ReadableStream({
 		start(controller) {
-			const 是流已关闭错误 = (err) => {
+			const EN_0351 = (err) => {
 				const msg = err?.message || `${err || ''}`;
 				return msg.includes('ReadableStream is closed') || msg.includes('The stream is closed') || msg.includes('already closed');
 			};
-			const 安全入队 = (data) => {
-				if (已取消读取 || 可读流已结束) return;
+			const EN_0239 = (data) => {
+				if (EN_0270 || EN_0163) return;
 				try {
 					controller.enqueue(data);
 				} catch (err) {
-					可读流已结束 = true;
-					if (!是流已关闭错误(err)) {
+					EN_0163 = true;
+					if (!EN_0351(err)) {
 						try { controller.error(err) } catch (_) { }
 					}
 				}
 			};
-			const 安全关闭流 = () => {
-				if (已取消读取 || 可读流已结束) return;
-				可读流已结束 = true;
+			const EN_0240 = () => {
+				if (EN_0270 || EN_0163) return;
+				EN_0163 = true;
 				try {
 					controller.close();
 				} catch (err) {
-					if (!是流已关闭错误(err)) {
+					if (!EN_0351(err)) {
 						try { controller.error(err) } catch (_) { }
 					}
 				}
 			};
-			const 安全报错流 = (err) => {
-				if (已取消读取 || 可读流已结束) return;
-				可读流已结束 = true;
+			const EN_0241 = (err) => {
+				if (EN_0270 || EN_0163) return;
+				EN_0163 = true;
 				try { controller.error(err) } catch (_) { }
 			};
 			serverSock.addEventListener('message', (event) => {
-				安全入队(event.data);
+				EN_0239(event.data);
 			});
 			serverSock.addEventListener('close', () => {
 				closeSocketQuietly(serverSock);
-				安全关闭流();
+				EN_0240();
 			});
 			serverSock.addEventListener('error', (err) => {
-				安全报错流(err);
+				EN_0241(err);
 				closeSocketQuietly(serverSock);
 			});
 
-			// SS 模式下禁用 sec-websocket-protocol early-data，避免把子协议值（如 "binary"）误当作 base64 数据注入首包导致 AEAD 解密失败。
-			if (SS模式禁用EarlyData || !earlyDataHeader) return;
+			// SS EN_0406 sec-websocket-protocol early-data，EN_0588（EN_0226 "binary"）EN_0529 base64 EN_0323 AEAD EN_0498。
+			if (SSEN_0407EarlyData || !earlyDataHeader) return;
 			try {
 				const binaryString = atob(earlyDataHeader.replace(/-/g, '+').replace(/_/g, '/'));
 				const bytes = new Uint8Array(binaryString.length);
 				for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
-				安全入队(bytes.buffer);
+				EN_0239(bytes.buffer);
 			} catch (error) {
-				安全报错流(error);
+				EN_0241(error);
 			}
 		},
 		cancel() {
-			已取消读取 = true;
-			可读流已结束 = true;
+			EN_0270 = true;
+			EN_0163 = true;
 			closeSocketQuietly(serverSock);
 		}
 	});
-	let 判断协议类型 = null, 当前写入Socket = null, 远端写入器 = null;
-	let ss上下文 = null, ss初始化任务 = null;
+	let EN_0105 = null, EN_0287Socket = null, EN_0576 = null;
+	let ssEN_0002 = null, ssEN_0099 = null;
 
-	const 释放远端写入器 = () => {
-		if (远端写入器) {
-			try { 远端写入器.releaseLock() } catch (e) { }
-			远端写入器 = null;
+	const EN_0596 = () => {
+		if (EN_0576) {
+			try { EN_0576.releaseLock() } catch (e) { }
+			EN_0576 = null;
 		}
-		当前写入Socket = null;
+		EN_0287Socket = null;
 	};
 
-	const 写入远端 = async (chunk, allowRetry = true) => {
+	const EN_0085 = async (chunk, allowRetry = true) => {
 		const socket = remoteConnWrapper.socket;
 		if (!socket) return false;
 
-		if (socket !== 当前写入Socket) {
-			释放远端写入器();
-			当前写入Socket = socket;
-			远端写入器 = socket.writable.getWriter();
+		if (socket !== EN_0287Socket) {
+			EN_0596();
+			EN_0287Socket = socket;
+			EN_0576 = socket.writable.getWriter();
 		}
 
 		try {
-			await 远端写入器.write(chunk);
+			await EN_0576.write(chunk);
 			return true;
 		} catch (err) {
-			释放远端写入器();
+			EN_0596();
 			if (allowRetry && typeof remoteConnWrapper.retryConnect === 'function') {
 				await remoteConnWrapper.retryConnect();
-				return await 写入远端(chunk, false);
+				return await EN_0085(chunk, false);
 			}
 			throw err;
 		}
 	};
 
-	const 获取SS上下文 = async () => {
-		if (ss上下文) return ss上下文;
-		if (!ss初始化任务) {
-			ss初始化任务 = (async () => {
-				const 请求加密方式 = (url.searchParams.get('enc') || '').toLowerCase();
-				const 首选加密配置 = SS支持加密配置[请求加密方式] || SS支持加密配置['aes-128-gcm'];
-				const 入站候选加密配置 = [首选加密配置, ...Object.values(SS支持加密配置).filter(c => c.method !== 首选加密配置.method)];
-				const 入站主密钥任务缓存 = new Map();
-				const 取入站主密钥任务 = (config) => {
-					if (!入站主密钥任务缓存.has(config.method)) 入站主密钥任务缓存.set(config.method, SS派生主密钥(yourUUID, config.keyLen));
-					return 入站主密钥任务缓存.get(config.method);
+	const EN_0486SSEN_0002 = async () => {
+		if (ssEN_0002) return ssEN_0002;
+		if (!ssEN_0099) {
+			ssEN_0099 = (async () => {
+				const EN_0533 = (url.searchParams.get('enc') || '').toLowerCase();
+				const EN_0628 = SSEN_0318[EN_0533] || SSEN_0318['aes-128-gcm'];
+				const EN_0068 = [EN_0628, ...Object.values(SSEN_0318).filter(c => c.method !== EN_0628.method)];
+				const EN_0067 = new Map();
+				const EN_0159 = (config) => {
+					if (!EN_0067.has(config.method)) EN_0067.set(config.method, SSEN_0416(yourUUID, config.keyLen));
+					return EN_0067.get(config.method);
 				};
-				const 入站状态 = {
+				const EN_0069 = {
 					buffer: new Uint8Array(0),
 					hasSalt: false,
 					waitPayloadLength: null,
 					decryptKey: null,
-					nonceCounter: new Uint8Array(SSNonce长度),
-					加密配置: null,
+					nonceCounter: new Uint8Array(SSNonceEN_0605),
+					EN_0120: null,
 				};
-				const 初始化入站解密状态 = async () => {
-					const lengthCipherTotalLength = 2 + SSAEAD标签长度;
-					const 最大盐长度 = Math.max(...入站候选加密配置.map(c => c.saltLen));
-					const 最大对齐扫描字节 = 16;
-					const 可扫描最大偏移 = Math.min(最大对齐扫描字节, Math.max(0, 入站状态.buffer.byteLength - (lengthCipherTotalLength + Math.min(...入站候选加密配置.map(c => c.saltLen)))));
-					for (let offset = 0; offset <= 可扫描最大偏移; offset++) {
-						for (const 加密配置 of 入站候选加密配置) {
-							const 初始化最小长度 = offset + 加密配置.saltLen + lengthCipherTotalLength;
-							if (入站状态.buffer.byteLength < 初始化最小长度) continue;
-							const salt = 入站状态.buffer.subarray(offset, offset + 加密配置.saltLen);
-							const lengthCipher = 入站状态.buffer.subarray(offset + 加密配置.saltLen, 初始化最小长度);
-							const masterKey = await 取入站主密钥任务(加密配置);
-							const decryptKey = await SS派生会话密钥(加密配置, masterKey, salt, ['decrypt']);
-							const nonceCounter = new Uint8Array(SSNonce长度);
+				const EN_0100 = async () => {
+					const lengthCipherTotalLength = 2 + SSAEADEN_0394;
+					const EN_0359 = Math.max(...EN_0068.map(c => c.saltLen));
+					const EN_0358 = 16;
+					const EN_0161 = Math.min(EN_0358, Math.max(0, EN_0069.buffer.byteLength - (lengthCipherTotalLength + Math.min(...EN_0068.map(c => c.saltLen)))));
+					for (let offset = 0; offset <= EN_0161; offset++) {
+						for (const EN_0120 of EN_0068) {
+							const EN_0104 = offset + EN_0120.saltLen + lengthCipherTotalLength;
+							if (EN_0069.buffer.byteLength < EN_0104) continue;
+							const salt = EN_0069.buffer.subarray(offset, offset + EN_0120.saltLen);
+							const lengthCipher = EN_0069.buffer.subarray(offset + EN_0120.saltLen, EN_0104);
+							const masterKey = await EN_0159(EN_0120);
+							const decryptKey = await SSEN_0417(EN_0120, masterKey, salt, ['decrypt']);
+							const nonceCounter = new Uint8Array(SSNonceEN_0605);
 							try {
-								const lengthPlain = await SSAEAD解密(decryptKey, nonceCounter, lengthCipher);
+								const lengthPlain = await SSAEADEN_0497(decryptKey, nonceCounter, lengthCipher);
 								if (lengthPlain.byteLength !== 2) continue;
 								const payloadLength = (lengthPlain[0] << 8) | lengthPlain[1];
-								if (payloadLength < 0 || payloadLength > 加密配置.maxChunk) continue;
-								if (offset > 0) log(`[SS入站] 检测到前导噪声 ${offset}B，已自动对齐`);
-								if (加密配置.method !== 首选加密配置.method) log(`[SS入站] URL enc=${请求加密方式 || 首选加密配置.method} 与实际 ${加密配置.method} 不一致，已自动切换`);
-								入站状态.buffer = 入站状态.buffer.subarray(初始化最小长度);
-								入站状态.decryptKey = decryptKey;
-								入站状态.nonceCounter = nonceCounter;
-								入站状态.waitPayloadLength = payloadLength;
-								入站状态.加密配置 = 加密配置;
-								入站状态.hasSalt = true;
+								if (payloadLength < 0 || payloadLength > EN_0120.maxChunk) continue;
+								if (offset > 0) log(`[SSEN_0066] EN_0403 ${offset}B，EN_0273`);
+								if (EN_0120.method !== EN_0628.method) log(`[SSEN_0066] URL enc=${EN_0533 || EN_0628.method} EN_0012 ${EN_0120.method} EN_0007，EN_0272`);
+								EN_0069.buffer = EN_0069.buffer.subarray(EN_0104);
+								EN_0069.decryptKey = decryptKey;
+								EN_0069.nonceCounter = nonceCounter;
+								EN_0069.waitPayloadLength = payloadLength;
+								EN_0069.EN_0120 = EN_0120;
+								EN_0069.hasSalt = true;
 								return true;
 							} catch (_) { }
 						}
 					}
-					const 初始化失败判定长度 = 最大盐长度 + lengthCipherTotalLength + 最大对齐扫描字节;
-					if (入站状态.buffer.byteLength >= 初始化失败判定长度) {
-						throw new Error(`SS handshake decrypt failed (enc=${请求加密方式 || 'auto'}, candidates=${入站候选加密配置.map(c => c.method).join('/')})`);
+					const EN_0101 = EN_0359 + lengthCipherTotalLength + EN_0358;
+					if (EN_0069.buffer.byteLength >= EN_0101) {
+						throw new Error(`SS handshake decrypt failed (enc=${EN_0533 || 'auto'}, candidates=${EN_0068.map(c => c.method).join('/')})`);
 					}
 					return false;
 				};
-				const 入站解密器 = {
-					async 输入(dataChunk) {
-						const chunk = 数据转Uint8Array(dataChunk);
-						if (chunk.byteLength > 0) 入站状态.buffer = 拼接字节数据(入站状态.buffer, chunk);
-						if (!入站状态.hasSalt) {
-							const 初始化成功 = await 初始化入站解密状态();
-							if (!初始化成功) return [];
+				const EN_0070 = {
+					async EN_0567(dataChunk) {
+						const chunk = EN_0324Uint8Array(dataChunk);
+						if (chunk.byteLength > 0) EN_0069.buffer = EN_0308(EN_0069.buffer, chunk);
+						if (!EN_0069.hasSalt) {
+							const EN_0103 = await EN_0100();
+							if (!EN_0103) return [];
 						}
 						const plaintextChunks = [];
 						while (true) {
-							if (入站状态.waitPayloadLength === null) {
-								const lengthCipherTotalLength = 2 + SSAEAD标签长度;
-								if (入站状态.buffer.byteLength < lengthCipherTotalLength) break;
-								const lengthCipher = 入站状态.buffer.subarray(0, lengthCipherTotalLength);
-								入站状态.buffer = 入站状态.buffer.subarray(lengthCipherTotalLength);
-								const lengthPlain = await SSAEAD解密(入站状态.decryptKey, 入站状态.nonceCounter, lengthCipher);
+							if (EN_0069.waitPayloadLength === null) {
+								const lengthCipherTotalLength = 2 + SSAEADEN_0394;
+								if (EN_0069.buffer.byteLength < lengthCipherTotalLength) break;
+								const lengthCipher = EN_0069.buffer.subarray(0, lengthCipherTotalLength);
+								EN_0069.buffer = EN_0069.buffer.subarray(lengthCipherTotalLength);
+								const lengthPlain = await SSAEADEN_0497(EN_0069.decryptKey, EN_0069.nonceCounter, lengthCipher);
 								if (lengthPlain.byteLength !== 2) throw new Error('SS length decrypt failed');
 								const payloadLength = (lengthPlain[0] << 8) | lengthPlain[1];
-								if (payloadLength < 0 || payloadLength > 入站状态.加密配置.maxChunk) throw new Error(`SS payload length invalid: ${payloadLength}`);
-								入站状态.waitPayloadLength = payloadLength;
+								if (payloadLength < 0 || payloadLength > EN_0069.EN_0120.maxChunk) throw new Error(`SS payload length invalid: ${payloadLength}`);
+								EN_0069.waitPayloadLength = payloadLength;
 							}
-							const payloadCipherTotalLength = 入站状态.waitPayloadLength + SSAEAD标签长度;
-							if (入站状态.buffer.byteLength < payloadCipherTotalLength) break;
-							const payloadCipher = 入站状态.buffer.subarray(0, payloadCipherTotalLength);
-							入站状态.buffer = 入站状态.buffer.subarray(payloadCipherTotalLength);
-							const payloadPlain = await SSAEAD解密(入站状态.decryptKey, 入站状态.nonceCounter, payloadCipher);
+							const payloadCipherTotalLength = EN_0069.waitPayloadLength + SSAEADEN_0394;
+							if (EN_0069.buffer.byteLength < payloadCipherTotalLength) break;
+							const payloadCipher = EN_0069.buffer.subarray(0, payloadCipherTotalLength);
+							EN_0069.buffer = EN_0069.buffer.subarray(payloadCipherTotalLength);
+							const payloadPlain = await SSAEADEN_0497(EN_0069.decryptKey, EN_0069.nonceCounter, payloadCipher);
 							plaintextChunks.push(payloadPlain);
-							入站状态.waitPayloadLength = null;
+							EN_0069.waitPayloadLength = null;
 						}
 						return plaintextChunks;
 					},
 				};
-				let 出站加密器 = null;
-				const SS单批最大字节 = 32 * 1024;
-				const 获取出站加密器 = async () => {
-					if (出站加密器) return 出站加密器;
-					if (!入站状态.加密配置) throw new Error('SS cipher is not negotiated');
-					const 出站加密配置 = 入站状态.加密配置;
-					const 出站主密钥 = await SS派生主密钥(yourUUID, 出站加密配置.keyLen);
-					const 出站随机字节 = crypto.getRandomValues(new Uint8Array(出站加密配置.saltLen));
-					const 出站加密密钥 = await SS派生会话密钥(出站加密配置, 出站主密钥, 出站随机字节, ['encrypt']);
-					const 出站Nonce计数器 = new Uint8Array(SSNonce长度);
-					let 随机字节已发送 = false;
-					出站加密器 = {
-						async 加密并发送(dataChunk, sendChunk) {
-							const plaintextData = 数据转Uint8Array(dataChunk);
-							if (!随机字节已发送) {
-								await sendChunk(出站随机字节);
-								随机字节已发送 = true;
+				let EN_0088 = null;
+				const SSEN_0131 = 32 * 1024;
+				const EN_0493 = async () => {
+					if (EN_0088) return EN_0088;
+					if (!EN_0069.EN_0120) throw new Error('SS cipher is not negotiated');
+					const EN_0090 = EN_0069.EN_0120;
+					const EN_0087 = await SSEN_0416(yourUUID, EN_0090.keyLen);
+					const EN_0091 = crypto.getRandomValues(new Uint8Array(EN_0090.saltLen));
+					const EN_0089 = await SSEN_0417(EN_0090, EN_0087, EN_0091, ['encrypt']);
+					const EN_0086NonceEN_0509 = new Uint8Array(SSNonceEN_0605);
+					let EN_0611 = false;
+					EN_0088 = {
+						async EN_0117(dataChunk, sendChunk) {
+							const plaintextData = EN_0324Uint8Array(dataChunk);
+							if (!EN_0611) {
+								await sendChunk(EN_0091);
+								EN_0611 = true;
 							}
 							if (plaintextData.byteLength === 0) return;
 							let offset = 0;
 							while (offset < plaintextData.byteLength) {
-								const end = Math.min(offset + 出站加密配置.maxChunk, plaintextData.byteLength);
+								const end = Math.min(offset + EN_0090.maxChunk, plaintextData.byteLength);
 								const payloadPlain = plaintextData.subarray(offset, end);
 								const lengthPlain = new Uint8Array(2);
 								lengthPlain[0] = (payloadPlain.byteLength >>> 8) & 0xff;
 								lengthPlain[1] = payloadPlain.byteLength & 0xff;
-								const lengthCipher = await SSAEAD加密(出站加密密钥, 出站Nonce计数器, lengthPlain);
-								const payloadCipher = await SSAEAD加密(出站加密密钥, 出站Nonce计数器, payloadPlain);
+								const lengthCipher = await SSAEADEN_0115(EN_0089, EN_0086NonceEN_0509, lengthPlain);
+								const payloadCipher = await SSAEADEN_0115(EN_0089, EN_0086NonceEN_0509, payloadPlain);
 								const frame = new Uint8Array(lengthCipher.byteLength + payloadCipher.byteLength);
 								frame.set(lengthCipher, 0);
 								frame.set(payloadCipher, lengthCipher.byteLength);
@@ -1221,101 +1221,101 @@ async function 处理WS请求(request, yourUUID, url) {
 							}
 						},
 					};
-					return 出站加密器;
+					return EN_0088;
 				};
-				let SS发送队列 = Promise.resolve();
-				const SS入队发送 = (chunk) => {
-					SS发送队列 = SS发送队列.then(async () => {
+				let SSEN_0158 = Promise.resolve();
+				const SSEN_0072 = (chunk) => {
+					SSEN_0158 = SSEN_0158.then(async () => {
 						if (serverSock.readyState !== WebSocket.OPEN) return;
-						const 已初始化出站加密器 = await 获取出站加密器();
-						await 已初始化出站加密器.加密并发送(chunk, async (encryptedChunk) => {
+						const EN_0269 = await EN_0493();
+						await EN_0269.EN_0117(chunk, async (encryptedChunk) => {
 							if (encryptedChunk.byteLength > 0 && serverSock.readyState === WebSocket.OPEN) {
-								await WebSocket发送并等待(serverSock, encryptedChunk.buffer);
+								await WebSocketEN_0155(serverSock, encryptedChunk.buffer);
 							}
 						});
 					}).catch((error) => {
-						log(`[SS发送] 加密失败: ${error?.message || error}`);
+						log(`[SSEN_0153] EN_0116: ${error?.message || error}`);
 						closeSocketQuietly(serverSock);
 					});
-					return SS发送队列;
+					return SSEN_0158;
 				};
-				const 回包Socket = {
+				const EN_0190Socket = {
 					get readyState() {
 						return serverSock.readyState;
 					},
 					send(data) {
-						const chunk = 数据转Uint8Array(data);
-						if (chunk.byteLength <= SS单批最大字节) {
-							return SS入队发送(chunk);
+						const chunk = EN_0324Uint8Array(data);
+						if (chunk.byteLength <= SSEN_0131) {
+							return SSEN_0072(chunk);
 						}
-						for (let i = 0; i < chunk.byteLength; i += SS单批最大字节) {
-							SS入队发送(chunk.subarray(i, Math.min(i + SS单批最大字节, chunk.byteLength)));
+						for (let i = 0; i < chunk.byteLength; i += SSEN_0131) {
+							SSEN_0072(chunk.subarray(i, Math.min(i + SSEN_0131, chunk.byteLength)));
 						}
-						return SS发送队列;
+						return SSEN_0158;
 					},
 					close() {
 						closeSocketQuietly(serverSock);
 					}
 				};
-				ss上下文 = {
-					入站解密器,
-					回包Socket,
-					首包已建立: false,
-					目标主机: '',
-					目标端口: 0,
+				ssEN_0002 = {
+					EN_0070,
+					EN_0190Socket,
+					EN_0627: false,
+					EN_0435: '',
+					EN_0439: 0,
 				};
-				return ss上下文;
-			})().finally(() => { ss初始化任务 = null });
+				return ssEN_0002;
+			})().finally(() => { ssEN_0099 = null });
 		}
-		return ss初始化任务;
+		return ssEN_0099;
 	};
 
-	const 处理SS数据 = async (chunk) => {
-		const 上下文 = await 获取SS上下文();
-		let 明文块数组 = null;
+	const EN_0211SSEN_0321 = async (chunk) => {
+		const EN_0002 = await EN_0486SSEN_0002();
+		let EN_0345 = null;
 		try {
-			明文块数组 = await 上下文.入站解密器.输入(chunk);
+			EN_0345 = await EN_0002.EN_0070.EN_0567(chunk);
 		} catch (err) {
 			const msg = err?.message || `${err}`;
 			if (msg.includes('Decryption failed') || msg.includes('SS handshake decrypt failed') || msg.includes('SS length decrypt failed')) {
-				log(`[SS入站] 解密失败，连接关闭: ${msg}`);
+				log(`[SSEN_0066] EN_0498，EN_0577: ${msg}`);
 				closeSocketQuietly(serverSock);
 				return;
 			}
 			throw err;
 		}
-		for (const 明文块 of 明文块数组) {
-			let 已写入 = false;
+		for (const EN_0344 of EN_0345) {
+			let EN_0268 = false;
 			try {
-				已写入 = await 写入远端(明文块, false);
+				EN_0268 = await EN_0085(EN_0344, false);
 			} catch (_) {
-				已写入 = false;
+				EN_0268 = false;
 			}
-			if (已写入) continue;
-			if (上下文.首包已建立 && 上下文.目标主机 && 上下文.目标端口 > 0) {
-				await forwardataTCP(上下文.目标主机, 上下文.目标端口, 明文块, 上下文.回包Socket, null, remoteConnWrapper, yourUUID);
+			if (EN_0268) continue;
+			if (EN_0002.EN_0627 && EN_0002.EN_0435 && EN_0002.EN_0439 > 0) {
+				await forwardataTCP(EN_0002.EN_0435, EN_0002.EN_0439, EN_0344, EN_0002.EN_0190Socket, null, remoteConnWrapper, yourUUID);
 				continue;
 			}
-			const 明文数据 = 数据转Uint8Array(明文块);
-			if (明文数据.byteLength < 3) throw new Error('invalid ss data');
-			const addressType = 明文数据[0];
+			const EN_0346 = EN_0324Uint8Array(EN_0344);
+			if (EN_0346.byteLength < 3) throw new Error('invalid ss data');
+			const addressType = EN_0346[0];
 			let cursor = 1;
 			let hostname = '';
 			if (addressType === 1) {
-				if (明文数据.byteLength < cursor + 4 + 2) throw new Error('invalid ss ipv4 length');
-				hostname = `${明文数据[cursor]}.${明文数据[cursor + 1]}.${明文数据[cursor + 2]}.${明文数据[cursor + 3]}`;
+				if (EN_0346.byteLength < cursor + 4 + 2) throw new Error('invalid ss ipv4 length');
+				hostname = `${EN_0346[cursor]}.${EN_0346[cursor + 1]}.${EN_0346[cursor + 2]}.${EN_0346[cursor + 3]}`;
 				cursor += 4;
 			} else if (addressType === 3) {
-				if (明文数据.byteLength < cursor + 1) throw new Error('invalid ss domain length');
-				const domainLength = 明文数据[cursor];
+				if (EN_0346.byteLength < cursor + 1) throw new Error('invalid ss domain length');
+				const domainLength = EN_0346[cursor];
 				cursor += 1;
-				if (明文数据.byteLength < cursor + domainLength + 2) throw new Error('invalid ss domain data');
-				hostname = SS文本解码器.decode(明文数据.subarray(cursor, cursor + domainLength));
+				if (EN_0346.byteLength < cursor + domainLength + 2) throw new Error('invalid ss domain data');
+				hostname = SSEN_0329.decode(EN_0346.subarray(cursor, cursor + domainLength));
 				cursor += domainLength;
 			} else if (addressType === 4) {
-				if (明文数据.byteLength < cursor + 16 + 2) throw new Error('invalid ss ipv6 length');
+				if (EN_0346.byteLength < cursor + 16 + 2) throw new Error('invalid ss ipv6 length');
 				const ipv6 = [];
-				const ipv6View = new DataView(明文数据.buffer, 明文数据.byteOffset + cursor, 16);
+				const ipv6View = new DataView(EN_0346.buffer, EN_0346.byteOffset + cursor, 16);
 				for (let i = 0; i < 8; i++) ipv6.push(ipv6View.getUint16(i * 2).toString(16));
 				hostname = ipv6.join(':');
 				cursor += 16;
@@ -1323,60 +1323,60 @@ async function 处理WS请求(request, yourUUID, url) {
 				throw new Error(`invalid ss addressType: ${addressType}`);
 			}
 			if (!hostname) throw new Error(`invalid ss address: ${addressType}`);
-			const port = (明文数据[cursor] << 8) | 明文数据[cursor + 1];
+			const port = (EN_0346[cursor] << 8) | EN_0346[cursor + 1];
 			cursor += 2;
-			const rawClientData = 明文数据.subarray(cursor);
+			const rawClientData = EN_0346.subarray(cursor);
 			if (isSpeedTestSite(hostname)) throw new Error('Speedtest site is blocked');
-			上下文.首包已建立 = true;
-			上下文.目标主机 = hostname;
-			上下文.目标端口 = port;
-			await forwardataTCP(hostname, port, rawClientData, 上下文.回包Socket, null, remoteConnWrapper, yourUUID);
+			EN_0002.EN_0627 = true;
+			EN_0002.EN_0435 = hostname;
+			EN_0002.EN_0439 = port;
+			await forwardataTCP(hostname, port, rawClientData, EN_0002.EN_0190Socket, null, remoteConnWrapper, yourUUID);
 		}
 	};
 
 	readable.pipeTo(new WritableStream({
 		async write(chunk) {
 			if (isDnsQuery) {
-				if (判断是否是木马) return await 转发木马UDP数据(chunk, serverSock, 木马UDP上下文);
+				if (EN_0107) return await EN_0566UDPEN_0321(chunk, serverSock, EN_0367UDPEN_0002);
 				return await forwardataudp(chunk, serverSock, null);
 			}
-			if (判断协议类型 === 'ss') {
-				await 处理SS数据(chunk);
+			if (EN_0105 === 'ss') {
+				await EN_0211SSEN_0321(chunk);
 				return;
 			}
-			if (await 写入远端(chunk)) return;
+			if (await EN_0085(chunk)) return;
 
-			if (判断协议类型 === null) {
-				if (url.searchParams.get('enc')) 判断协议类型 = 'ss';
+			if (EN_0105 === null) {
+				if (url.searchParams.get('enc')) EN_0105 = 'ss';
 				else {
 					const bytes = new Uint8Array(chunk);
-					判断协议类型 = bytes.byteLength >= 58 && bytes[56] === 0x0d && bytes[57] === 0x0a ? '木马' : '魏烈思';
+					EN_0105 = bytes.byteLength >= 58 && bytes[56] === 0x0d && bytes[57] === 0x0a ? 'EN_0367' : 'EN_0634';
 				}
-				判断是否是木马 = 判断协议类型 === '木马';
-				log(`[WS转发] 协议类型: ${判断协议类型} | 来自: ${url.host} | UA: ${request.headers.get('user-agent') || '未知'}`);
+				EN_0107 = EN_0105 === 'EN_0367';
+				log(`[WSEN_0563] EN_0130: ${EN_0105} | EN_0382: ${url.host} | UA: ${request.headers.get('user-agent') || 'EN_0372'}`);
 			}
 
-			if (判断协议类型 === 'ss') {
-				await 处理SS数据(chunk);
+			if (EN_0105 === 'ss') {
+				await EN_0211SSEN_0321(chunk);
 				return;
 			}
-			if (await 写入远端(chunk)) return;
-			if (判断协议类型 === '木马') {
-				const 解析结果 = 解析木马请求(chunk, yourUUID);
-				if (解析结果?.hasError) throw new Error(解析结果.message || 'Invalid trojan request');
-				const { port, hostname, rawClientData, isUDP } = 解析结果;
+			if (await EN_0085(chunk)) return;
+			if (EN_0105 === 'EN_0367') {
+				const EN_0507 = EN_0506(chunk, yourUUID);
+				if (EN_0507?.hasError) throw new Error(EN_0507.message || 'Invalid trojan request');
+				const { port, hostname, rawClientData, isUDP } = EN_0507;
 				if (isSpeedTestSite(hostname)) throw new Error('Speedtest site is blocked');
 				if (isUDP) {
 					isDnsQuery = true;
-					if (有效数据长度(rawClientData) > 0) return 转发木马UDP数据(rawClientData, serverSock, 木马UDP上下文);
+					if (EN_0365(rawClientData) > 0) return EN_0566UDPEN_0321(rawClientData, serverSock, EN_0367UDPEN_0002);
 					return;
 				}
 				await forwardataTCP(hostname, port, rawClientData, serverSock, null, remoteConnWrapper, yourUUID);
 			} else {
-				判断是否是木马 = false;
-				const 解析结果 = 解析魏烈思请求(chunk, yourUUID);
-				if (解析结果?.hasError) throw new Error(解析结果.message || 'Invalid 魏烈思 request');
-				const { port, hostname, rawIndex, version, isUDP } = 解析结果;
+				EN_0107 = false;
+				const EN_0507 = EN_0508(chunk, yourUUID);
+				if (EN_0507?.hasError) throw new Error(EN_0507.message || 'Invalid EN_0634 request');
+				const { port, hostname, rawIndex, version, isUDP } = EN_0507;
 				if (isSpeedTestSite(hostname)) throw new Error('Speedtest site is blocked');
 				if (isUDP) {
 					if (port === 53) isDnsQuery = true;
@@ -1385,33 +1385,33 @@ async function 处理WS请求(request, yourUUID, url) {
 				const respHeader = new Uint8Array([version[0], 0]);
 				const rawData = chunk.slice(rawIndex);
 				if (isDnsQuery) {
-					if (判断是否是木马) return 转发木马UDP数据(rawData, serverSock, 木马UDP上下文);
+					if (EN_0107) return EN_0566UDPEN_0321(rawData, serverSock, EN_0367UDPEN_0002);
 					return forwardataudp(rawData, serverSock, respHeader);
 				}
 				await forwardataTCP(hostname, port, rawData, serverSock, respHeader, remoteConnWrapper, yourUUID);
 			}
 		},
 		close() {
-			释放远端写入器();
+			EN_0596();
 		},
 		abort() {
-			释放远端写入器();
+			EN_0596();
 		}
 	})).catch((err) => {
 		const msg = err?.message || `${err}`;
 		if (msg.includes('Network connection lost') || msg.includes('ReadableStream is closed')) {
-			log(`[WS转发] 连接结束: ${msg}`);
+			log(`[WSEN_0563] EN_0580: ${msg}`);
 		} else {
-			log(`[WS转发] 处理失败: ${msg}`);
+			log(`[WSEN_0563] EN_0213: ${msg}`);
 		}
-		释放远端写入器();
+		EN_0596();
 		closeSocketQuietly(serverSock);
 	});
 
 	return new Response(null, { status: 101, webSocket: clientSock });
 }
 
-function 解析木马请求(buffer, passwordPlainText) {
+function EN_0506(buffer, passwordPlainText) {
 	const sha224Password = sha224(passwordPlainText);
 	if (buffer.byteLength < 56) return { hasError: true, message: "invalid data" };
 	let crLfIndex = 56;
@@ -1472,7 +1472,7 @@ function 解析木马请求(buffer, passwordPlainText) {
 	};
 }
 
-function 解析魏烈思请求(chunk, token) {
+function EN_0508(chunk, token) {
 	if (chunk.byteLength < 24) return { hasError: true, message: 'Invalid data' };
 	const version = new Uint8Array(chunk.slice(0, 1));
 	if (formatIdentifier(new Uint8Array(chunk.slice(1, 17))) !== token) return { hasError: true, message: 'Invalid uuid' };
@@ -1508,25 +1508,25 @@ function 解析魏烈思请求(chunk, token) {
 	return { hasError: false, addressType, port, hostname, isUDP, rawIndex: addrValIdx + addrLen, version };
 }
 
-const SS支持加密配置 = {
+const SSEN_0318 = {
 	'aes-128-gcm': { method: 'aes-128-gcm', keyLen: 16, saltLen: 16, maxChunk: 0x3fff, aesLength: 128 },
 	'aes-256-gcm': { method: 'aes-256-gcm', keyLen: 32, saltLen: 32, maxChunk: 0x3fff, aesLength: 256 },
 };
 
-const SSAEAD标签长度 = 16, SSNonce长度 = 12;
-const SS子密钥信息 = new TextEncoder().encode('ss-subkey');
-const SS文本编码器 = new TextEncoder(), SS文本解码器 = new TextDecoder(), SS主密钥缓存 = new Map();
+const SSAEADEN_0394 = 16, SSNonceEN_0605 = 12;
+const SSEN_0235 = new TextEncoder().encode('ss-subkey');
+const SSEN_0328 = new TextEncoder(), SSEN_0329 = new TextDecoder(), SSEN_0019 = new Map();
 
-function 数据转Uint8Array(data) {
+function EN_0324Uint8Array(data) {
 	if (data instanceof Uint8Array) return data;
 	if (data instanceof ArrayBuffer) return new Uint8Array(data);
 	if (ArrayBuffer.isView(data)) return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
 	return new Uint8Array(data || 0);
 }
 
-function 拼接字节数据(...chunkList) {
+function EN_0308(...chunkList) {
 	if (!chunkList || chunkList.length === 0) return new Uint8Array(0);
-	const chunks = chunkList.map(数据转Uint8Array);
+	const chunks = chunkList.map(EN_0324Uint8Array);
 	const total = chunks.reduce((sum, c) => sum + c.byteLength, 0);
 	const result = new Uint8Array(total);
 	let offset = 0;
@@ -1534,10 +1534,10 @@ function 拼接字节数据(...chunkList) {
 	return result;
 }
 
-async function 转发木马UDP数据(chunk, webSocket, 上下文) {
-	const 当前块 = 数据转Uint8Array(chunk);
-	const 缓存块 = 上下文?.缓存 instanceof Uint8Array ? 上下文.缓存 : new Uint8Array(0);
-	const input = 缓存块.byteLength ? 拼接字节数据(缓存块, 当前块) : 当前块;
+async function EN_0566UDPEN_0321(chunk, webSocket, EN_0002) {
+	const EN_0289 = EN_0324Uint8Array(chunk);
+	const EN_0473 = EN_0002?.EN_0469 instanceof Uint8Array ? EN_0002.EN_0469 : new Uint8Array(0);
+	const input = EN_0473.byteLength ? EN_0308(EN_0473, EN_0289) : EN_0289;
 	let cursor = 0;
 
 	while (cursor < input.byteLength) {
@@ -1563,75 +1563,75 @@ async function 转发木马UDP数据(chunk, webSocket, 上下文) {
 		const payloadEnd = payloadStart + payloadLength;
 		if (input.byteLength < payloadEnd) break;
 
-		const 地址端口头 = input.slice(packetStart, portCursor + 2);
+		const EN_0204 = input.slice(packetStart, portCursor + 2);
 		const payload = input.slice(payloadStart, payloadEnd);
 		cursor = payloadEnd;
 
 		if (port !== 53) throw new Error('UDP is not supported');
 		if (!payload.byteLength) continue;
 
-		let tcpDNS查询 = payload;
+		let tcpDNSEN_0384 = payload;
 		if (payload.byteLength < 2 || ((payload[0] << 8) | payload[1]) !== payload.byteLength - 2) {
-			tcpDNS查询 = new Uint8Array(payload.byteLength + 2);
-			tcpDNS查询[0] = (payload.byteLength >>> 8) & 0xff;
-			tcpDNS查询[1] = payload.byteLength & 0xff;
-			tcpDNS查询.set(payload, 2);
+			tcpDNSEN_0384 = new Uint8Array(payload.byteLength + 2);
+			tcpDNSEN_0384[0] = (payload.byteLength >>> 8) & 0xff;
+			tcpDNSEN_0384[1] = payload.byteLength & 0xff;
+			tcpDNSEN_0384.set(payload, 2);
 		}
 
-		const dns响应上下文 = { 缓存: new Uint8Array(0) };
-		await forwardataudp(tcpDNS查询, webSocket, null, (dnsRespChunk) => {
-			const 当前响应块 = 数据转Uint8Array(dnsRespChunk);
-			const 响应输入 = dns响应上下文.缓存.byteLength ? 拼接字节数据(dns响应上下文.缓存, 当前响应块) : 当前响应块;
-			const 响应帧列表 = [];
+		const dnsEN_0179 = { EN_0469: new Uint8Array(0) };
+		await forwardataudp(tcpDNSEN_0384, webSocket, null, (dnsRespChunk) => {
+			const EN_0288 = EN_0324Uint8Array(dnsRespChunk);
+			const EN_0189 = dnsEN_0179.EN_0469.byteLength ? EN_0308(dnsEN_0179.EN_0469, EN_0288) : EN_0288;
+			const EN_0187 = [];
 			let responseCursor = 0;
-			while (responseCursor + 2 <= 响应输入.byteLength) {
-				const dnsLen = (响应输入[responseCursor] << 8) | 响应输入[responseCursor + 1];
+			while (responseCursor + 2 <= EN_0189.byteLength) {
+				const dnsLen = (EN_0189[responseCursor] << 8) | EN_0189[responseCursor + 1];
 				const dnsStart = responseCursor + 2;
 				const dnsEnd = dnsStart + dnsLen;
-				if (dnsEnd > 响应输入.byteLength) break;
-				const dnsPayload = 响应输入.slice(dnsStart, dnsEnd);
-				const frame = new Uint8Array(地址端口头.byteLength + 4 + dnsPayload.byteLength);
-				frame.set(地址端口头, 0);
-				frame[地址端口头.byteLength] = (dnsPayload.byteLength >>> 8) & 0xff;
-				frame[地址端口头.byteLength + 1] = dnsPayload.byteLength & 0xff;
-				frame[地址端口头.byteLength + 2] = 0x0d;
-				frame[地址端口头.byteLength + 3] = 0x0a;
-				frame.set(dnsPayload, 地址端口头.byteLength + 4);
-				响应帧列表.push(frame);
+				if (dnsEnd > EN_0189.byteLength) break;
+				const dnsPayload = EN_0189.slice(dnsStart, dnsEnd);
+				const frame = new Uint8Array(EN_0204.byteLength + 4 + dnsPayload.byteLength);
+				frame.set(EN_0204, 0);
+				frame[EN_0204.byteLength] = (dnsPayload.byteLength >>> 8) & 0xff;
+				frame[EN_0204.byteLength + 1] = dnsPayload.byteLength & 0xff;
+				frame[EN_0204.byteLength + 2] = 0x0d;
+				frame[EN_0204.byteLength + 3] = 0x0a;
+				frame.set(dnsPayload, EN_0204.byteLength + 4);
+				EN_0187.push(frame);
 				responseCursor = dnsEnd;
 			}
-			dns响应上下文.缓存 = 响应输入.slice(responseCursor);
-			return 响应帧列表.length ? 响应帧列表 : new Uint8Array(0);
+			dnsEN_0179.EN_0469 = EN_0189.slice(responseCursor);
+			return EN_0187.length ? EN_0187 : new Uint8Array(0);
 		});
 	}
 
-	if (上下文) 上下文.缓存 = input.slice(cursor);
+	if (EN_0002) EN_0002.EN_0469 = input.slice(cursor);
 }
 
-function SS递增Nonce计数器(counter) {
+function SSEN_0583NonceEN_0509(counter) {
 	for (let i = 0; i < counter.length; i++) { counter[i] = (counter[i] + 1) & 0xff; if (counter[i] !== 0) return }
 }
 
-async function SS派生主密钥(passwordText, keyLen) {
+async function SSEN_0416(passwordText, keyLen) {
 	const cacheKey = `${keyLen}:${passwordText}`;
-	if (SS主密钥缓存.has(cacheKey)) return SS主密钥缓存.get(cacheKey);
+	if (SSEN_0019.has(cacheKey)) return SSEN_0019.get(cacheKey);
 	const deriveTask = (async () => {
-		const pwBytes = SS文本编码器.encode(passwordText || '');
+		const pwBytes = SSEN_0328.encode(passwordText || '');
 		let prev = new Uint8Array(0), result = new Uint8Array(0);
 		while (result.byteLength < keyLen) {
 			const input = new Uint8Array(prev.byteLength + pwBytes.byteLength);
 			input.set(prev, 0); input.set(pwBytes, prev.byteLength);
 			prev = new Uint8Array(await crypto.subtle.digest('MD5', input));
-			result = 拼接字节数据(result, prev);
+			result = EN_0308(result, prev);
 		}
 		return result.slice(0, keyLen);
 	})();
-	SS主密钥缓存.set(cacheKey, deriveTask);
+	SSEN_0019.set(cacheKey, deriveTask);
 	try { return await deriveTask }
-	catch (error) { SS主密钥缓存.delete(cacheKey); throw error }
+	catch (error) { SSEN_0019.delete(cacheKey); throw error }
 }
 
-async function SS派生会话密钥(config, masterKey, salt, usages) {
+async function SSEN_0417(config, masterKey, salt, usages) {
 	const hmacOpts = { name: 'HMAC', hash: 'SHA-1' };
 	const saltHmacKey = await crypto.subtle.importKey('raw', salt, hmacOpts, false, ['sign']);
 	const prk = new Uint8Array(await crypto.subtle.sign('HMAC', saltHmacKey, masterKey));
@@ -1639,7 +1639,7 @@ async function SS派生会话密钥(config, masterKey, salt, usages) {
 	const subKey = new Uint8Array(config.keyLen);
 	let prev = new Uint8Array(0), written = 0, counter = 1;
 	while (written < config.keyLen) {
-		const input = 拼接字节数据(prev, SS子密钥信息, new Uint8Array([counter]));
+		const input = EN_0308(prev, SSEN_0235, new Uint8Array([counter]));
 		prev = new Uint8Array(await crypto.subtle.sign('HMAC', prkHmacKey, input));
 		const copyLen = Math.min(prev.byteLength, config.keyLen - written);
 		subKey.set(prev.subarray(0, copyLen), written);
@@ -1648,62 +1648,62 @@ async function SS派生会话密钥(config, masterKey, salt, usages) {
 	return crypto.subtle.importKey('raw', subKey, { name: 'AES-GCM', length: config.aesLength }, false, usages);
 }
 
-async function SSAEAD加密(cryptoKey, nonceCounter, plaintext) {
+async function SSAEADEN_0115(cryptoKey, nonceCounter, plaintext) {
 	const iv = nonceCounter.slice();
 	const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv, tagLength: 128 }, cryptoKey, plaintext);
-	SS递增Nonce计数器(nonceCounter);
+	SSEN_0583NonceEN_0509(nonceCounter);
 	return new Uint8Array(ct);
 }
 
-async function SSAEAD解密(cryptoKey, nonceCounter, ciphertext) {
+async function SSAEADEN_0497(cryptoKey, nonceCounter, ciphertext) {
 	const iv = nonceCounter.slice();
 	const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv, tagLength: 128 }, cryptoKey, ciphertext);
-	SS递增Nonce计数器(nonceCounter);
+	SSEN_0583NonceEN_0509(nonceCounter);
 	return new Uint8Array(pt);
 }
 
 async function forwardataTCP(host, portNum, rawData, ws, respHeader, remoteConnWrapper, yourUUID) {
-	log(`[TCP转发] 目标: ${host}:${portNum} | 反代IP: ${反代IP} | 反代兜底: ${启用反代兜底 ? '是' : '否'} | 反代类型: ${启用SOCKS5反代 || 'proxyip'} | 全局: ${启用SOCKS5全局反代 ? '是' : '否'}`);
-	const 连接超时毫秒 = 1000;
-	let 已通过代理发送首包 = false;
+	log(`[TCPEN_0563] EN_0434: ${host}:${portNum} | EN_0140IP: ${EN_0140IP} | EN_0141: ${EN_0173 ? 'EN_0348' : 'EN_0170'} | EN_0149: ${EN_0172SOCKS5EN_0140 || 'proxyip'} | EN_0073: ${EN_0172SOCKS5EN_0075 ? 'EN_0348' : 'EN_0170'}`);
+	const EN_0582 = 1000;
+	let EN_0274 = false;
 
-	async function 等待连接建立(remoteSock, timeoutMs = 连接超时毫秒) {
+	async function EN_0457(remoteSock, timeoutMs = EN_0582) {
 		await Promise.race([
 			remoteSock.opened,
-			new Promise((_, reject) => setTimeout(() => reject(new Error('连接超时')), timeoutMs))
+			new Promise((_, reject) => setTimeout(() => reject(new Error('EN_0581')), timeoutMs))
 		]);
 	}
 
-	async function connectDirect(address, port, data = null, 所有反代数组 = null, 反代兜底 = true) {
+	async function connectDirect(address, port, data = null, EN_0302 = null, EN_0141 = true) {
 		let remoteSock;
-		if (所有反代数组 && 所有反代数组.length > 0) {
-			for (let i = 0; i < 所有反代数组.length; i++) {
-				const 反代数组索引 = (缓存反代数组索引 + i) % 所有反代数组.length;
-				const [反代地址, 反代端口] = 所有反代数组[反代数组索引];
+		if (EN_0302 && EN_0302.length > 0) {
+			for (let i = 0; i < EN_0302.length; i++) {
+				const EN_0145 = (EN_0471 + i) % EN_0302.length;
+				const [EN_0144, EN_0148] = EN_0302[EN_0145];
 				try {
-					log(`[反代连接] 尝试连接到: ${反代地址}:${反代端口} (索引: ${反代数组索引})`);
-					remoteSock = connect({ hostname: 反代地址, port: 反代端口 });
-					await 等待连接建立(remoteSock);
-					if (有效数据长度(data) > 0) {
+					log(`[EN_0152] EN_0265: ${EN_0144}:${EN_0148} (EN_0463: ${EN_0145})`);
+					remoteSock = connect({ hostname: EN_0144, port: EN_0148 });
+					await EN_0457(remoteSock);
+					if (EN_0365(data) > 0) {
 						const testWriter = remoteSock.writable.getWriter();
 						await testWriter.write(data);
 						testWriter.releaseLock();
 					}
-					log(`[反代连接] 成功连接到: ${反代地址}:${反代端口}`);
-					缓存反代数组索引 = 反代数组索引;
+					log(`[EN_0152] EN_0299: ${EN_0144}:${EN_0148}`);
+					EN_0471 = EN_0145;
 					return remoteSock;
 				} catch (err) {
-					log(`[反代连接] 连接失败: ${反代地址}:${反代端口}, 错误: ${err.message}`);
+					log(`[EN_0152] EN_0578: ${EN_0144}:${EN_0148}, EN_0601: ${err.message}`);
 					try { remoteSock?.close?.() } catch (e) { }
 					continue;
 				}
 			}
 		}
 
-		if (反代兜底) {
+		if (EN_0141) {
 			remoteSock = connect({ hostname: address, port: port });
-			await 等待连接建立(remoteSock);
-			if (有效数据长度(data) > 0) {
+			await EN_0457(remoteSock);
+			if (EN_0365(data) > 0) {
 				const writer = remoteSock.writable.getWriter();
 				await writer.write(data);
 				writer.releaseLock();
@@ -1711,66 +1711,66 @@ async function forwardataTCP(host, portNum, rawData, ws, respHeader, remoteConnW
 			return remoteSock;
 		} else {
 			closeSocketQuietly(ws);
-			throw new Error('[反代连接] 所有反代连接失败，且未启用反代兜底，连接终止。');
+			throw new Error('[EN_0152] EN_0303，EN_0014，EN_0579。');
 		}
 	}
 
-	async function connecttoPry(允许发送首包 = true) {
+	async function connecttoPry(EN_0062 = true) {
 		if (remoteConnWrapper.connectingPromise) {
 			await remoteConnWrapper.connectingPromise;
 			return;
 		}
 
-		const 本次发送首包 = 允许发送首包 && !已通过代理发送首包 && 有效数据长度(rawData) > 0;
-		const 本次首包数据 = 本次发送首包 ? rawData : null;
+		const EN_0378 = EN_0062 && !EN_0274 && EN_0365(rawData) > 0;
+		const EN_0379 = EN_0378 ? rawData : null;
 
-		const 当前连接任务 = (async () => {
+		const EN_0292 = (async () => {
 			let newSocket;
-			if (启用SOCKS5反代 === 'socks5') {
-				log(`[SOCKS5代理] 代理到: ${host}:${portNum}`);
-				newSocket = await socks5Connect(host, portNum, 本次首包数据);
-			} else if (启用SOCKS5反代 === 'http') {
-				log(`[HTTP代理] 代理到: ${host}:${portNum}`);
-				newSocket = await httpConnect(host, portNum, 本次首包数据);
-			} else if (启用SOCKS5反代 === 'https') {
-				log(`[HTTPS代理] 代理到: ${host}:${portNum}`);
+			if (EN_0172SOCKS5EN_0140 === 'socks5') {
+				log(`[SOCKS5EN_0023] EN_0024: ${host}:${portNum}`);
+				newSocket = await socks5Connect(host, portNum, EN_0379);
+			} else if (EN_0172SOCKS5EN_0140 === 'http') {
+				log(`[HTTPEN_0023] EN_0024: ${host}:${portNum}`);
+				newSocket = await httpConnect(host, portNum, EN_0379);
+			} else if (EN_0172SOCKS5EN_0140 === 'https') {
+				log(`[HTTPSEN_0023] EN_0024: ${host}:${portNum}`);
 				newSocket = isIPHostname(parsedSocks5Address.hostname)
-					? await httpsConnect(host, portNum, 本次首包数据)
-					: await httpConnect(host, portNum, 本次首包数据, true);
+					? await httpsConnect(host, portNum, EN_0379)
+					: await httpConnect(host, portNum, EN_0379, true);
 			} else {
-				log(`[反代连接] 代理到: ${host}:${portNum}`);
-				const 所有反代数组 = await 解析地址端口(反代IP, host, yourUUID);
-				newSocket = await connectDirect(atob('UFJPWFlJUC50cDEuMDkwMjI3Lnh5eg=='), 1, 本次首包数据, 所有反代数组, 启用反代兜底);
+				log(`[EN_0152] EN_0024: ${host}:${portNum}`);
+				const EN_0302 = await EN_0501(EN_0140IP, host, yourUUID);
+				newSocket = await connectDirect(atob('UFJPWFlJUC50cDEuMDkwMjI3Lnh5eg=='), 1, EN_0379, EN_0302, EN_0173);
 			}
-			if (本次发送首包) 已通过代理发送首包 = true;
+			if (EN_0378) EN_0274 = true;
 			remoteConnWrapper.socket = newSocket;
 			newSocket.closed.catch(() => { }).finally(() => closeSocketQuietly(ws));
 			connectStreams(newSocket, ws, respHeader, null);
 		})();
 
-		remoteConnWrapper.connectingPromise = 当前连接任务;
+		remoteConnWrapper.connectingPromise = EN_0292;
 		try {
-			await 当前连接任务;
+			await EN_0292;
 		} finally {
-			if (remoteConnWrapper.connectingPromise === 当前连接任务) {
+			if (remoteConnWrapper.connectingPromise === EN_0292) {
 				remoteConnWrapper.connectingPromise = null;
 			}
 		}
 	}
-	remoteConnWrapper.retryConnect = async () => connecttoPry(!已通过代理发送首包);
+	remoteConnWrapper.retryConnect = async () => connecttoPry(!EN_0274);
 
-	const 验证SOCKS5白名单 = (addr) => SOCKS5白名单.some(p => new RegExp(`^${p.replace(/\*/g, '.*')}$`, 'i').test(addr));
-	if (启用SOCKS5反代 && (启用SOCKS5全局反代 || 验证SOCKS5白名单(host))) {
-		log(`[TCP转发] 启用 SOCKS5/HTTP/HTTPS 全局代理`);
+	const EN_0629SOCKS5EN_0430 = (addr) => SOCKS5EN_0430.some(p => new RegExp(`^${p.replace(/\*/g, '.*')}$`, 'i').test(addr));
+	if (EN_0172SOCKS5EN_0140 && (EN_0172SOCKS5EN_0075 || EN_0629SOCKS5EN_0430(host))) {
+		log(`[TCPEN_0563] EN_0172 SOCKS5/HTTP/HTTPS EN_0074`);
 		try {
 			await connecttoPry();
 		} catch (err) {
-			log(`[TCP转发] SOCKS5/HTTP/HTTPS 代理连接失败: ${err.message}`);
+			log(`[TCPEN_0563] SOCKS5/HTTP/HTTPS EN_0032: ${err.message}`);
 			throw err;
 		}
 	} else {
 		try {
-			log(`[TCP转发] 尝试直连到: ${host}:${portNum}`);
+			log(`[TCPEN_0563] EN_0262: ${host}:${portNum}`);
 			const initialSocket = await connectDirect(host, portNum, rawData);
 			remoteConnWrapper.socket = initialSocket;
 			connectStreams(initialSocket, ws, respHeader, async () => {
@@ -1778,49 +1778,49 @@ async function forwardataTCP(host, portNum, rawData, ws, respHeader, remoteConnW
 				await connecttoPry();
 			});
 		} catch (err) {
-			log(`[TCP转发] 直连 ${host}:${portNum} 失败: ${err.message}`);
+			log(`[TCPEN_0563] EN_0442 ${host}:${portNum} EN_0223: ${err.message}`);
 			await connecttoPry();
 		}
 	}
 }
 
-async function forwardataudp(udpChunk, webSocket, respHeader, 响应封装器 = null) {
-	const 请求数据 = 数据转Uint8Array(udpChunk);
-	const 请求字节数 = 请求数据.byteLength;
-	log(`[UDP转发] 收到 DNS 请求: ${请求字节数}B -> 8.8.4.4:53`);
+async function forwardataudp(udpChunk, webSocket, respHeader, EN_0186 = null) {
+	const EN_0537 = EN_0324Uint8Array(udpChunk);
+	const EN_0535 = EN_0537.byteLength;
+	log(`[UDPEN_0563] EN_0319 DNS EN_0531: ${EN_0535}B -> 8.8.4.4:53`);
 	try {
 		const tcpSocket = connect({ hostname: '8.8.4.4', port: 53 });
-		let 魏烈思Header = respHeader;
+		let EN_0634Header = respHeader;
 		const writer = tcpSocket.writable.getWriter();
-		await writer.write(请求数据);
-		log(`[UDP转发] DNS 请求已写入上游: ${请求字节数}B`);
+		await writer.write(EN_0537);
+		log(`[UDPEN_0563] DNS EN_0536: ${EN_0535}B`);
 		writer.releaseLock();
 		await tcpSocket.readable.pipeTo(new WritableStream({
 			async write(chunk) {
-				const 原始响应 = 数据转Uint8Array(chunk);
-				log(`[UDP转发] 收到 DNS 响应: ${原始响应.byteLength}B`);
-				const 封装结果 = 响应封装器 ? await 响应封装器(原始响应) : 原始响应;
-				const 发送片段列表 = Array.isArray(封装结果) ? 封装结果 : [封装结果];
-				if (!发送片段列表.length) return;
+				const EN_0135 = EN_0324Uint8Array(chunk);
+				log(`[UDPEN_0563] EN_0319 DNS EN_0178: ${EN_0135.byteLength}B`);
+				const EN_0256 = EN_0186 ? await EN_0186(EN_0135) : EN_0135;
+				const EN_0157 = Array.isArray(EN_0256) ? EN_0256 : [EN_0256];
+				if (!EN_0157.length) return;
 				if (webSocket.readyState === WebSocket.OPEN) {
-					for (const fragment of 发送片段列表) {
-						const 转发响应 = 数据转Uint8Array(fragment);
-						if (!转发响应.byteLength) continue;
-						if (魏烈思Header) {
-							const response = new Uint8Array(魏烈思Header.length + 转发响应.byteLength);
-							response.set(魏烈思Header, 0);
-							response.set(转发响应, 魏烈思Header.length);
-							await WebSocket发送并等待(webSocket, response.buffer);
-							魏烈思Header = null;
+					for (const fragment of EN_0157) {
+						const EN_0564 = EN_0324Uint8Array(fragment);
+						if (!EN_0564.byteLength) continue;
+						if (EN_0634Header) {
+							const response = new Uint8Array(EN_0634Header.length + EN_0564.byteLength);
+							response.set(EN_0634Header, 0);
+							response.set(EN_0564, EN_0634Header.length);
+							await WebSocketEN_0155(webSocket, response.buffer);
+							EN_0634Header = null;
 						} else {
-							await WebSocket发送并等待(webSocket, 转发响应);
+							await WebSocketEN_0155(webSocket, EN_0564);
 						}
 					}
 				}
 			},
 		}));
 	} catch (error) {
-		log(`[UDP转发] DNS 转发失败: ${error?.message || error}`);
+		log(`[UDPEN_0563] DNS EN_0565: ${error?.message || error}`);
 	}
 }
 
@@ -1837,25 +1837,25 @@ function formatIdentifier(arr, offset = 0) {
 	return `${hex.substring(0, 8)}-${hex.substring(8, 12)}-${hex.substring(12, 16)}-${hex.substring(16, 20)}-${hex.substring(20)}`;
 }
 
-async function WebSocket发送并等待(webSocket, payload) {
+async function WebSocketEN_0155(webSocket, payload) {
 	const sendResult = webSocket.send(payload);
 	if (sendResult && typeof sendResult.then === 'function') await sendResult;
 }
 
 async function connectStreams(remoteSocket, webSocket, headerData, retryFunc) {
 	let header = headerData, hasData = false, reader, useBYOB = false;
-	const BYOB缓冲区大小 = 512 * 1024, BYOB单次读取上限 = 64 * 1024, BYOB高吞吐阈值 = 50 * 1024 * 1024;
-	const 普通流聚合阈值 = 128 * 1024, 普通流刷新间隔 = 2;
-	const BYOB慢速刷新间隔 = 20, BYOB快速刷新间隔 = 2, BYOB安全阈值 = BYOB缓冲区大小 - BYOB单次读取上限;
+	const BYOBEN_0468 = 512 * 1024, BYOBEN_0132 = 64 * 1024, BYOBEN_0633 = 50 * 1024 * 1024;
+	const EN_0353 = 128 * 1024, EN_0352 = 2;
+	const BYOBEN_0298 = 20, BYOBEN_0294 = 2, BYOBEN_0242 = BYOBEN_0468 - BYOBEN_0132;
 
-	const 发送块 = async (chunk) => {
+	const EN_0154 = async (chunk) => {
 		if (webSocket.readyState !== WebSocket.OPEN) throw new Error('ws.readyState is not open');
 		if (header) {
 			const merged = new Uint8Array(header.length + chunk.byteLength);
 			merged.set(header, 0); merged.set(chunk, header.length);
-			await WebSocket发送并等待(webSocket, merged.buffer);
+			await WebSocketEN_0155(webSocket, merged.buffer);
 			header = null;
-		} else await WebSocket发送并等待(webSocket, chunk);
+		} else await WebSocketEN_0155(webSocket, chunk);
 	};
 
 	try { reader = remoteSocket.readable.getReader({ mode: 'byob' }); useBYOB = true }
@@ -1863,29 +1863,29 @@ async function connectStreams(remoteSocket, webSocket, headerData, retryFunc) {
 
 	try {
 		if (!useBYOB) {
-			let pendingChunks = [], pendingBytes = 0, flush定时器 = null, flush任务 = null;
+			let pendingChunks = [], pendingBytes = 0, flushEN_0249 = null, flushEN_0034 = null;
 			const flush = async () => {
-				if (flush任务) return flush任务;
-				flush任务 = (async () => {
-					if (flush定时器) { clearTimeout(flush定时器); flush定时器 = null }
+				if (flushEN_0034) return flushEN_0034;
+				flushEN_0034 = (async () => {
+					if (flushEN_0249) { clearTimeout(flushEN_0249); flushEN_0249 = null }
 					if (pendingBytes <= 0) return;
 					const chunks = pendingChunks, bytes = pendingBytes;
 					pendingChunks = []; pendingBytes = 0;
-					const payload = chunks.length === 1 ? chunks[0] : 拼接字节数据(...chunks);
-					if (payload.byteLength || bytes > 0) await 发送块(payload);
-				})().finally(() => { flush任务 = null });
-				return flush任务;
+					const payload = chunks.length === 1 ? chunks[0] : EN_0308(...chunks);
+					if (payload.byteLength || bytes > 0) await EN_0154(payload);
+				})().finally(() => { flushEN_0034 = null });
+				return flushEN_0034;
 			};
-			const 推送普通流块 = async (chunk) => {
-				const bytes = 数据转Uint8Array(chunk);
+			const EN_0311 = async (chunk) => {
+				const bytes = EN_0324Uint8Array(chunk);
 				if (!bytes.byteLength) return;
 				pendingChunks.push(bytes);
 				pendingBytes += bytes.byteLength;
-				if (pendingBytes >= 普通流聚合阈值) {
+				if (pendingBytes >= EN_0353) {
 					await flush();
-					if (pendingBytes >= 普通流聚合阈值) await flush();
-				} else if (!flush定时器) {
-					flush定时器 = setTimeout(() => { flush().catch(() => closeSocketQuietly(webSocket)) }, 普通流刷新间隔);
+					if (pendingBytes >= EN_0353) await flush();
+				} else if (!flushEN_0249) {
+					flushEN_0249 = setTimeout(() => { flush().catch(() => closeSocketQuietly(webSocket)) }, EN_0352);
 				}
 			};
 			while (true) {
@@ -1893,60 +1893,60 @@ async function connectStreams(remoteSocket, webSocket, headerData, retryFunc) {
 				if (done) break;
 				if (!value || value.byteLength === 0) continue;
 				hasData = true;
-				await 推送普通流块(value);
+				await EN_0311(value);
 			}
 			await flush();
 		} else {
-			let mainBuf = new ArrayBuffer(BYOB缓冲区大小), offset = 0, totalBytes = 0;
-			let flush间隔毫秒 = BYOB快速刷新间隔, flush定时器 = null, 等待刷新恢复 = null;
-			let 正在读取 = false, 读取中待刷新 = false;
+			let mainBuf = new ArrayBuffer(BYOBEN_0468), offset = 0, totalBytes = 0;
+			let flushEN_0607 = BYOBEN_0294, flushEN_0249 = null, EN_0456 = null;
+			let EN_0409 = false, EN_0544 = false;
 
 			const flush = async () => {
-				if (正在读取) { 读取中待刷新 = true; return }
+				if (EN_0409) { EN_0544 = true; return }
 				try {
-					if (offset > 0) { const p = new Uint8Array(mainBuf.slice(0, offset)); offset = 0; await 发送块(p) }
+					if (offset > 0) { const p = new Uint8Array(mainBuf.slice(0, offset)); offset = 0; await EN_0154(p) }
 				} finally {
-					读取中待刷新 = false;
-					if (flush定时器) { clearTimeout(flush定时器); flush定时器 = null }
-					if (等待刷新恢复) { const r = 等待刷新恢复; 等待刷新恢复 = null; r() }
+					EN_0544 = false;
+					if (flushEN_0249) { clearTimeout(flushEN_0249); flushEN_0249 = null }
+					if (EN_0456) { const r = EN_0456; EN_0456 = null; r() }
 				}
 			};
 
 			while (true) {
-				正在读取 = true;
-				const { done, value } = await reader.read(new Uint8Array(mainBuf, offset, BYOB单次读取上限));
-				正在读取 = false;
+				EN_0409 = true;
+				const { done, value } = await reader.read(new Uint8Array(mainBuf, offset, BYOBEN_0132));
+				EN_0409 = false;
 				if (done) break;
-				if (!value || value.byteLength === 0) { if (读取中待刷新) await flush(); continue }
+				if (!value || value.byteLength === 0) { if (EN_0544) await flush(); continue }
 				hasData = true;
 				mainBuf = value.buffer;
 				const len = value.byteLength;
 
 				if (value.byteOffset !== offset) {
-					log(`[BYOB] 偏移异常: 预期=${offset}, 实际=${value.byteOffset}`);
-					await 发送块(new Uint8Array(value.buffer, value.byteOffset, len).slice());
-					mainBuf = new ArrayBuffer(BYOB缓冲区大小); offset = 0; totalBytes = 0;
+					log(`[BYOB] EN_0061: EN_0625=${offset}, EN_0250=${value.byteOffset}`);
+					await EN_0154(new Uint8Array(value.buffer, value.byteOffset, len).slice());
+					mainBuf = new ArrayBuffer(BYOBEN_0468); offset = 0; totalBytes = 0;
 					continue;
 				}
 
-				if (len < BYOB单次读取上限) {
-					flush间隔毫秒 = BYOB快速刷新间隔;
+				if (len < BYOBEN_0132) {
+					flushEN_0607 = BYOBEN_0294;
 					if (len < 4096) totalBytes = 0;
 					if (offset > 0) { offset += len; await flush() }
-					else await 发送块(value.slice());
+					else await EN_0154(value.slice());
 				} else {
 					totalBytes += len; offset += len;
-					if (!flush定时器) flush定时器 = setTimeout(() => { flush().catch(() => closeSocketQuietly(webSocket)) }, flush间隔毫秒);
-					if (读取中待刷新) await flush();
-					if (offset > BYOB安全阈值) {
-						if (totalBytes > BYOB高吞吐阈值) flush间隔毫秒 = BYOB慢速刷新间隔;
-						await new Promise(r => { 等待刷新恢复 = r });
+					if (!flushEN_0249) flushEN_0249 = setTimeout(() => { flush().catch(() => closeSocketQuietly(webSocket)) }, flushEN_0607);
+					if (EN_0544) await flush();
+					if (offset > BYOBEN_0242) {
+						if (totalBytes > BYOBEN_0633) flushEN_0607 = BYOBEN_0298;
+						await new Promise(r => { EN_0456 = r });
 					}
 				}
 			}
-			正在读取 = false;
+			EN_0409 = false;
 			await flush();
-			if (flush定时器) { clearTimeout(flush定时器); flush定时器 = null }
+			if (flushEN_0249) { clearTimeout(flushEN_0249); flushEN_0249 = null }
 		}
 	} catch (err) { closeSocketQuietly(webSocket) }
 	finally { try { reader.cancel() } catch (e) { } try { reader.releaseLock() } catch (e) { } }
@@ -1967,15 +1967,15 @@ function isSpeedTestSite(hostname) {
 	return false;
 }
 
-function 修正请求URL(url文本) {
-	url文本 = url文本.replace(/%5[Cc]/g, '').replace(/\\/g, '');
-	const 锚点索引 = url文本.indexOf('#');
-	const 主体部分 = 锚点索引 === -1 ? url文本 : url文本.slice(0, 锚点索引);
-	if (主体部分.includes('?') || !/%3f/i.test(主体部分)) return url文本;
-	const 锚点部分 = 锚点索引 === -1 ? '' : url文本.slice(锚点索引);
-	return 主体部分.replace(/%3f/i, '?') + 锚点部分;
+function EN_0059URL(urlEN_0327) {
+	urlEN_0327 = urlEN_0327.replace(/%5[Cc]/g, '').replace(/\\/g, '');
+	const EN_0602 = urlEN_0327.indexOf('#');
+	const EN_0018 = EN_0602 === -1 ? urlEN_0327 : urlEN_0327.slice(0, EN_0602);
+	if (EN_0018.includes('?') || !/%3f/i.test(EN_0018)) return urlEN_0327;
+	const EN_0603 = EN_0602 === -1 ? '' : urlEN_0327.slice(EN_0602);
+	return EN_0018.replace(/%3f/i, '?') + EN_0603;
 }
-///////////////////////////////////////////////////////SOCKS5/HTTP函数///////////////////////////////////////////////
+///////////////////////////////////////////////////////SOCKS5/HTTPEN_0093///////////////////////////////////////////////
 async function socks5Connect(targetHost, targetPort, initialData) {
 	const { username, password, hostname, port } = parsedSocks5Address;
 	const socket = connect({ hostname, port }), writer = socket.writable.getWriter(), reader = socket.readable.getReader();
@@ -2001,7 +2001,7 @@ async function socks5Connect(targetHost, targetPort, initialData) {
 		response = await reader.read();
 		if (response.done || new Uint8Array(response.value)[1] !== 0x00) throw new Error('S5 connection failed');
 
-		if (有效数据长度(initialData) > 0) await writer.write(initialData);
+		if (EN_0365(initialData) > 0) await writer.write(initialData);
 		writer.releaseLock(); reader.releaseLock();
 		return socket;
 	} catch (error) {
@@ -2012,16 +2012,16 @@ async function socks5Connect(targetHost, targetPort, initialData) {
 	}
 }
 
-async function httpConnect(targetHost, targetPort, initialData, HTTPS代理 = false) {
+async function httpConnect(targetHost, targetPort, initialData, HTTPSEN_0023 = false) {
 	const { username, password, hostname, port } = parsedSocks5Address;
-	const socket = HTTPS代理
+	const socket = HTTPSEN_0023
 		? connect({ hostname, port }, { secureTransport: 'on', allowHalfOpen: false })
 		: connect({ hostname, port });
 	const writer = socket.writable.getWriter(), reader = socket.readable.getReader();
 	const encoder = new TextEncoder();
 	const decoder = new TextDecoder();
 	try {
-		if (HTTPS代理) await socket.opened;
+		if (HTTPSEN_0023) await socket.opened;
 
 		const auth = username && password ? `Proxy-Authorization: Basic ${btoa(`${username}:${password}`)}\r\n` : '';
 		const request = `CONNECT ${targetHost}:${targetPort} HTTP/1.1\r\nHost: ${targetHost}:${targetPort}\r\n${auth}User-Agent: Mozilla/5.0\r\nConnection: keep-alive\r\n\r\n`;
@@ -2031,27 +2031,27 @@ async function httpConnect(targetHost, targetPort, initialData, HTTPS代理 = fa
 		let responseBuffer = new Uint8Array(0), headerEndIndex = -1, bytesRead = 0;
 		while (headerEndIndex === -1 && bytesRead < 8192) {
 			const { done, value } = await reader.read();
-			if (done || !value) throw new Error(`${HTTPS代理 ? 'HTTPS' : 'HTTP'} 代理在返回 CONNECT 响应前关闭连接`);
+			if (done || !value) throw new Error(`${HTTPSEN_0023 ? 'HTTPS' : 'HTTP'} EN_0027 CONNECT EN_0182`);
 			responseBuffer = new Uint8Array([...responseBuffer, ...value]);
 			bytesRead = responseBuffer.length;
 			const crlfcrlf = responseBuffer.findIndex((_, i) => i < responseBuffer.length - 3 && responseBuffer[i] === 0x0d && responseBuffer[i + 1] === 0x0a && responseBuffer[i + 2] === 0x0d && responseBuffer[i + 3] === 0x0a);
 			if (crlfcrlf !== -1) headerEndIndex = crlfcrlf + 4;
 		}
 
-		if (headerEndIndex === -1) throw new Error('代理 CONNECT 响应头过长或无效');
+		if (headerEndIndex === -1) throw new Error('EN_0023 CONNECT EN_0185');
 		const statusMatch = decoder.decode(responseBuffer.slice(0, headerEndIndex)).split('\r\n')[0].match(/HTTP\/\d\.\d\s+(\d+)/);
 		const statusCode = statusMatch ? parseInt(statusMatch[1], 10) : NaN;
 		if (!Number.isFinite(statusCode) || statusCode < 200 || statusCode >= 300) throw new Error(`Connection failed: HTTP ${statusCode}`);
 
 		reader.releaseLock();
 
-		if (有效数据长度(initialData) > 0) {
-			const 远端写入器 = socket.writable.getWriter();
-			await 远端写入器.write(initialData);
-			远端写入器.releaseLock();
+		if (EN_0365(initialData) > 0) {
+			const EN_0576 = socket.writable.getWriter();
+			await EN_0576.write(initialData);
+			EN_0576.releaseLock();
 		}
 
-		// CONNECT 响应头后可能夹带隧道数据，先回灌到可读流，避免首包被吞。
+		// CONNECT EN_0184，EN_0065，EN_0589。
 		if (bytesRead > headerEndIndex) {
 			const { readable, writable } = new TransformStream();
 			const transformWriter = writable.getWriter();
@@ -2076,14 +2076,14 @@ async function httpsConnect(targetHost, targetPort, initialData) {
 	const decoder = new TextDecoder();
 	let tlsSocket = null;
 	const tlsServerName = isIPHostname(hostname) ? '' : stripIPv6Brackets(hostname);
-	const 需要ChaCha回退 = (error) => /cipher|handshake|TLS Alert|ServerHello|Finished|Unsupported|Missing TLS/i.test(error?.message || `${error || ''}`);
-	const 打开HTTPS代理TLS = async (allowChacha = false) => {
+	const EN_0616ChaChaEN_0191 = (error) => /cipher|handshake|TLS Alert|ServerHello|Finished|Unsupported|Missing TLS/i.test(error?.message || `${error || ''}`);
+	const EN_0305HTTPSEN_0023TLS = async (allowChacha = false) => {
 		const proxySocket = connect({ hostname, port });
 		try {
 			await proxySocket.opened;
 			const socket = new TlsClient(proxySocket, { serverName: tlsServerName, insecure: true, allowChacha });
 			await socket.handshake();
-			log(`[HTTPS代理] TLS版本: ${socket.isTls13 ? '1.3' : '1.2'} | Cipher: 0x${socket.cipherSuite.toString(16)}${socket.cipherConfig?.chacha ? ' (ChaCha20)' : ' (AES-GCM)'}`);
+			log(`[HTTPSEN_0023] TLSEN_0422: ${socket.isTls13 ? '1.3' : '1.2'} | Cipher: 0x${socket.cipherSuite.toString(16)}${socket.cipherConfig?.chacha ? ' (ChaCha20)' : ' (AES-GCM)'}`);
 			return socket;
 		} catch (error) {
 			try { proxySocket.close() } catch (e) { }
@@ -2092,11 +2092,11 @@ async function httpsConnect(targetHost, targetPort, initialData) {
 	};
 	try {
 		try {
-			tlsSocket = await 打开HTTPS代理TLS(false);
+			tlsSocket = await EN_0305HTTPSEN_0023TLS(false);
 		} catch (error) {
-			if (!需要ChaCha回退(error)) throw error;
-			log(`[HTTPS代理] AES-GCM TLS 握手失败，回退 ChaCha20 兼容模式: ${error?.message || error}`);
-			tlsSocket = await 打开HTTPS代理TLS(true);
+			if (!EN_0616ChaChaEN_0191(error)) throw error;
+			log(`[HTTPSEN_0023] AES-GCM TLS EN_0316，EN_0191 ChaCha20 EN_0080: ${error?.message || error}`);
+			tlsSocket = await EN_0305HTTPSEN_0023TLS(true);
 		}
 
 		const auth = username && password ? `Proxy-Authorization: Basic ${btoa(`${username}:${password}`)}\r\n` : '';
@@ -2106,19 +2106,19 @@ async function httpsConnect(targetHost, targetPort, initialData) {
 		let responseBuffer = new Uint8Array(0), headerEndIndex = -1, bytesRead = 0;
 		while (headerEndIndex === -1 && bytesRead < 8192) {
 			const value = await tlsSocket.read();
-			if (!value) throw new Error('HTTPS 代理在返回 CONNECT 响应前关闭连接');
-			responseBuffer = 拼接字节数据(responseBuffer, value);
+			if (!value) throw new Error('HTTPS EN_0027 CONNECT EN_0182');
+			responseBuffer = EN_0308(responseBuffer, value);
 			bytesRead = responseBuffer.length;
 			const crlfcrlf = responseBuffer.findIndex((_, i) => i < responseBuffer.length - 3 && responseBuffer[i] === 0x0d && responseBuffer[i + 1] === 0x0a && responseBuffer[i + 2] === 0x0d && responseBuffer[i + 3] === 0x0a);
 			if (crlfcrlf !== -1) headerEndIndex = crlfcrlf + 4;
 		}
 
-		if (headerEndIndex === -1) throw new Error('HTTPS 代理 CONNECT 响应头过长或无效');
+		if (headerEndIndex === -1) throw new Error('HTTPS EN_0023 CONNECT EN_0185');
 		const statusMatch = decoder.decode(responseBuffer.slice(0, headerEndIndex)).split('\r\n')[0].match(/HTTP\/\d\.\d\s+(\d+)/);
 		const statusCode = statusMatch ? parseInt(statusMatch[1], 10) : NaN;
 		if (!Number.isFinite(statusCode) || statusCode < 200 || statusCode >= 300) throw new Error(`Connection failed: HTTP ${statusCode}`);
 
-		if (有效数据长度(initialData) > 0) await tlsSocket.write(数据转Uint8Array(initialData));
+		if (EN_0365(initialData) > 0) await tlsSocket.write(EN_0324Uint8Array(initialData));
 		const bufferedData = bytesRead > headerEndIndex ? responseBuffer.subarray(headerEndIndex, bytesRead) : null;
 		return wrapTlsSocket(tlsSocket, bufferedData);
 	} catch (error) {
@@ -2319,7 +2319,7 @@ function chacha20Poly1305Decrypt(key, nonce, ciphertext, additionalData) {
 
 const TLS_MAX_PLAINTEXT_FRAGMENT = 16 * 1024;
 function buildTlsRecord(contentType, fragment, version = TLS_VERSION_12) {
-	const data = 数据转Uint8Array(fragment);
+	const data = EN_0324Uint8Array(fragment);
 	const record = new Uint8Array(5 + data.byteLength);
 	record[0] = contentType;
 	record[1] = version >> 8 & 255;
@@ -2333,7 +2333,7 @@ function buildHandshakeMessage(handshakeType, body) { return tlsBytes(handshakeT
 class TlsRecordParser {
 	constructor() { this.buffer = new Uint8Array(0) }
 	feed(chunk) {
-		const bytes = 数据转Uint8Array(chunk);
+		const bytes = EN_0324Uint8Array(chunk);
 		this.buffer = this.buffer.length ? concatBytes(this.buffer, bytes) : bytes
 	}
 	next() {
@@ -2349,7 +2349,7 @@ class TlsRecordParser {
 class TlsHandshakeParser {
 	constructor() { this.buffer = new Uint8Array(0) }
 	feed(chunk) {
-		const bytes = 数据转Uint8Array(chunk);
+		const bytes = EN_0324Uint8Array(chunk);
 		this.buffer = this.buffer.length ? concatBytes(this.buffer, bytes) : bytes
 	}
 	next() {
@@ -2753,7 +2753,7 @@ class TlsClient {
 	}
 	async write(data) {
 		if (!this.handshakeComplete) throw new Error("Handshake not complete");
-		const plaintext = 数据转Uint8Array(data);
+		const plaintext = EN_0324Uint8Array(data);
 		if (!plaintext.byteLength) return;
 		const writer = this.socket.writable.getWriter();
 		try {
@@ -2839,7 +2839,7 @@ function wrapTlsSocket(tlsSocket, bufferedData = null) {
 	const readable = new ReadableStream({
 		async start(controller) {
 			try {
-				if (有效数据长度(bufferedData) > 0) controller.enqueue(bufferedData);
+				if (EN_0365(bufferedData) > 0) controller.enqueue(bufferedData);
 				while (true) {
 					const data = await tlsSocket.read();
 					if (!data) break;
@@ -2858,7 +2858,7 @@ function wrapTlsSocket(tlsSocket, bufferedData = null) {
 	});
 	const writable = new WritableStream({
 		async write(chunk) {
-			await tlsSocket.write(数据转Uint8Array(chunk));
+			await tlsSocket.write(EN_0324Uint8Array(chunk));
 		},
 		close,
 		abort(error) {
@@ -2869,37 +2869,37 @@ function wrapTlsSocket(tlsSocket, bufferedData = null) {
 	return { readable, writable, closed, close };
 }
 
-//////////////////////////////////////////////////功能性函数///////////////////////////////////////////////
-function 获取传输协议配置(配置 = {}) {
-	const 是gRPC = 配置.传输协议 === 'grpc';
+//////////////////////////////////////////////////EN_0114///////////////////////////////////////////////
+function EN_0489(EN_0590 = {}) {
+	const EN_0348gRPC = EN_0590.EN_0044 === 'grpc';
 	return {
-		type: 是gRPC ? (配置.gRPC模式 === 'multi' ? 'grpc&mode=multi' : 'grpc&mode=gun') : (配置.传输协议 === 'xhttp' ? 'xhttp&mode=stream-one' : 'ws'),
-		路径字段名: 是gRPC ? 'serviceName' : 'path',
-		域名字段名: 是gRPC ? 'authority' : 'host'
+		type: EN_0348gRPC ? (EN_0590.gRPCEN_0405 === 'multi' ? 'grpc&mode=multi' : 'grpc&mode=gun') : (EN_0590.EN_0044 === 'xhttp' ? 'xhttp&mode=stream-one' : 'ws'),
+		EN_0555: EN_0348gRPC ? 'serviceName' : 'path',
+		EN_0208: EN_0348gRPC ? 'authority' : 'host'
 	};
 }
 
-function 获取传输路径参数值(配置 = {}, 节点路径 = '/', 作为优选订阅生成器 = false) {
-	const 路径值 = 作为优选订阅生成器 ? '/' : (配置.随机路径 ? 随机路径(节点路径) : 节点路径);
-	if (配置.传输协议 !== 'grpc') return 路径值;
-	return 路径值.split('?')[0] || '/';
+function EN_0490(EN_0590 = {}, EN_0485 = '/', EN_0051 = false) {
+	const EN_0552 = EN_0051 ? '/' : (EN_0590.EN_0615 ? EN_0615(EN_0485) : EN_0485);
+	if (EN_0590.EN_0044 !== 'grpc') return EN_0552;
+	return EN_0552.split('?')[0] || '/';
 }
 
 function log(...args) {
-	if (调试日志打印) console.log(...args);
+	if (EN_0547) console.log(...args);
 }
 
-function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON = {}) {
+function ClashEN_0518(Clash_EN_0137, config_JSON = {}) {
 	const uuid = config_JSON?.UUID || null;
-	const ECH启用 = Boolean(config_JSON?.ECH);
+	const ECHEN_0172 = Boolean(config_JSON?.ECH);
 	const HOSTS = Array.isArray(config_JSON?.HOSTS) ? [...config_JSON.HOSTS] : [];
 	const ECH_SNI = config_JSON?.ECHConfig?.SNI || null;
 	const ECH_DNS = config_JSON?.ECHConfig?.DNS;
-	const 需要处理ECH = Boolean(uuid && ECH启用);
+	const EN_0617ECH = Boolean(uuid && ECHEN_0172);
 	const gRPCUserAgent = (typeof config_JSON?.gRPCUserAgent === 'string' && config_JSON.gRPCUserAgent.trim()) ? config_JSON.gRPCUserAgent.trim() : null;
-	const 需要处理gRPC = config_JSON?.传输协议 === "grpc" && Boolean(gRPCUserAgent);
+	const EN_0617gRPC = config_JSON?.EN_0044 === "grpc" && Boolean(gRPCUserAgent);
 	const gRPCUserAgentYAML = gRPCUserAgent ? JSON.stringify(gRPCUserAgent) : null;
-	let clash_yaml = Clash_原始订阅内容.replace(/mode:\s*Rule\b/g, 'mode: rule');
+	let clash_yaml = Clash_EN_0137.replace(/mode:\s*Rule\b/g, 'mode: rule');
 
 	const baseDnsBlock = `dns:
   enable: true
@@ -2927,21 +2927,21 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
       - '+.youtube.com'
 `;
 
-	const 添加InlineGrpcUserAgent = (text) => text.replace(/grpc-opts:\s*\{([\s\S]*?)\}/i, (all, inner) => {
+	const EN_0418InlineGrpcUserAgent = (text) => text.replace(/grpc-opts:\s*\{([\s\S]*?)\}/i, (all, inner) => {
 		if (/grpc-user-agent\s*:/i.test(inner)) return all;
 		let content = inner.trim();
 		if (content.endsWith(',')) content = content.slice(0, -1).trim();
 		const patchedContent = content ? `${content}, grpc-user-agent: ${gRPCUserAgentYAML}` : `grpc-user-agent: ${gRPCUserAgentYAML}`;
 		return `grpc-opts: {${patchedContent}}`;
 	});
-	const 匹配到gRPC网络 = (text) => /(?:^|[,{])\s*network:\s*(?:"grpc"|'grpc'|grpc)(?=\s*(?:[,}\n#]|$))/mi.test(text);
-	const 获取代理类型 = (nodeText) => nodeText.match(/type:\s*(\w+)/)?.[1] || 'vl' + 'ess';
-	const 获取凭据值 = (nodeText, isFlowStyle) => {
-		const credentialField = 获取代理类型(nodeText) === 'trojan' ? 'password' : 'uuid';
+	const EN_0124gRPCEN_0478 = (text) => /(?:^|[,{])\s*network:\s*(?:"grpc"|'grpc'|grpc)(?=\s*(?:[,}\n#]|$))/mi.test(text);
+	const EN_0487 = (nodeText) => nodeText.match(/type:\s*(\w+)/)?.[1] || 'vl' + 'ess';
+	const EN_0492 = (nodeText, isFlowStyle) => {
+		const credentialField = EN_0487(nodeText) === 'trojan' ? 'password' : 'uuid';
 		const pattern = new RegExp(`${credentialField}:\\s*${isFlowStyle ? '([^,}\\n]+)' : '([^\\n]+)'}`);
 		return nodeText.match(pattern)?.[1]?.trim() || null;
 	};
-	const 插入NameserverPolicy = (yaml, hostsEntries) => {
+	const EN_0315NameserverPolicy = (yaml, hostsEntries) => {
 		if (/^\s{2}nameserver-policy:\s*(?:\n|$)/m.test(yaml)) {
 			return yaml.replace(/^(\s{2}nameserver-policy:\s*\n)/m, `$1${hostsEntries}\n`);
 		}
@@ -2964,13 +2964,13 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 		else lines.push(nameserverPolicyBlock);
 		return lines.join('\n');
 	};
-	const 添加Flow格式gRPCUserAgent = (nodeText) => {
-		if (!匹配到gRPC网络(nodeText) || /grpc-user-agent\s*:/i.test(nodeText)) return nodeText;
-		if (/grpc-opts:\s*\{/i.test(nodeText)) return 添加InlineGrpcUserAgent(nodeText);
+	const EN_0418FlowEN_0396gRPCUserAgent = (nodeText) => {
+		if (!EN_0124gRPCEN_0478(nodeText) || /grpc-user-agent\s*:/i.test(nodeText)) return nodeText;
+		if (/grpc-opts:\s*\{/i.test(nodeText)) return EN_0418InlineGrpcUserAgent(nodeText);
 		return nodeText.replace(/\}(\s*)$/, `, grpc-opts: {grpc-user-agent: ${gRPCUserAgentYAML}}}$1`);
 	};
-	const 添加Block格式gRPCUserAgent = (nodeLines, topLevelIndent) => {
-		const 顶级缩进 = ' '.repeat(topLevelIndent);
+	const EN_0418BlockEN_0396gRPCUserAgent = (nodeLines, topLevelIndent) => {
+		const EN_0622 = ' '.repeat(topLevelIndent);
 		let grpcOptsIndex = -1;
 		for (let idx = 0; idx < nodeLines.length; idx++) {
 			const line = nodeLines[idx];
@@ -2990,17 +2990,17 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 					break;
 				}
 			}
-			if (insertIndex >= 0) nodeLines.splice(insertIndex + 1, 0, `${顶级缩进}grpc-opts:`, `${顶级缩进}  grpc-user-agent: ${gRPCUserAgentYAML}`);
+			if (insertIndex >= 0) nodeLines.splice(insertIndex + 1, 0, `${EN_0622}grpc-opts:`, `${EN_0622}  grpc-user-agent: ${gRPCUserAgentYAML}`);
 			return nodeLines;
 		}
 		const grpcLine = nodeLines[grpcOptsIndex];
 		if (/^\s*grpc-opts:\s*\{.*\}\s*(?:#.*)?$/.test(grpcLine)) {
-			if (!/grpc-user-agent\s*:/i.test(grpcLine)) nodeLines[grpcOptsIndex] = 添加InlineGrpcUserAgent(grpcLine);
+			if (!/grpc-user-agent\s*:/i.test(grpcLine)) nodeLines[grpcOptsIndex] = EN_0418InlineGrpcUserAgent(grpcLine);
 			return nodeLines;
 		}
 		let blockEndIndex = nodeLines.length;
-		let 子级缩进 = topLevelIndent + 2;
-		let 已有gRPCUserAgent = false;
+		let EN_0236 = topLevelIndent + 2;
+		let EN_0271gRPCUserAgent = false;
 		for (let idx = grpcOptsIndex + 1; idx < nodeLines.length; idx++) {
 			const line = nodeLines[idx];
 			const trimmed = line.trim();
@@ -3010,16 +3010,16 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 				blockEndIndex = idx;
 				break;
 			}
-			if (indent > topLevelIndent && 子级缩进 === topLevelIndent + 2) 子级缩进 = indent;
+			if (indent > topLevelIndent && EN_0236 === topLevelIndent + 2) EN_0236 = indent;
 			if (/^grpc-user-agent\s*:/.test(trimmed)) {
-				已有gRPCUserAgent = true;
+				EN_0271gRPCUserAgent = true;
 				break;
 			}
 		}
-		if (!已有gRPCUserAgent) nodeLines.splice(blockEndIndex, 0, `${' '.repeat(子级缩进)}grpc-user-agent: ${gRPCUserAgentYAML}`);
+		if (!EN_0271gRPCUserAgent) nodeLines.splice(blockEndIndex, 0, `${' '.repeat(EN_0236)}grpc-user-agent: ${gRPCUserAgentYAML}`);
 		return nodeLines;
 	};
-	const 添加Block格式ECHOpts = (nodeLines, topLevelIndent) => {
+	const EN_0418BlockEN_0396ECHOpts = (nodeLines, topLevelIndent) => {
 		let insertIndex = -1;
 		for (let j = nodeLines.length - 1; j >= 0; j--) {
 			if (nodeLines[j].trim()) {
@@ -3038,12 +3038,12 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 	if (!/^dns:\s*(?:\n|$)/m.test(clash_yaml)) clash_yaml = baseDnsBlock + clash_yaml;
 	if (ECH_SNI && !HOSTS.includes(ECH_SNI)) HOSTS.push(ECH_SNI);
 
-	if (ECH启用 && HOSTS.length > 0) {
+	if (ECHEN_0172 && HOSTS.length > 0) {
 		const hostsEntries = HOSTS.map(host => `    "${host}":${ECH_DNS ? `\n      - ${ECH_DNS}` : ''}\n      - https://doh.cm.edu.kg/CMLiussss`).join('\n');
-		clash_yaml = 插入NameserverPolicy(clash_yaml, hostsEntries);
+		clash_yaml = EN_0315NameserverPolicy(clash_yaml, hostsEntries);
 	}
 
-	if (!需要处理ECH && !需要处理gRPC) return clash_yaml;
+	if (!EN_0617ECH && !EN_0617gRPC) return clash_yaml;
 
 	const lines = clash_yaml.split('\n');
 	const processedLines = [];
@@ -3061,8 +3061,8 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 				fullNode += '\n' + lines[i];
 				braceCount += (lines[i].match(/\{/g) || []).length - (lines[i].match(/\}/g) || []).length;
 			}
-			if (需要处理gRPC) fullNode = 添加Flow格式gRPCUserAgent(fullNode);
-			if (需要处理ECH && 获取凭据值(fullNode, true) === uuid.trim()) {
+			if (EN_0617gRPC) fullNode = EN_0418FlowEN_0396gRPCUserAgent(fullNode);
+			if (EN_0617ECH && EN_0492(fullNode, true) === uuid.trim()) {
 				fullNode = fullNode.replace(/\}(\s*)$/, `, ech-opts: {enable: true${ECH_SNI ? `, query-server-name: ${ECH_SNI}` : ''}}}$1`);
 			}
 			processedLines.push(fullNode);
@@ -3091,11 +3091,11 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 				i++;
 			}
 			let nodeText = nodeLines.join('\n');
-			if (需要处理gRPC && 匹配到gRPC网络(nodeText)) {
-				nodeLines = 添加Block格式gRPCUserAgent(nodeLines, topLevelIndent);
+			if (EN_0617gRPC && EN_0124gRPCEN_0478(nodeText)) {
+				nodeLines = EN_0418BlockEN_0396gRPCUserAgent(nodeLines, topLevelIndent);
 				nodeText = nodeLines.join('\n');
 			}
-			if (需要处理ECH && 获取凭据值(nodeText, false) === uuid.trim()) nodeLines = 添加Block格式ECHOpts(nodeLines, topLevelIndent);
+			if (EN_0617ECH && EN_0492(nodeText, false) === uuid.trim()) nodeLines = EN_0418BlockEN_0396ECHOpts(nodeLines, topLevelIndent);
 			processedLines.push(...nodeLines);
 		} else {
 			processedLines.push(line);
@@ -3106,16 +3106,16 @@ function Clash订阅配置文件热补丁(Clash_原始订阅内容, config_JSON 
 	return processedLines.join('\n');
 }
 
-async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, config_JSON = {}) {
+async function SingboxEN_0518(SingBox_EN_0137, config_JSON = {}) {
 	const uuid = config_JSON?.UUID || null;
 	const fingerprint = config_JSON?.Fingerprint || "chrome";
 	const ECH_SNI = config_JSON?.ECHConfig?.SNI || config_JSON?.HOST || null;
 	const ech_config = config_JSON?.ECH && ECH_SNI ? await getECH(ECH_SNI) : null;
-	const sb_json_text = SingBox_原始订阅内容.replace('1.1.1.1', '8.8.8.8').replace('1.0.0.1', '8.8.4.4');
+	const sb_json_text = SingBox_EN_0137.replace('1.1.1.1', '8.8.8.8').replace('1.0.0.1', '8.8.4.4');
 	try {
 		let config = JSON.parse(sb_json_text);
 
-		// --- 1. TUN 入站迁移 (1.10.0+) ---
+		// --- 1. TUN EN_0071 (1.10.0+) ---
 		if (Array.isArray(config.inbounds)) {
 			config.inbounds.forEach(inbound => {
 				if (inbound.type === 'tun') {
@@ -3149,7 +3149,7 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 			});
 		}
 
-		// --- 2. 迁移 Geosite/GeoIP 到 rule_set (1.8.0+) 及 Actions (1.11.0+) ---
+		// --- 2. EN_0570 Geosite/GeoIP EN_0108 rule_set (1.8.0+) EN_0139 Actions (1.11.0+) ---
 		const ruleSetsDefinitions = new Map();
 		const processRules = (rules, isDns = false) => {
 			if (!Array.isArray(rules)) return;
@@ -3193,7 +3193,7 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 				const actionValue = String(rule[targetField]).toUpperCase();
 				if (actionValue === 'REJECT' || actionValue === 'BLOCK') {
 					rule.action = 'reject';
-					rule.method = 'drop'; // 强制使用现代方式
+					rule.method = 'drop'; // EN_0284
 					delete rule[targetField];
 				}
 			});
@@ -3207,14 +3207,14 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 			config.route.rule_set = Array.from(ruleSetsDefinitions.values());
 		}
 
-		// --- 3. 兼容性与纠错 ---
+		// --- 3. EN_0079 ---
 		if (!config.outbounds) config.outbounds = [];
 
-		// 移除 outbounds 中冗余的 block 类型节点 (如果它们已经被 action 替代)
-		// 但保留 DIRECT 这种必需的特殊出站
+		// EN_0446 outbounds EN_0016 block EN_0461 (EN_0227 action EN_0355)
+		// EN_0049 DIRECT EN_0574
 		config.outbounds = config.outbounds.filter(o => {
 			if (o.tag === 'REJECT' || o.tag === 'block') {
-				return false; // 移除，因为已经改用 action: reject 了
+				return false; // EN_0446，EN_0192 action: reject EN_0021
 			}
 			return true;
 		});
@@ -3245,8 +3245,8 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 		config.outbounds.forEach(outbound => {
 			if (outbound.type === 'selector' || outbound.type === 'urltest') {
 				if (Array.isArray(outbound.outbounds)) {
-					// 修正：如果选择器引用了被移除的 REJECT/block，直接将其过滤掉
-					// 因为路由规则已经通过 action 拦截了，不需要走选择器
+					// EN_0058：EN_0233 REJECT/block，EN_0440
+					// EN_0193 action EN_0307，EN_0011
 					outbound.outbounds = outbound.outbounds.filter(tag => {
 						const upperTag = tag.toUpperCase();
 						return existingOutboundTags.has(tag) && upperTag !== 'REJECT' && upperTag !== 'BLOCK';
@@ -3256,17 +3256,17 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 			}
 		});
 
-		// --- 4. UUID 匹配节点的 TLS 热补丁 (utls & ech) ---
+		// --- 4. UUID EN_0126 TLS EN_0420 (utls & ech) ---
 		if (uuid) {
 			config.outbounds.forEach(outbound => {
-				// 仅处理包含 uuid 或 password 且匹配的节点
+				// EN_0022 uuid EN_0301 password EN_0013
 				if ((outbound.uuid && outbound.uuid === uuid) || (outbound.password && outbound.password === uuid)) {
-					// 确保 tls 对象存在
+					// EN_0443 tls EN_0255
 					if (!outbound.tls) {
 						outbound.tls = { enabled: true };
 					}
 
-					// 添加/更新 utls 配置
+					// EN_0418/EN_0354 utls EN_0590
 					if (fingerprint) {
 						outbound.tls.utls = {
 							enabled: true,
@@ -3274,11 +3274,11 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 						};
 					}
 
-					// 如果提供了 ech_config，添加/更新 ech 配置
+					// EN_0229 ech_config，EN_0418/EN_0354 ech EN_0590
 					if (ech_config) {
 						outbound.tls.ech = {
 							enabled: true,
-							//query_server_name: "cloudflare-ech.com",// 等待 1.13.0+ 版本上线
+							//query_server_name: "cloudflare-ech.com",// EN_0455 1.13.0+ EN_0423
 							config: `-----BEGIN ECH CONFIGS-----\n${ech_config}\n-----END ECH CONFIGS-----`
 						};
 					}
@@ -3288,147 +3288,147 @@ async function Singbox订阅配置文件热补丁(SingBox_原始订阅内容, co
 
 		return JSON.stringify(config, null, 2);
 	} catch (e) {
-		console.error("Singbox热补丁执行失败:", e);
+		console.error("SingboxEN_0421:", e);
 		return JSON.stringify(JSON.parse(sb_json_text), null, 2);
 	}
 }
 
-function Surge订阅配置文件热补丁(content, url, config_JSON) {
-	const 每行内容 = content.includes('\r\n') ? content.split('\r\n') : content.split('\n');
-	const 完整节点路径 = config_JSON.随机路径 ? 随机路径(config_JSON.完整节点路径) : config_JSON.完整节点路径;
-	let 输出内容 = "";
-	for (let x of 每行内容) {
+function SurgeEN_0518(content, url, config_JSON) {
+	const EN_0412 = content.includes('\r\n') ? content.split('\r\n') : content.split('\n');
+	const EN_0246 = config_JSON.EN_0615 ? EN_0615(config_JSON.EN_0246) : config_JSON.EN_0246;
+	let EN_0569 = "";
+	for (let x of EN_0412) {
 		if (x.includes('= tro' + 'jan,') && !x.includes('ws=true') && !x.includes('ws-path=')) {
 			const host = x.split("sni=")[1].split(",")[0];
-			const 备改内容 = `sni=${host}, skip-cert-verify=${config_JSON.跳过证书验证}`;
-			const 正确内容 = `sni=${host}, skip-cert-verify=${config_JSON.跳过证书验证}, ws=true, ws-path=${完整节点路径.replace(/,/g, '%2C')}, ws-headers=Host:"${host}"`;
-			输出内容 += x.replace(new RegExp(备改内容, 'g'), 正确内容).replace("[", "").replace("]", "") + '\n';
+			const EN_0219 = `sni=${host}, skip-cert-verify=${config_JSON.EN_0562}`;
+			const EN_0410 = `sni=${host}, skip-cert-verify=${config_JSON.EN_0562}, ws=true, ws-path=${EN_0246.replace(/,/g, '%2C')}, ws-headers=Host:"${host}"`;
+			EN_0569 += x.replace(new RegExp(EN_0219, 'g'), EN_0410).replace("[", "").replace("]", "") + '\n';
 		} else {
-			输出内容 += x + '\n';
+			EN_0569 += x + '\n';
 		}
 	}
 
-	输出内容 = `#!MANAGED-CONFIG ${url} interval=${config_JSON.优选订阅生成.SUBUpdateTime * 60 * 60} strict=false` + 输出内容.substring(输出内容.indexOf('\n'));
-	return 输出内容;
+	EN_0569 = `#!MANAGED-CONFIG ${url} interval=${config_JSON.EN_0039.SUBUpdateTime * 60 * 60} strict=false` + EN_0569.substring(EN_0569.indexOf('\n'));
+	return EN_0569;
 }
 
-async function 请求日志记录(env, request, 访问IP, 请求类型 = "Get_SUB", config_JSON, 是否写入KV日志 = true) {
+async function EN_0538(env, request, EN_0526IP, EN_0541 = "Get_SUB", config_JSON, EN_0349KVEN_0337 = true) {
 	try {
-		const 当前时间 = new Date();
-		const 日志内容 = { TYPE: 请求类型, IP: 访问IP, ASN: `AS${request.cf.asn || '0'} ${request.cf.asOrganization || 'Unknown'}`, CC: `${request.cf.country || 'N/A'} ${request.cf.city || 'N/A'}`, URL: request.url, UA: request.headers.get('User-Agent') || 'Unknown', TIME: 当前时间.getTime() };
-		if (config_JSON.TG.启用) {
+		const EN_0291 = new Date();
+		const EN_0338 = { TYPE: EN_0541, IP: EN_0526IP, ASN: `AS${request.cf.asn || '0'} ${request.cf.asOrganization || 'Unknown'}`, CC: `${request.cf.country || 'N/A'} ${request.cf.city || 'N/A'}`, URL: request.url, UA: request.headers.get('User-Agent') || 'Unknown', TIME: EN_0291.getTime() };
+		if (config_JSON.TG.EN_0172) {
 			try {
 				const TG_TXT = await env.KV.get('tg.json');
 				const TG_JSON = JSON.parse(TG_TXT);
 				if (TG_JSON?.BotToken && TG_JSON?.ChatID) {
-					const 请求时间 = new Date(日志内容.TIME).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
-					const 请求URL = new URL(日志内容.URL);
-					const msg = `<b>#${config_JSON.优选订阅生成.SUBNAME} 日志通知</b>\n\n` +
-						`📌 <b>类型：</b>#${日志内容.TYPE}\n` +
-						`🌐 <b>IP：</b><code>${日志内容.IP}</code>\n` +
-						`📍 <b>位置：</b>${日志内容.CC}\n` +
-						`🏢 <b>ASN：</b>${日志内容.ASN}\n` +
-						`🔗 <b>域名：</b><code>${请求URL.host}</code>\n` +
-						`🔍 <b>路径：</b><code>${请求URL.pathname + 请求URL.search}</code>\n` +
-						`🤖 <b>UA：</b><code>${日志内容.UA}</code>\n` +
-						`📅 <b>时间：</b>${请求时间}\n` +
-						`${config_JSON.CF.Usage.success ? `📊 <b>请求用量：</b>${config_JSON.CF.Usage.total}/${config_JSON.CF.Usage.max} <b>${((config_JSON.CF.Usage.total / config_JSON.CF.Usage.max) * 100).toFixed(2)}%</b>\n` : ''}`;
+					const EN_0539 = new Date(EN_0338.TIME).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
+					const EN_0531URL = new URL(EN_0338.URL);
+					const msg = `<b>#${config_JSON.EN_0039.SUBNAME} EN_0341</b>\n\n` +
+						`📌 <b>EN_0459：</b>#${EN_0338.TYPE}\n` +
+						`🌐 <b>IP：</b><code>${EN_0338.IP}</code>\n` +
+						`📍 <b>EN_0050：</b>${EN_0338.CC}\n` +
+						`🏢 <b>ASN：</b>${EN_0338.ASN}\n` +
+						`🔗 <b>EN_0206：</b><code>${EN_0531URL.host}</code>\n` +
+						`🔍 <b>EN_0551：</b><code>${EN_0531URL.pathname + EN_0531URL.search}</code>\n` +
+						`🤖 <b>UA：</b><code>${EN_0338.UA}</code>\n` +
+						`📅 <b>EN_0343：</b>${EN_0539}\n` +
+						`${config_JSON.CF.Usage.success ? `📊 <b>EN_0540：</b>${config_JSON.CF.Usage.total}/${config_JSON.CF.Usage.max} <b>${((config_JSON.CF.Usage.total / config_JSON.CF.Usage.max) * 100).toFixed(2)}%</b>\n` : ''}`;
 					await fetch(`https://api.telegram.org/bot${TG_JSON.BotToken}/sendMessage?chat_id=${TG_JSON.ChatID}&parse_mode=HTML&text=${encodeURIComponent(msg)}`, {
 						method: 'GET',
 						headers: {
 							'Accept': 'text/html,application/xhtml+xml,application/xml;',
 							'Accept-Encoding': 'gzip, deflate, br',
-							'User-Agent': 日志内容.UA || 'Unknown',
+							'User-Agent': EN_0338.UA || 'Unknown',
 						}
 					});
 				}
-			} catch (error) { console.error(`读取tg.json出错: ${error.message}`) }
+			} catch (error) { console.error(`EN_0543tg.jsonEN_0092: ${error.message}`) }
 		}
-		是否写入KV日志 = ['1', 'true'].includes(env.OFF_LOG) ? false : 是否写入KV日志;
-		if (!是否写入KV日志) return;
-		let 日志数组 = [];
-		const 现有日志 = await env.KV.get('log.json'), KV容量限制 = 4;//MB
-		if (现有日志) {
+		EN_0349KVEN_0337 = ['1', 'true'].includes(env.OFF_LOG) ? false : EN_0349KVEN_0337;
+		if (!EN_0349KVEN_0337) return;
+		let EN_0339 = [];
+		const EN_0427 = await env.KV.get('log.json'), KVEN_0251 = 4;//MB
+		if (EN_0427) {
 			try {
-				日志数组 = JSON.parse(现有日志);
-				if (!Array.isArray(日志数组)) { 日志数组 = [日志内容] }
-				else if (请求类型 !== "Get_SUB") {
-					const 三十分钟前时间戳 = 当前时间.getTime() - 30 * 60 * 1000;
-					if (日志数组.some(log => log.TYPE !== "Get_SUB" && log.IP === 访问IP && log.URL === request.url && log.UA === (request.headers.get('User-Agent') || 'Unknown') && log.TIME >= 三十分钟前时间戳)) return;
-					日志数组.push(日志内容);
-					while (JSON.stringify(日志数组, null, 2).length > KV容量限制 * 1024 * 1024 && 日志数组.length > 0) 日志数组.shift();
+				EN_0339 = JSON.parse(EN_0427);
+				if (!Array.isArray(EN_0339)) { EN_0339 = [EN_0338] }
+				else if (EN_0541 !== "Get_SUB") {
+					const EN_0001 = EN_0291.getTime() - 30 * 60 * 1000;
+					if (EN_0339.some(log => log.TYPE !== "Get_SUB" && log.IP === EN_0526IP && log.URL === request.url && log.UA === (request.headers.get('User-Agent') || 'Unknown') && log.TIME >= EN_0001)) return;
+					EN_0339.push(EN_0338);
+					while (JSON.stringify(EN_0339, null, 2).length > KVEN_0251 * 1024 * 1024 && EN_0339.length > 0) EN_0339.shift();
 				} else {
-					日志数组.push(日志内容);
-					while (JSON.stringify(日志数组, null, 2).length > KV容量限制 * 1024 * 1024 && 日志数组.length > 0) 日志数组.shift();
+					EN_0339.push(EN_0338);
+					while (JSON.stringify(EN_0339, null, 2).length > KVEN_0251 * 1024 * 1024 && EN_0339.length > 0) EN_0339.shift();
 				}
-			} catch (e) { 日志数组 = [日志内容] }
-		} else { 日志数组 = [日志内容] }
-		await env.KV.put('log.json', JSON.stringify(日志数组, null, 2));
-	} catch (error) { console.error(`日志记录失败: ${error.message}`) }
+			} catch (e) { EN_0339 = [EN_0338] }
+		} else { EN_0339 = [EN_0338] }
+		await env.KV.put('log.json', JSON.stringify(EN_0339, null, 2));
+	} catch (error) { console.error(`EN_0340: ${error.message}`) }
 }
 
-function 掩码敏感信息(文本, 前缀长度 = 3, 后缀长度 = 2) {
-	if (!文本 || typeof 文本 !== 'string') return 文本;
-	if (文本.length <= 前缀长度 + 后缀长度) return 文本; // 如果长度太短，直接返回
+function EN_0312(EN_0327, EN_0113 = 3, EN_0169 = 2) {
+	if (!EN_0327 || typeof EN_0327 !== 'string') return EN_0327;
+	if (EN_0327.length <= EN_0113 + EN_0169) return EN_0327; // EN_0234，EN_0441
 
-	const 前缀 = 文本.slice(0, 前缀长度);
-	const 后缀 = 文本.slice(-后缀长度);
-	const 星号数量 = 文本.length - 前缀长度 - 后缀长度;
+	const EN_0112 = EN_0327.slice(0, EN_0113);
+	const EN_0168 = EN_0327.slice(-EN_0169);
+	const EN_0347 = EN_0327.length - EN_0113 - EN_0169;
 
-	return `${前缀}${'*'.repeat(星号数量)}${后缀}`;
+	return `${EN_0112}${'*'.repeat(EN_0347)}${EN_0168}`;
 }
 
-async function MD5MD5(文本) {
-	const 编码器 = new TextEncoder();
+async function MD5MD5(EN_0327) {
+	const EN_0474 = new TextEncoder();
 
-	const 第一次哈希 = await crypto.subtle.digest('MD5', 编码器.encode(文本));
-	const 第一次哈希数组 = Array.from(new Uint8Array(第一次哈希));
-	const 第一次十六进制 = 第一次哈希数组.map(字节 => 字节.toString(16).padStart(2, '0')).join('');
+	const EN_0450 = await crypto.subtle.digest('MD5', EN_0474.encode(EN_0327));
+	const EN_0451 = Array.from(new Uint8Array(EN_0450));
+	const EN_0449 = EN_0451.map(EN_0238 => EN_0238.toString(16).padStart(2, '0')).join('');
 
-	const 第二次哈希 = await crypto.subtle.digest('MD5', 编码器.encode(第一次十六进制.slice(7, 27)));
-	const 第二次哈希数组 = Array.from(new Uint8Array(第二次哈希));
-	const 第二次十六进制 = 第二次哈希数组.map(字节 => 字节.toString(16).padStart(2, '0')).join('');
+	const EN_0453 = await crypto.subtle.digest('MD5', EN_0474.encode(EN_0449.slice(7, 27)));
+	const EN_0454 = Array.from(new Uint8Array(EN_0453));
+	const EN_0452 = EN_0454.map(EN_0238 => EN_0238.toString(16).padStart(2, '0')).join('');
 
-	return 第二次十六进制.toLowerCase();
+	return EN_0452.toLowerCase();
 }
 
-function 随机路径(完整节点路径 = "/") {
-	const 常用路径目录 = ["about", "account", "acg", "act", "activity", "ad", "ads", "ajax", "album", "albums", "anime", "api", "app", "apps", "archive", "archives", "article", "articles", "ask", "auth", "avatar", "bbs", "bd", "blog", "blogs", "book", "books", "bt", "buy", "cart", "category", "categories", "cb", "channel", "channels", "chat", "china", "city", "class", "classify", "clip", "clips", "club", "cn", "code", "collect", "collection", "comic", "comics", "community", "company", "config", "contact", "content", "course", "courses", "cp", "data", "detail", "details", "dh", "directory", "discount", "discuss", "dl", "dload", "doc", "docs", "document", "documents", "doujin", "download", "downloads", "drama", "edu", "en", "ep", "episode", "episodes", "event", "events", "f", "faq", "favorite", "favourites", "favs", "feedback", "file", "files", "film", "films", "forum", "forums", "friend", "friends", "game", "games", "gif", "go", "go.html", "go.php", "group", "groups", "help", "home", "hot", "htm", "html", "image", "images", "img", "index", "info", "intro", "item", "items", "ja", "jp", "jump", "jump.html", "jump.php", "jumping", "knowledge", "lang", "lesson", "lessons", "lib", "library", "link", "links", "list", "live", "lives", "m", "mag", "magnet", "mall", "manhua", "map", "member", "members", "message", "messages", "mobile", "movie", "movies", "music", "my", "new", "news", "note", "novel", "novels", "online", "order", "out", "out.html", "out.php", "outbound", "p", "page", "pages", "pay", "payment", "pdf", "photo", "photos", "pic", "pics", "picture", "pictures", "play", "player", "playlist", "post", "posts", "product", "products", "program", "programs", "project", "qa", "question", "rank", "ranking", "read", "readme", "redirect", "redirect.html", "redirect.php", "reg", "register", "res", "resource", "retrieve", "sale", "search", "season", "seasons", "section", "seller", "series", "service", "services", "setting", "settings", "share", "shop", "show", "shows", "site", "soft", "sort", "source", "special", "star", "stars", "static", "stock", "store", "stream", "streaming", "streams", "student", "study", "tag", "tags", "task", "teacher", "team", "tech", "temp", "test", "thread", "tool", "tools", "topic", "topics", "torrent", "trade", "travel", "tv", "txt", "type", "u", "upload", "uploads", "url", "urls", "user", "users", "v", "version", "video", "videos", "view", "vip", "vod", "watch", "web", "wenku", "wiki", "work", "www", "zh", "zh-cn", "zh-tw", "zip"];
-	const 随机数 = Math.floor(Math.random() * 3 + 1);
-	const 随机路径 = 常用路径目录.sort(() => 0.5 - Math.random()).slice(0, 随机数).join('/');
-	if (完整节点路径 === "/") return `/${随机路径}`;
-	else return `/${随机路径 + 完整节点路径.replace('/?', '?')}`;
+function EN_0615(EN_0246 = "/") {
+	const EN_0275 = ["about", "account", "acg", "act", "activity", "ad", "ads", "ajax", "album", "albums", "anime", "api", "app", "apps", "archive", "archives", "article", "articles", "ask", "auth", "avatar", "bbs", "bd", "blog", "blogs", "book", "books", "bt", "buy", "cart", "category", "categories", "cb", "channel", "channels", "chat", "china", "city", "class", "classify", "clip", "clips", "club", "cn", "code", "collect", "collection", "comic", "comics", "community", "company", "config", "contact", "content", "course", "courses", "cp", "data", "detail", "details", "dh", "directory", "discount", "discuss", "dl", "dload", "doc", "docs", "document", "documents", "doujin", "download", "downloads", "drama", "edu", "en", "ep", "episode", "episodes", "event", "events", "f", "faq", "favorite", "favourites", "favs", "feedback", "file", "files", "film", "films", "forum", "forums", "friend", "friends", "game", "games", "gif", "go", "go.html", "go.php", "group", "groups", "help", "home", "hot", "htm", "html", "image", "images", "img", "index", "info", "intro", "item", "items", "ja", "jp", "jump", "jump.html", "jump.php", "jumping", "knowledge", "lang", "lesson", "lessons", "lib", "library", "link", "links", "list", "live", "lives", "m", "mag", "magnet", "mall", "manhua", "map", "member", "members", "message", "messages", "mobile", "movie", "movies", "music", "my", "new", "news", "note", "novel", "novels", "online", "order", "out", "out.html", "out.php", "outbound", "p", "page", "pages", "pay", "payment", "pdf", "photo", "photos", "pic", "pics", "picture", "pictures", "play", "player", "playlist", "post", "posts", "product", "products", "program", "programs", "project", "qa", "question", "rank", "ranking", "read", "readme", "redirect", "redirect.html", "redirect.php", "reg", "register", "res", "resource", "retrieve", "sale", "search", "season", "seasons", "section", "seller", "series", "service", "services", "setting", "settings", "share", "shop", "show", "shows", "site", "soft", "sort", "source", "special", "star", "stars", "static", "stock", "store", "stream", "streaming", "streams", "student", "study", "tag", "tags", "task", "teacher", "team", "tech", "temp", "test", "thread", "tool", "tools", "topic", "topics", "torrent", "trade", "travel", "tv", "txt", "type", "u", "upload", "uploads", "url", "urls", "user", "users", "v", "version", "video", "videos", "view", "vip", "vod", "watch", "web", "wenku", "wiki", "work", "www", "zh", "zh-cn", "zh-tw", "zip"];
+	const EN_0612 = Math.floor(Math.random() * 3 + 1);
+	const EN_0615 = EN_0275.sort(() => 0.5 - Math.random()).slice(0, EN_0612).join('/');
+	if (EN_0246 === "/") return `/${EN_0615}`;
+	else return `/${EN_0615 + EN_0246.replace('/?', '?')}`;
 }
 
-function 批量替换域名(内容, hosts, 每组数量 = 2) {
-	const 打乱后HOSTS = [...hosts].sort(() => Math.random() - 0.5);
-	const 字符集 = 'abcdefghijklmnopqrstuvwxyz0123456789';
+function EN_0306(EN_0081, hosts, EN_0411 = 2) {
+	const EN_0304HOSTS = [...hosts].sort(() => Math.random() - 0.5);
+	const EN_0237 = 'abcdefghijklmnopqrstuvwxyz0123456789';
 	let count = 0;
 	let currentRandomHost = null;
-	return 内容.replace(/example\.com/g, () => {
-		if (count % 每组数量 === 0) {
-			const 原始host = 打乱后HOSTS[Math.floor(count / 每组数量) % 打乱后HOSTS.length];
-			currentRandomHost = 原始host?.includes('*') ? 原始host.replace(/\*/g, () => {
+	return EN_0081.replace(/example\.com/g, () => {
+		if (count % EN_0411 === 0) {
+			const EN_0134host = EN_0304HOSTS[Math.floor(count / EN_0411) % EN_0304HOSTS.length];
+			currentRandomHost = EN_0134host?.includes('*') ? EN_0134host.replace(/\*/g, () => {
 				let s = '';
-				for (let i = 0; i < Math.floor(Math.random() * 14) + 3; i++) s += 字符集[Math.floor(Math.random() * 36)];
+				for (let i = 0; i < Math.floor(Math.random() * 14) + 3; i++) s += EN_0237[Math.floor(Math.random() * 36)];
 				return s;
-			}) : 原始host;
+			}) : EN_0134host;
 		}
 		count++;
 		return currentRandomHost;
 	});
 }
 
-async function DoH查询(域名, 记录类型, DoH解析服务 = "https://cloudflare-dns.com/dns-query") {
-	const 开始时间 = performance.now();
-	log(`[DoH查询] 开始查询 ${域名} ${记录类型} via ${DoH解析服务}`);
+async function DoHEN_0384(EN_0206, EN_0522, DoHEN_0505 = "https://cloudflare-dns.com/dns-query") {
+	const EN_0282 = performance.now();
+	log(`[DoHEN_0384] EN_0283 ${EN_0206} ${EN_0522} via ${DoHEN_0505}`);
 	try {
-		// 记录类型字符串转数值
-		const 类型映射 = { 'A': 1, 'NS': 2, 'CNAME': 5, 'MX': 15, 'TXT': 16, 'AAAA': 28, 'SRV': 33, 'HTTPS': 65 };
-		const qtype = 类型映射[记录类型.toUpperCase()] || 1;
+		// EN_0523
+		const EN_0460 = { 'A': 1, 'NS': 2, 'CNAME': 5, 'MX': 15, 'TXT': 16, 'AAAA': 28, 'SRV': 33, 'HTTPS': 65 };
+		const qtype = EN_0460[EN_0522.toUpperCase()] || 1;
 
-		// 编码域名为 DNS wire format labels
-		const 编码域名 = (name) => {
+		// EN_0476 DNS wire format labels
+		const EN_0475 = (name) => {
 			const parts = name.endsWith('.') ? name.slice(0, -1).split('.') : name.split('.');
 			const bufs = [];
 			for (const label of parts) {
@@ -3443,20 +3443,20 @@ async function DoH查询(域名, 记录类型, DoH解析服务 = "https://cloudf
 			return result;
 		};
 
-		// 构建 DNS 查询报文
-		const qname = 编码域名(域名);
+		// EN_0383 DNS EN_0388
+		const qname = EN_0475(EN_0206);
 		const query = new Uint8Array(12 + qname.length + 4);
 		const qview = new DataView(query.buffer);
 		qview.setUint16(0, crypto.getRandomValues(new Uint16Array(1))[0]); // ID (random per RFC 1035)
-		qview.setUint16(2, 0x0100);  // Flags: RD=1 (递归查询)
+		qview.setUint16(2, 0x0100);  // Flags: RD=1 (EN_0584)
 		qview.setUint16(4, 1);       // QDCOUNT
 		query.set(qname, 12);
 		qview.setUint16(12 + qname.length, qtype);
 		qview.setUint16(12 + qname.length + 2, 1); // QCLASS = IN
 
-		// 通过 POST 发送 dns-message 请求
-		log(`[DoH查询] 发送查询报文 ${域名} via ${DoH解析服务} (type=${qtype}, ${query.length}字节)`);
-		const response = await fetch(DoH解析服务, {
+		// EN_0585 POST EN_0153 dns-message EN_0531
+		log(`[DoHEN_0384] EN_0156 ${EN_0206} via ${DoHEN_0505} (type=${qtype}, ${query.length}EN_0238)`);
+		const response = await fetch(DoHEN_0505, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/dns-message',
@@ -3465,19 +3465,19 @@ async function DoH查询(域名, 记录类型, DoH解析服务 = "https://cloudf
 			body: query,
 		});
 		if (!response.ok) {
-			console.warn(`[DoH查询] 请求失败 ${域名} ${记录类型} via ${DoH解析服务} 响应代码:${response.status}`);
+			console.warn(`[DoHEN_0384] EN_0534 ${EN_0206} ${EN_0522} via ${DoHEN_0505} EN_0180:${response.status}`);
 			return [];
 		}
 
-		// 解析 DNS 响应报文
+		// EN_0499 DNS EN_0188
 		const buf = new Uint8Array(await response.arrayBuffer());
 		const dv = new DataView(buf.buffer);
 		const qdcount = dv.getUint16(4);
 		const ancount = dv.getUint16(6);
-		log(`[DoH查询] 收到响应 ${域名} ${记录类型} via ${DoH解析服务} (${buf.length}字节, ${ancount}条应答)`);
+		log(`[DoHEN_0384] EN_0320 ${EN_0206} ${EN_0522} via ${DoHEN_0505} (${buf.length}EN_0238, ${ancount}EN_0380)`);
 
-		// 解析域名（处理指针压缩）
-		const 解析域名 = (pos) => {
+		// EN_0503（EN_0214）
+		const EN_0503 = (pos) => {
 			const labels = [];
 			let p = pos, jumped = false, endPos = -1, safe = 128;
 			while (p < buf.length && safe-- > 0) {
@@ -3496,17 +3496,17 @@ async function DoH查询(域名, 记录类型, DoH解析服务 = "https://cloudf
 			return [labels.join('.'), endPos];
 		};
 
-		// 跳过 Question Section
+		// EN_0559 Question Section
 		let offset = 12;
 		for (let i = 0; i < qdcount; i++) {
-			const [, end] = 解析域名(offset);
-			offset = /** @type {number} */ (end) + 4; // +4 跳过 QTYPE + QCLASS
+			const [, end] = EN_0503(offset);
+			offset = /** @type {number} */ (end) + 4; // +4 EN_0559 QTYPE + QCLASS
 		}
 
-		// 解析 Answer Section
+		// EN_0499 Answer Section
 		const answers = [];
 		for (let i = 0; i < ancount && offset < buf.length; i++) {
-			const [name, nameEnd] = 解析域名(offset);
+			const [name, nameEnd] = EN_0503(offset);
 			offset = /** @type {number} */ (nameEnd);
 			const type = dv.getUint16(offset); offset += 2;
 			offset += 2; // CLASS
@@ -3517,15 +3517,15 @@ async function DoH查询(域名, 记录类型, DoH解析服务 = "https://cloudf
 
 			let data;
 			if (type === 1 && rdlen === 4) {
-				// A 记录
+				// A EN_0521
 				data = `${rdata[0]}.${rdata[1]}.${rdata[2]}.${rdata[3]}`;
 			} else if (type === 28 && rdlen === 16) {
-				// AAAA 记录
+				// AAAA EN_0521
 				const segs = [];
 				for (let j = 0; j < 16; j += 2) segs.push(((rdata[j] << 8) | rdata[j + 1]).toString(16));
 				data = segs.join(':');
 			} else if (type === 16) {
-				// TXT 记录 (长度前缀字符串)
+				// TXT EN_0521 (EN_0606)
 				let tOff = 0;
 				const parts = [];
 				while (tOff < rdlen) {
@@ -3535,45 +3535,45 @@ async function DoH查询(域名, 记录类型, DoH解析服务 = "https://cloudf
 				}
 				data = parts.join('');
 			} else if (type === 5) {
-				// CNAME 记录
-				const [cname] = 解析域名(offset - rdlen);
+				// CNAME EN_0521
+				const [cname] = EN_0503(offset - rdlen);
 				data = cname;
 			} else {
 				data = Array.from(rdata).map(b => b.toString(16).padStart(2, '0')).join('');
 			}
 			answers.push({ name, type, TTL: ttl, data, rdata });
 		}
-		const 耗时 = (performance.now() - 开始时间).toFixed(2);
-		log(`[DoH查询] 查询完成 ${域名} ${记录类型} via ${DoH解析服务} ${耗时}ms 共${answers.length}条结果${answers.length > 0 ? '\n' + answers.map((a, i) => `  ${i + 1}. ${a.name} type=${a.type} TTL=${a.TTL} data=${a.data}`).join('\n') : ''}`);
+		const EN_0479 = (performance.now() - EN_0282).toFixed(2);
+		log(`[DoHEN_0384] EN_0387 ${EN_0206} ${EN_0522} via ${DoHEN_0505} ${EN_0479}ms EN_0076${answers.length}EN_0381${answers.length > 0 ? '\n' + answers.map((a, i) => `  ${i + 1}. ${a.name} type=${a.type} TTL=${a.TTL} data=${a.data}`).join('\n') : ''}`);
 		return answers;
 	} catch (error) {
-		const 耗时 = (performance.now() - 开始时间).toFixed(2);
-		console.error(`[DoH查询] 查询失败 ${域名} ${记录类型} via ${DoH解析服务} ${耗时}ms:`, error);
+		const EN_0479 = (performance.now() - EN_0282).toFixed(2);
+		console.error(`[DoHEN_0384] EN_0386 ${EN_0206} ${EN_0522} via ${DoHEN_0505} ${EN_0479}ms:`, error);
 		return [];
 	}
 }
 
 async function getECH(host) {
 	try {
-		const answers = await DoH查询(host, 'HTTPS');
+		const answers = await DoHEN_0384(host, 'HTTPS');
 		if (!answers.length) return '';
 		for (const ans of answers) {
 			if (ans.type !== 65 || !ans.rdata) continue;
 			const bytes = ans.rdata;
-			// 解析 SVCB/HTTPS rdata: SvcPriority(2) + TargetName(variable) + SvcParams
-			let offset = 2; // 跳过 SvcPriority
-			// 跳过 TargetName (域名编码)
+			// EN_0499 SVCB/HTTPS rdata: SvcPriority(2) + TargetName(variable) + SvcParams
+			let offset = 2; // EN_0559 SvcPriority
+			// EN_0559 TargetName (EN_0209)
 			while (offset < bytes.length) {
 				const len = bytes[offset];
 				if (len === 0) { offset++; break }
 				offset += len + 1;
 			}
-			// 遍历 SvcParams 键值对
+			// EN_0586 SvcParams EN_0604
 			while (offset + 4 <= bytes.length) {
 				const key = (bytes[offset] << 8) | bytes[offset + 1];
 				const len = (bytes[offset + 2] << 8) | bytes[offset + 3];
 				offset += 4;
-				// key=5 是 ECH (Encrypted Client Hello)
+				// key=5 EN_0348 ECH (Encrypted Client Hello)
 				if (key === 5) return btoa(String.fromCharCode(...bytes.slice(offset, offset + len)));
 				offset += len;
 			}
@@ -3584,75 +3584,75 @@ async function getECH(host) {
 	}
 }
 
-async function 读取config_JSON(env, hostname, userID, UA = "Mozilla/5.0", 重置配置 = false) {
+async function EN_0543config_JSON(env, hostname, userID, UA = "Mozilla/5.0", EN_0598 = false) {
 	const _p = atob("UFJPWFlJUA==");
-	const host = hostname, Ali_DoH = "https://dns.alidns.com/dns-query", ECH_SNI = "cloudflare-ech.com", 占位符 = '{{IP:PORT}}', 初始化开始时间 = performance.now(), 默认配置JSON = {
+	const host = hostname, Ali_DoH = "https://dns.alidns.com/dns-query", ECH_SNI = "cloudflare-ech.com", EN_0133 = '{{IP:PORT}}', EN_0102 = performance.now(), EN_0641JSON = {
 		TIME: new Date().toISOString(),
 		HOST: host,
 		HOSTS: [hostname],
 		UUID: userID,
 		PATH: "/",
-		协议类型: "v" + "le" + "ss",
-		传输协议: "ws",
-		gRPC模式: "gun",
+		EN_0130: "v" + "le" + "ss",
+		EN_0044: "ws",
+		gRPCEN_0405: "gun",
 		gRPCUserAgent: UA,
-		跳过证书验证: false,
-		启用0RTT: false,
-		TLS分片: null,
-		随机路径: false,
+		EN_0562: false,
+		EN_01720RTT: false,
+		TLSEN_0094: null,
+		EN_0615: false,
 		ECH: false,
 		ECHConfig: {
 			DNS: Ali_DoH,
 			SNI: ECH_SNI,
 		},
 		SS: {
-			加密方式: "aes-128-gcm",
+			EN_0118: "aes-128-gcm",
 			TLS: true,
 		},
 		Fingerprint: "chrome",
-		优选订阅生成: {
-			local: true, // true: 基于本地的优选地址  false: 优选订阅生成器
-			本地IP库: {
-				随机IP: true, // 当 随机IP 为true时生效，启用随机IP的数量，否则使用KV内的ADD.txt
-				随机数量: 16,
-				指定端口: -1,
+		EN_0039: {
+			local: true, // true: EN_0210  false: EN_0040
+			EN_0375IPEN_0279: {
+				EN_0609IP: true, // EN_0286 EN_0609IP EN_0017trueEN_0342，EN_0174IPEN_0433，EN_0171KVEN_0084ADD.txt
+				EN_0613: 16,
+				EN_0309: -1,
 			},
 			SUB: null,
 			SUBNAME: "edge" + "tunnel",
-			SUBUpdateTime: 3, // 订阅更新时间（小时）
+			SUBUpdateTime: 3, // EN_0512（EN_0258）
 			TOKEN: await MD5MD5(hostname + userID),
 		},
-		订阅转换配置: {
+		EN_0517: {
 			SUBAPI: "https://SUBAPI.cmliussss.net",
 			SUBCONFIG: "https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/config/ACL4SSR_Online_Mini_MultiMode_CF.ini",
 			SUBEMOJI: false,
 		},
-		反代: {
+		EN_0140: {
 			[_p]: "auto",
 			SOCKS5: {
-				启用: 启用SOCKS5反代,
-				全局: 启用SOCKS5全局反代,
-				账号: 我的SOCKS5账号,
-				白名单: SOCKS5白名单,
+				EN_0172: EN_0172SOCKS5EN_0140,
+				EN_0073: EN_0172SOCKS5EN_0075,
+				EN_0548: EN_0300SOCKS5EN_0548,
+				EN_0430: SOCKS5EN_0430,
 			},
-			路径模板: {
-				[_p]: "proxyip=" + 占位符,
+			EN_0556: {
+				[_p]: "proxyip=" + EN_0133,
 				SOCKS5: {
-					全局: "socks5://" + 占位符,
-					标准: "socks5=" + 占位符
+					EN_0073: "socks5://" + EN_0133,
+					EN_0393: "socks5=" + EN_0133
 				},
 				HTTP: {
-					全局: "http://" + 占位符,
-					标准: "http=" + 占位符
+					EN_0073: "http://" + EN_0133,
+					EN_0393: "http=" + EN_0133
 				},
 				HTTPS: {
-					全局: "https://" + 占位符,
-					标准: "https=" + 占位符
+					EN_0073: "https://" + EN_0133,
+					EN_0393: "https=" + EN_0133
 				},
 			},
 		},
 		TG: {
-			启用: false,
+			EN_0172: false,
 			BotToken: null,
 			ChatID: null,
 		},
@@ -3674,100 +3674,100 @@ async function 读取config_JSON(env, hostname, userID, UA = "Mozilla/5.0", 重�
 
 	try {
 		let configJSON = await env.KV.get('config.json');
-		if (!configJSON || 重置配置 == true) {
-			await env.KV.put('config.json', JSON.stringify(默认配置JSON, null, 2));
-			config_JSON = 默认配置JSON;
+		if (!configJSON || EN_0598 == true) {
+			await env.KV.put('config.json', JSON.stringify(EN_0641JSON, null, 2));
+			config_JSON = EN_0641JSON;
 		} else {
 			config_JSON = JSON.parse(configJSON);
 		}
 	} catch (error) {
-		console.error(`读取config_JSON出错: ${error.message}`);
-		config_JSON = 默认配置JSON;
+		console.error(`EN_0543config_JSONEN_0092: ${error.message}`);
+		config_JSON = EN_0641JSON;
 	}
 
 	if (!config_JSON.gRPCUserAgent) config_JSON.gRPCUserAgent = UA;
 	config_JSON.HOST = host;
 	if (!config_JSON.HOSTS) config_JSON.HOSTS = [hostname];
-	if (env.HOST) config_JSON.HOSTS = (await 整理成数组(env.HOST)).map(h => h.toLowerCase().replace(/^https?:\/\//, '').split('/')[0].split(':')[0]);
+	if (env.HOST) config_JSON.HOSTS = (await EN_0326(env.HOST)).map(h => h.toLowerCase().replace(/^https?:\/\//, '').split('/')[0].split(':')[0]);
 	config_JSON.UUID = userID;
-	if (!config_JSON.随机路径) config_JSON.随机路径 = false;
-	if (!config_JSON.启用0RTT) config_JSON.启用0RTT = false;
+	if (!config_JSON.EN_0615) config_JSON.EN_0615 = false;
+	if (!config_JSON.EN_01720RTT) config_JSON.EN_01720RTT = false;
 
 	if (env.PATH) config_JSON.PATH = env.PATH.startsWith('/') ? env.PATH : '/' + env.PATH;
 	else if (!config_JSON.PATH) config_JSON.PATH = '/';
 
-	if (!config_JSON.gRPC模式) config_JSON.gRPC模式 = 'gun';
-	if (!config_JSON.SS) config_JSON.SS = { 加密方式: "aes-128-gcm", TLS: false };
+	if (!config_JSON.gRPCEN_0405) config_JSON.gRPCEN_0405 = 'gun';
+	if (!config_JSON.SS) config_JSON.SS = { EN_0118: "aes-128-gcm", TLS: false };
 
-	if (!config_JSON.反代.路径模板?.[_p]) {
-		config_JSON.反代.路径模板 = {
-			[_p]: "proxyip=" + 占位符,
+	if (!config_JSON.EN_0140.EN_0556?.[_p]) {
+		config_JSON.EN_0140.EN_0556 = {
+			[_p]: "proxyip=" + EN_0133,
 			SOCKS5: {
-				全局: "socks5://" + 占位符,
-				标准: "socks5=" + 占位符
+				EN_0073: "socks5://" + EN_0133,
+				EN_0393: "socks5=" + EN_0133
 			},
 			HTTP: {
-				全局: "http://" + 占位符,
-				标准: "http=" + 占位符
+				EN_0073: "http://" + EN_0133,
+				EN_0393: "http=" + EN_0133
 			},
 		};
 	}
-	if (!config_JSON.反代.路径模板.HTTPS) config_JSON.反代.路径模板.HTTPS = { 全局: "https://" + 占位符, 标准: "https=" + 占位符 };
+	if (!config_JSON.EN_0140.EN_0556.HTTPS) config_JSON.EN_0140.EN_0556.HTTPS = { EN_0073: "https://" + EN_0133, EN_0393: "https=" + EN_0133 };
 
-	const 代理配置 = config_JSON.反代.路径模板[config_JSON.反代.SOCKS5.启用?.toUpperCase()];
+	const EN_0033 = config_JSON.EN_0140.EN_0556[config_JSON.EN_0140.SOCKS5.EN_0172?.toUpperCase()];
 
-	let 路径反代参数 = '';
-	if (代理配置 && config_JSON.反代.SOCKS5.账号) 路径反代参数 = (config_JSON.反代.SOCKS5.全局 ? 代理配置.全局 : 代理配置.标准).replace(占位符, config_JSON.反代.SOCKS5.账号);
-	else if (config_JSON.反代[_p] !== 'auto') 路径反代参数 = config_JSON.反代.路径模板[_p].replace(占位符, config_JSON.反代[_p]);
+	let EN_0554 = '';
+	if (EN_0033 && config_JSON.EN_0140.SOCKS5.EN_0548) EN_0554 = (config_JSON.EN_0140.SOCKS5.EN_0073 ? EN_0033.EN_0073 : EN_0033.EN_0393).replace(EN_0133, config_JSON.EN_0140.SOCKS5.EN_0548);
+	else if (config_JSON.EN_0140[_p] !== 'auto') EN_0554 = config_JSON.EN_0140.EN_0556[_p].replace(EN_0133, config_JSON.EN_0140[_p]);
 
-	let 反代查询参数 = '';
-	if (路径反代参数.includes('?')) {
-		const [反代路径部分, 反代查询部分] = 路径反代参数.split('?');
-		路径反代参数 = 反代路径部分;
-		反代查询参数 = 反代查询部分;
+	let EN_0146 = '';
+	if (EN_0554.includes('?')) {
+		const [EN_0151, EN_0147] = EN_0554.split('?');
+		EN_0554 = EN_0151;
+		EN_0146 = EN_0147;
 	}
 
-	config_JSON.PATH = config_JSON.PATH.replace(路径反代参数, '').replace('//', '/');
+	config_JSON.PATH = config_JSON.PATH.replace(EN_0554, '').replace('//', '/');
 	const normalizedPath = config_JSON.PATH === '/' ? '' : config_JSON.PATH.replace(/\/+(?=\?|$)/, '').replace(/\/+$/, '');
-	const [路径部分, ...查询数组] = normalizedPath.split('?');
-	const 查询部分 = 查询数组.length ? '?' + 查询数组.join('?') : '';
-	const 最终查询部分 = 反代查询参数 ? (查询部分 ? 查询部分 + '&' + 反代查询参数 : '?' + 反代查询参数) : 查询部分;
-	config_JSON.完整节点路径 = (路径部分 || '/') + (路径部分 && 路径反代参数 ? '/' : '') + 路径反代参数 + 最终查询部分 + (config_JSON.启用0RTT ? (最终查询部分 ? '&' : '?') + 'ed=2560' : '');
+	const [EN_0557, ...EN_0389] = normalizedPath.split('?');
+	const EN_0392 = EN_0389.length ? '?' + EN_0389.join('?') : '';
+	const EN_0362 = EN_0146 ? (EN_0392 ? EN_0392 + '&' + EN_0146 : '?' + EN_0146) : EN_0392;
+	config_JSON.EN_0246 = (EN_0557 || '/') + (EN_0557 && EN_0554 ? '/' : '') + EN_0554 + EN_0362 + (config_JSON.EN_01720RTT ? (EN_0362 ? '&' : '?') + 'ed=2560' : '');
 
-	if (!config_JSON.TLS分片 && config_JSON.TLS分片 !== null) config_JSON.TLS分片 = null;
-	const TLS分片参数 = config_JSON.TLS分片 == 'Shadowrocket' ? `&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}` : config_JSON.TLS分片 == 'Happ' ? `&fragment=${encodeURIComponent('3,1,tlshello')}` : '';
+	if (!config_JSON.TLSEN_0094 && config_JSON.TLSEN_0094 !== null) config_JSON.TLSEN_0094 = null;
+	const TLSEN_0095 = config_JSON.TLSEN_0094 == 'Shadowrocket' ? `&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}` : config_JSON.TLSEN_0094 == 'Happ' ? `&fragment=${encodeURIComponent('3,1,tlshello')}` : '';
 	if (!config_JSON.Fingerprint) config_JSON.Fingerprint = "chrome";
 	if (!config_JSON.ECH) config_JSON.ECH = false;
 	if (!config_JSON.ECHConfig) config_JSON.ECHConfig = { DNS: Ali_DoH, SNI: ECH_SNI };
-	const ECHLINK参数 = config_JSON.ECH ? `&ech=${encodeURIComponent((config_JSON.ECHConfig.SNI ? config_JSON.ECHConfig.SNI + '+' : '') + config_JSON.ECHConfig.DNS)}` : '';
-	const { type: 传输协议, 路径字段名, 域名字段名 } = 获取传输协议配置(config_JSON);
-	const 传输路径参数值 = 获取传输路径参数值(config_JSON, config_JSON.完整节点路径);
-	config_JSON.LINK = config_JSON.协议类型 === 'ss'
-		? `${config_JSON.协议类型}://${btoa(config_JSON.SS.加密方式 + ':' + userID)}@${host}:${config_JSON.SS.TLS ? '443' : '80'}?plugin=v2${encodeURIComponent(`ray-plugin;mode=websocket;host=${host};path=${((config_JSON.完整节点路径.includes('?') ? config_JSON.完整节点路径.replace('?', '?enc=' + config_JSON.SS.加密方式 + '&') : (config_JSON.完整节点路径 + '?enc=' + config_JSON.SS.加密方式)) + (config_JSON.SS.TLS ? ';tls' : ''))};mux=0`) + ECHLINK参数}#${encodeURIComponent(config_JSON.优选订阅生成.SUBNAME)}`
-		: `${config_JSON.协议类型}://${userID}@${host}:443?security=tls&type=${传输协议 + ECHLINK参数}&${域名字段名}=${host}&fp=${config_JSON.Fingerprint}&sni=${host}&${路径字段名}=${encodeURIComponent(传输路径参数值) + TLS分片参数}&encryption=none${config_JSON.跳过证书验证 ? '&insecure=1&allowInsecure=1' : ''}#${encodeURIComponent(config_JSON.优选订阅生成.SUBNAME)}`;
-	config_JSON.优选订阅生成.TOKEN = await MD5MD5(hostname + userID);
+	const ECHLINKEN_0138 = config_JSON.ECH ? `&ech=${encodeURIComponent((config_JSON.ECHConfig.SNI ? config_JSON.ECHConfig.SNI + '+' : '') + config_JSON.ECHConfig.DNS)}` : '';
+	const { type: EN_0044, EN_0555, EN_0208 } = EN_0489(config_JSON);
+	const EN_0046 = EN_0490(config_JSON, config_JSON.EN_0246);
+	config_JSON.LINK = config_JSON.EN_0130 === 'ss'
+		? `${config_JSON.EN_0130}://${btoa(config_JSON.SS.EN_0118 + ':' + userID)}@${host}:${config_JSON.SS.TLS ? '443' : '80'}?plugin=v2${encodeURIComponent(`ray-plugin;mode=websocket;host=${host};path=${((config_JSON.EN_0246.includes('?') ? config_JSON.EN_0246.replace('?', '?enc=' + config_JSON.SS.EN_0118 + '&') : (config_JSON.EN_0246 + '?enc=' + config_JSON.SS.EN_0118)) + (config_JSON.SS.TLS ? ';tls' : ''))};mux=0`) + ECHLINKEN_0138}#${encodeURIComponent(config_JSON.EN_0039.SUBNAME)}`
+		: `${config_JSON.EN_0130}://${userID}@${host}:443?security=tls&type=${EN_0044 + ECHLINKEN_0138}&${EN_0208}=${host}&fp=${config_JSON.Fingerprint}&sni=${host}&${EN_0555}=${encodeURIComponent(EN_0046) + TLSEN_0095}&encryption=none${config_JSON.EN_0562 ? '&insecure=1&allowInsecure=1' : ''}#${encodeURIComponent(config_JSON.EN_0039.SUBNAME)}`;
+	config_JSON.EN_0039.TOKEN = await MD5MD5(hostname + userID);
 
-	const 初始化TG_JSON = { BotToken: null, ChatID: null };
-	config_JSON.TG = { 启用: config_JSON.TG.启用 ? config_JSON.TG.启用 : false, ...初始化TG_JSON };
+	const EN_0098TG_JSON = { BotToken: null, ChatID: null };
+	config_JSON.TG = { EN_0172: config_JSON.TG.EN_0172 ? config_JSON.TG.EN_0172 : false, ...EN_0098TG_JSON };
 	try {
 		const TG_TXT = await env.KV.get('tg.json');
 		if (!TG_TXT) {
-			await env.KV.put('tg.json', JSON.stringify(初始化TG_JSON, null, 2));
+			await env.KV.put('tg.json', JSON.stringify(EN_0098TG_JSON, null, 2));
 		} else {
 			const TG_JSON = JSON.parse(TG_TXT);
 			config_JSON.TG.ChatID = TG_JSON.ChatID ? TG_JSON.ChatID : null;
-			config_JSON.TG.BotToken = TG_JSON.BotToken ? 掩码敏感信息(TG_JSON.BotToken) : null;
+			config_JSON.TG.BotToken = TG_JSON.BotToken ? EN_0312(TG_JSON.BotToken) : null;
 		}
 	} catch (error) {
-		console.error(`读取tg.json出错: ${error.message}`);
+		console.error(`EN_0543tg.jsonEN_0092: ${error.message}`);
 	}
 
-	const 初始化CF_JSON = { Email: null, GlobalAPIKey: null, AccountID: null, APIToken: null, UsageAPI: null };
-	config_JSON.CF = { ...初始化CF_JSON, Usage: { success: false, pages: 0, workers: 0, total: 0, max: 100000 } };
+	const EN_0098CF_JSON = { Email: null, GlobalAPIKey: null, AccountID: null, APIToken: null, UsageAPI: null };
+	config_JSON.CF = { ...EN_0098CF_JSON, Usage: { success: false, pages: 0, workers: 0, total: 0, max: 100000 } };
 	try {
 		const CF_TXT = await env.KV.get('cf.json');
 		if (!CF_TXT) {
-			await env.KV.put('cf.json', JSON.stringify(初始化CF_JSON, null, 2));
+			await env.KV.put('cf.json', JSON.stringify(EN_0098CF_JSON, null, 2));
 		} else {
 			const CF_JSON = JSON.parse(CF_TXT);
 			if (CF_JSON.UsageAPI) {
@@ -3776,40 +3776,40 @@ async function 读取config_JSON(env, hostname, userID, UA = "Mozilla/5.0", 重�
 					const Usage = await response.json();
 					config_JSON.CF.Usage = Usage;
 				} catch (err) {
-					console.error(`请求 CF_JSON.UsageAPI 失败: ${err.message}`);
+					console.error(`EN_0531 CF_JSON.UsageAPI EN_0223: ${err.message}`);
 				}
 			} else {
 				config_JSON.CF.Email = CF_JSON.Email ? CF_JSON.Email : null;
-				config_JSON.CF.GlobalAPIKey = CF_JSON.GlobalAPIKey ? 掩码敏感信息(CF_JSON.GlobalAPIKey) : null;
-				config_JSON.CF.AccountID = CF_JSON.AccountID ? 掩码敏感信息(CF_JSON.AccountID) : null;
-				config_JSON.CF.APIToken = CF_JSON.APIToken ? 掩码敏感信息(CF_JSON.APIToken) : null;
+				config_JSON.CF.GlobalAPIKey = CF_JSON.GlobalAPIKey ? EN_0312(CF_JSON.GlobalAPIKey) : null;
+				config_JSON.CF.AccountID = CF_JSON.AccountID ? EN_0312(CF_JSON.AccountID) : null;
+				config_JSON.CF.APIToken = CF_JSON.APIToken ? EN_0312(CF_JSON.APIToken) : null;
 				config_JSON.CF.UsageAPI = null;
 				const Usage = await getCloudflareUsage(CF_JSON.Email, CF_JSON.GlobalAPIKey, CF_JSON.AccountID, CF_JSON.APIToken);
 				config_JSON.CF.Usage = Usage;
 			}
 		}
 	} catch (error) {
-		console.error(`读取cf.json出错: ${error.message}`);
+		console.error(`EN_0543cf.jsonEN_0092: ${error.message}`);
 	}
 
-	config_JSON.加载时间 = (performance.now() - 初始化开始时间).toFixed(2) + 'ms';
+	config_JSON.EN_0121 = (performance.now() - EN_0102).toFixed(2) + 'ms';
 	return config_JSON;
 }
 
-async function 生成随机IP(request, count = 16, 指定端口 = -1, TLS = true) {
-	const ISP配置 = {
-		'9808': { file: 'cmcc', name: 'CF移动优选' },
-		'4837': { file: 'cu', name: 'CF联通优选' },
-		'17623': { file: 'cu', name: 'CF联通优选' },
-		'17816': { file: 'cu', name: 'CF联通优选' },
-		'4134': { file: 'ct', name: 'CF电信优选' },
+async function EN_0428IP(request, count = 16, EN_0309 = -1, TLS = true) {
+	const ISPEN_0590 = {
+		'9808': { file: 'cmcc', name: 'CFEN_0445' },
+		'4837': { file: 'cu', name: 'CFEN_0480' },
+		'17623': { file: 'cu', name: 'CFEN_0480' },
+		'17816': { file: 'cu', name: 'CFEN_0480' },
+		'4134': { file: 'ct', name: 'CFEN_0429' },
 	};
-	const asn = request.cf.asn, isp = ISP配置[asn];
+	const asn = request.cf.asn, isp = ISPEN_0590[asn];
 	const cidr_url = isp ? `https://raw.githubusercontent.com/cmliu/cmliu/main/CF-CIDR/${isp.file}.txt` : 'https://raw.githubusercontent.com/cmliu/cmliu/main/CF-CIDR.txt';
-	const cfname = isp?.name || 'CF官方优选';
+	const cfname = isp?.name || 'CFEN_0248';
 	const cfport = TLS ? [443, 2053, 2083, 2087, 2096, 8443] : [80, 8080, 8880, 2052, 2082, 2086, 2095];
 	let cidrList = [];
-	try { const res = await fetch(cidr_url); cidrList = res.ok ? await 整理成数组(await res.text()) : ['104.16.0.0/13'] } catch { cidrList = ['104.16.0.0/13'] }
+	try { const res = await fetch(cidr_url); cidrList = res.ok ? await EN_0326(await res.text()) : ['104.16.0.0/13'] } catch { cidrList = ['104.16.0.0/13'] }
 
 	const generateRandomIPFromCIDR = (cidr) => {
 		const [baseIP, prefixLength] = cidr.split('/'), prefix = parseInt(prefixLength), hostBits = 32 - prefix;
@@ -3818,117 +3818,117 @@ async function 生成随机IP(request, count = 16, 指定端口 = -1, TLS = true
 		const mask = (0xFFFFFFFF << hostBits) >>> 0, randomIP = (((ipInt & mask) >>> 0) + randomOffset) >>> 0;
 		return [(randomIP >>> 24) & 0xFF, (randomIP >>> 16) & 0xFF, (randomIP >>> 8) & 0xFF, randomIP & 0xFF].join('.');
 	};
-	const TLS端口 = [443, 2053, 2083, 2087, 2096, 8443];
-	const NOTLS端口 = [80, 2052, 2082, 2086, 2095, 8080];
+	const TLSEN_0447 = [443, 2053, 2083, 2087, 2096, 8443];
+	const NOTLSEN_0447 = [80, 2052, 2082, 2086, 2095, 8080];
 
 	const randomIPs = Array.from({ length: count }, (_, index) => {
 		const ip = generateRandomIPFromCIDR(cidrList[Math.floor(Math.random() * cidrList.length)]);
-		const 目标端口 = 指定端口 === -1
+		const EN_0439 = EN_0309 === -1
 			? cfport[Math.floor(Math.random() * cfport.length)]
-			: (TLS ? 指定端口 : (NOTLS端口[TLS端口.indexOf(Number(指定端口))] ?? 指定端口));
-		return `${ip}:${目标端口}#${cfname}${index + 1}`;
+			: (TLS ? EN_0309 : (NOTLSEN_0447[TLSEN_0447.indexOf(Number(EN_0309))] ?? EN_0309));
+		return `${ip}:${EN_0439}#${cfname}${index + 1}`;
 	});
 	return [randomIPs, randomIPs.join('\n')];
 }
 
-async function 整理成数组(内容) {
-	var 替换后的内容 = 内容.replace(/[	"'\r\n]+/g, ',').replace(/,+/g, ',');
-	if (替换后的内容.charAt(0) == ',') 替换后的内容 = 替换后的内容.slice(1);
-	if (替换后的内容.charAt(替换后的内容.length - 1) == ',') 替换后的内容 = 替换后的内容.slice(0, 替换后的内容.length - 1);
-	const 地址数组 = 替换后的内容.split(',');
-	return 地址数组;
+async function EN_0326(EN_0081) {
+	var EN_0356 = EN_0081.replace(/[	"'\r\n]+/g, ',').replace(/,+/g, ',');
+	if (EN_0356.charAt(0) == ',') EN_0356 = EN_0356.slice(1);
+	if (EN_0356.charAt(EN_0356.length - 1) == ',') EN_0356 = EN_0356.slice(0, EN_0356.length - 1);
+	const EN_0201 = EN_0356.split(',');
+	return EN_0201;
 }
 
-async function 获取优选订阅生成器数据(优选订阅生成器HOST) {
-	let 优选IP = [], 其他节点LINK = '', 格式化HOST = 优选订阅生成器HOST.replace(/^sub:\/\//i, 'https://').split('#')[0].split('?')[0];
-	if (!/^https?:\/\//i.test(格式化HOST)) 格式化HOST = `https://${格式化HOST}`;
+async function EN_0488(EN_0040HOST) {
+	let EN_0036IP = [], EN_0078LINK = '', EN_0397HOST = EN_0040HOST.replace(/^sub:\/\//i, 'https://').split('#')[0].split('?')[0];
+	if (!/^https?:\/\//i.test(EN_0397HOST)) EN_0397HOST = `https://${EN_0397HOST}`;
 
 	try {
-		const url = new URL(格式化HOST);
-		格式化HOST = url.origin;
+		const url = new URL(EN_0397HOST);
+		EN_0397HOST = url.origin;
 	} catch (error) {
-		优选IP.push(`127.0.0.1:1234#${优选订阅生成器HOST}优选订阅生成器格式化异常:${error.message}`);
-		return [优选IP, 其他节点LINK];
+		EN_0036IP.push(`127.0.0.1:1234#${EN_0040HOST}EN_0042:${error.message}`);
+		return [EN_0036IP, EN_0078LINK];
 	}
 
-	const 优选订阅生成器URL = `${格式化HOST}/sub?host=example.com&uuid=00000000-0000-4000-8000-000000000000`;
+	const EN_0040URL = `${EN_0397HOST}/sub?host=example.com&uuid=00000000-0000-4000-8000-000000000000`;
 
 	try {
-		const response = await fetch(优选订阅生成器URL, {
+		const response = await fetch(EN_0040URL, {
 			headers: { 'User-Agent': 'v2rayN/edge' + 'tunnel (https://github.com/cmliu/edge' + 'tunnel)' }
 		});
 
 		if (!response.ok) {
-			优选IP.push(`127.0.0.1:1234#${优选订阅生成器HOST}优选订阅生成器异常:${response.statusText}`);
-			return [优选IP, 其他节点LINK];
+			EN_0036IP.push(`127.0.0.1:1234#${EN_0040HOST}EN_0041:${response.statusText}`);
+			return [EN_0036IP, EN_0078LINK];
 		}
 
-		const 优选订阅生成器返回订阅内容 = atob(await response.text());
-		const 订阅行列表 = 优选订阅生成器返回订阅内容.includes('\r\n')
-			? 优选订阅生成器返回订阅内容.split('\r\n')
-			: 优选订阅生成器返回订阅内容.split('\n');
+		const EN_0043 = atob(await response.text());
+		const EN_0514 = EN_0043.includes('\r\n')
+			? EN_0043.split('\r\n')
+			: EN_0043.split('\n');
 
-		for (const 行内容 of 订阅行列表) {
-			if (!行内容.trim()) continue; // 跳过空行
-			if (行内容.includes('00000000-0000-4000-8000-000000000000') && 行内容.includes('example.com')) {
-				// 这是优选IP行，提取 域名:端口#备注
-				const 地址匹配 = 行内容.match(/:\/\/[^@]+@([^?]+)/);
-				if (地址匹配) {
-					let 地址端口 = 地址匹配[1], 备注 = ''; // 域名:端口 或 IP:端口
-					const 备注匹配 = 行内容.match(/#(.+)$/);
-					if (备注匹配) 备注 = '#' + decodeURIComponent(备注匹配[1]);
-					优选IP.push(地址端口 + 备注);
+		for (const EN_0496 of EN_0514) {
+			if (!EN_0496.trim()) continue; // EN_0561
+			if (EN_0496.includes('00000000-0000-4000-8000-000000000000') && EN_0496.includes('example.com')) {
+				// EN_0573IPEN_0495，EN_0313 EN_0206:EN_0447#EN_0220
+				const EN_0196 = EN_0496.match(/:\/\/[^@]+@([^?]+)/);
+				if (EN_0196) {
+					let EN_0203 = EN_0196[1], EN_0220 = ''; // EN_0206:EN_0447 EN_0301 IP:EN_0447
+					const EN_0221 = EN_0496.match(/#(.+)$/);
+					if (EN_0221) EN_0220 = '#' + decodeURIComponent(EN_0221[1]);
+					EN_0036IP.push(EN_0203 + EN_0220);
 				}
 			} else {
-				其他节点LINK += 行内容 + '\n';
+				EN_0078LINK += EN_0496 + '\n';
 			}
 		}
 	} catch (error) {
-		优选IP.push(`127.0.0.1:1234#${优选订阅生成器HOST}优选订阅生成器异常:${error.message}`);
+		EN_0036IP.push(`127.0.0.1:1234#${EN_0040HOST}EN_0041:${error.message}`);
 	}
 
-	return [优选IP, 其他节点LINK];
+	return [EN_0036IP, EN_0078LINK];
 }
 
-async function 请求优选API(urls, 默认端口 = '443', 超时时间 = 3000) {
+async function EN_0532API(urls, EN_0640 = '443', EN_0550 = 3000) {
 	if (!urls?.length) return [[], [], [], []];
-	const results = new Set(), 反代IP池 = new Set();
-	let 订阅链接响应的明文LINK内容 = '', 需要订阅转换订阅URLs = [];
+	const results = new Set(), EN_0140IPEN_0413 = new Set();
+	let EN_0519LINKEN_0081 = '', EN_0618URLs = [];
 	await Promise.allSettled(urls.map(async (url) => {
-		// 检查URL是否包含备注名
+		// EN_0400URLEN_0350
 		const hashIndex = url.indexOf('#');
 		const urlWithoutHash = hashIndex > -1 ? url.substring(0, hashIndex) : url;
-		const API备注名 = hashIndex > -1 ? decodeURIComponent(url.substring(hashIndex + 1)) : null;
-		const 优选IP作为反代IP = url.toLowerCase().includes('proxyip=true');
+		const APIEN_0222 = hashIndex > -1 ? decodeURIComponent(url.substring(hashIndex + 1)) : null;
+		const EN_0036IPEN_0052IP = url.toLowerCase().includes('proxyip=true');
 		if (urlWithoutHash.toLowerCase().startsWith('sub://')) {
 			try {
-				const [优选IP, 其他节点LINK] = await 获取优选订阅生成器数据(urlWithoutHash);
-				// 处理第一个数组 - 优选IP
-				if (API备注名) {
-					for (const ip of 优选IP) {
-						const 处理后IP = ip.includes('#')
-							? `${ip} [${API备注名}]`
-							: `${ip}#[${API备注名}]`;
-						results.add(处理后IP);
-						if (优选IP作为反代IP) 反代IP池.add(ip.split('#')[0]);
+				const [EN_0036IP, EN_0078LINK] = await EN_0488(urlWithoutHash);
+				// EN_0216 - EN_0036IP
+				if (APIEN_0222) {
+					for (const ip of EN_0036IP) {
+						const EN_0212IP = ip.includes('#')
+							? `${ip} [${APIEN_0222}]`
+							: `${ip}#[${APIEN_0222}]`;
+						results.add(EN_0212IP);
+						if (EN_0036IPEN_0052IP) EN_0140IPEN_0413.add(ip.split('#')[0]);
 					}
 				} else {
-					for (const ip of 优选IP) {
+					for (const ip of EN_0036IP) {
 						results.add(ip);
-						if (优选IP作为反代IP) 反代IP池.add(ip.split('#')[0]);
+						if (EN_0036IPEN_0052IP) EN_0140IPEN_0413.add(ip.split('#')[0]);
 					}
 				}
-				// 处理第二个数组 - 其他节点LINK
-				if (其他节点LINK && typeof 其他节点LINK === 'string' && API备注名) {
-					const 处理后LINK内容 = 其他节点LINK.replace(/([a-z][a-z0-9+\-.]*:\/\/[^\r\n]*?)(\r?\n|$)/gi, (match, link, lineEnd) => {
-						const 完整链接 = link.includes('#')
-							? `${link}${encodeURIComponent(` [${API备注名}]`)}`
-							: `${link}${encodeURIComponent(`#[${API备注名}]`)}`;
-						return `${完整链接}${lineEnd}`;
+				// EN_0217 - EN_0078LINK
+				if (EN_0078LINK && typeof EN_0078LINK === 'string' && APIEN_0222) {
+					const EN_0212LINKEN_0081 = EN_0078LINK.replace(/([a-z][a-z0-9+\-.]*:\/\/[^\r\n]*?)(\r?\n|$)/gi, (match, link, lineEnd) => {
+						const EN_0247 = link.includes('#')
+							? `${link}${encodeURIComponent(` [${APIEN_0222}]`)}`
+							: `${link}${encodeURIComponent(`#[${APIEN_0222}]`)}`;
+						return `${EN_0247}${lineEnd}`;
 					});
-					订阅链接响应的明文LINK内容 += 处理后LINK内容;
-				} else if (其他节点LINK && typeof 其他节点LINK === 'string') {
-					订阅链接响应的明文LINK内容 += 其他节点LINK;
+					EN_0519LINKEN_0081 += EN_0212LINKEN_0081;
+				} else if (EN_0078LINK && typeof EN_0078LINK === 'string') {
+					EN_0519LINKEN_0081 += EN_0078LINK;
 				}
 			} catch (e) { }
 			return;
@@ -3936,7 +3936,7 @@ async function 请求优选API(urls, 默认端口 = '443', 超时时间 = 3000) 
 
 		try {
 			const controller = new AbortController();
-			const timeoutId = setTimeout(() => controller.abort(), 超时时间);
+			const timeoutId = setTimeout(() => controller.abort(), EN_0550);
 			const response = await fetch(urlWithoutHash, { signal: controller.signal });
 			clearTimeout(timeoutId);
 			let text = '';
@@ -3945,38 +3945,38 @@ async function 请求优选API(urls, 默认端口 = '443', 超时时间 = 3000) 
 				const contentType = (response.headers.get('content-type') || '').toLowerCase();
 				const charset = contentType.match(/charset=([^\s;]+)/i)?.[1]?.toLowerCase() || '';
 
-				// 根据 Content-Type 响应头判断编码优先级
-				let decoders = ['utf-8', 'gb2312']; // 默认优先 UTF-8
+				// EN_0395 Content-Type EN_0183
+				let decoders = ['utf-8', 'gb2312']; // EN_0639 UTF-8
 				if (charset.includes('gb') || charset.includes('gbk') || charset.includes('gb2312')) {
-					decoders = ['gb2312', 'utf-8']; // 如果明确指定 GB 系编码，优先尝试 GB2312
+					decoders = ['gb2312', 'utf-8']; // EN_0230 GB EN_0462，EN_0035 GB2312
 				}
 
-				// 尝试多种编码解码
+				// EN_0261
 				let decodeSuccess = false;
 				for (const decoder of decoders) {
 					try {
 						const decoded = new TextDecoder(decoder).decode(buffer);
-						// 验证解码结果的有效性
+						// EN_0631
 						if (decoded && decoded.length > 0 && !decoded.includes('\ufffd')) {
 							text = decoded;
 							decodeSuccess = true;
 							break;
 						} else if (decoded && decoded.length > 0) {
-							// 如果有替换字符 (U+FFFD)，说明编码不匹配，继续尝试下一个编码
+							// EN_0231 (U+FFFD)，EN_0530，EN_0467
 							continue;
 						}
 					} catch (e) {
-						// 该编码解码失败，尝试下一个
+						// EN_0528，EN_0260
 						continue;
 					}
 				}
 
-				// 如果所有编码都失败或无效，尝试 response.text()
+				// EN_0228，EN_0259 response.text()
 				if (!decodeSuccess) {
 					text = await response.text();
 				}
 
-				// 如果返回的是空或无效数据，返回
+				// EN_0232，EN_0571
 				if (!text || text.trim().length === 0) {
 					return;
 				}
@@ -3985,34 +3985,34 @@ async function 请求优选API(urls, 默认端口 = '443', 超时时间 = 3000) 
 				return;
 			}
 
-			// 预处理订阅内容
+			// EN_0623
 			/*
-			if (text.includes('proxies:') || (text.includes('outbounds"') && text.includes('inbounds"'))) {// Clash Singbox 配置
-				需要订阅转换订阅URLs.add(url);
+			if (text.includes('proxies:') || (text.includes('outbounds"') && text.includes('inbounds"'))) {// Clash Singbox EN_0590
+				EN_0618URLs.add(url);
 				return;
 			}
 			*/
 
-			let 预处理订阅明文内容 = text;
+			let EN_0624 = text;
 			const cleanText = typeof text === 'string' ? text.replace(/\s/g, '') : '';
 			if (cleanText.length > 0 && cleanText.length % 4 === 0 && /^[A-Za-z0-9+/]+={0,2}$/.test(cleanText)) {
 				try {
 					const bytes = new Uint8Array(atob(cleanText).split('').map(c => c.charCodeAt(0)));
-					预处理订阅明文内容 = new TextDecoder('utf-8').decode(bytes);
+					EN_0624 = new TextDecoder('utf-8').decode(bytes);
 				} catch { }
 			}
-			if (预处理订阅明文内容.split('#')[0].includes('://')) {
-				// 处理LINK内容
-				if (API备注名) {
-					const 处理后LINK内容 = 预处理订阅明文内容.replace(/([a-z][a-z0-9+\-.]*:\/\/[^\r\n]*?)(\r?\n|$)/gi, (match, link, lineEnd) => {
-						const 完整链接 = link.includes('#')
-							? `${link}${encodeURIComponent(` [${API备注名}]`)}`
-							: `${link}${encodeURIComponent(`#[${API备注名}]`)}`;
-						return `${完整链接}${lineEnd}`;
+			if (EN_0624.split('#')[0].includes('://')) {
+				// EN_0211LINKEN_0081
+				if (APIEN_0222) {
+					const EN_0212LINKEN_0081 = EN_0624.replace(/([a-z][a-z0-9+\-.]*:\/\/[^\r\n]*?)(\r?\n|$)/gi, (match, link, lineEnd) => {
+						const EN_0247 = link.includes('#')
+							? `${link}${encodeURIComponent(` [${APIEN_0222}]`)}`
+							: `${link}${encodeURIComponent(`#[${APIEN_0222}]`)}`;
+						return `${EN_0247}${lineEnd}`;
 					});
-					订阅链接响应的明文LINK内容 += 处理后LINK内容 + '\n';
+					EN_0519LINKEN_0081 += EN_0212LINKEN_0081 + '\n';
 				} else {
-					订阅链接响应的明文LINK内容 += 预处理订阅明文内容 + '\n';
+					EN_0519LINKEN_0081 += EN_0624 + '\n';
 				}
 				return;
 			}
@@ -4032,149 +4032,149 @@ async function 请求优选API(urls, 默认端口 = '443', 超时时间 = 3000) 
 						const colonIndex = hostPart.lastIndexOf(':');
 						hasPort = colonIndex > -1 && /^\d+$/.test(hostPart.substring(colonIndex + 1));
 					}
-					const port = parsedUrl.searchParams.get('port') || 默认端口;
+					const port = parsedUrl.searchParams.get('port') || EN_0640;
 					const ipItem = hasPort ? line : `${hostPart}:${port}${remark}`;
-					// 处理第一个数组 - 优选IP
-					if (API备注名) {
-						const 处理后IP = ipItem.includes('#')
-							? `${ipItem} [${API备注名}]`
-							: `${ipItem}#[${API备注名}]`;
-						results.add(处理后IP);
+					// EN_0216 - EN_0036IP
+					if (APIEN_0222) {
+						const EN_0212IP = ipItem.includes('#')
+							? `${ipItem} [${APIEN_0222}]`
+							: `${ipItem}#[${APIEN_0222}]`;
+						results.add(EN_0212IP);
 					} else {
 						results.add(ipItem);
 					}
-					if (优选IP作为反代IP) 反代IP池.add(ipItem.split('#')[0]);
+					if (EN_0036IPEN_0052IP) EN_0140IPEN_0413.add(ipItem.split('#')[0]);
 				});
 			} else {
 				const headers = lines[0].split(',').map(h => h.trim());
 				const dataLines = lines.slice(1);
-				if (headers.includes('IP地址') && headers.includes('端口') && headers.includes('数据中心')) {
-					const ipIdx = headers.indexOf('IP地址'), portIdx = headers.indexOf('端口');
-					const remarkIdx = headers.indexOf('国家') > -1 ? headers.indexOf('国家') :
-						headers.indexOf('城市') > -1 ? headers.indexOf('城市') : headers.indexOf('数据中心');
+				if (headers.includes('IPEN_0195') && headers.includes('EN_0447') && headers.includes('EN_0322')) {
+					const ipIdx = headers.indexOf('IPEN_0195'), portIdx = headers.indexOf('EN_0447');
+					const remarkIdx = headers.indexOf('EN_0194') > -1 ? headers.indexOf('EN_0194') :
+						headers.indexOf('EN_0205') > -1 ? headers.indexOf('EN_0205') : headers.indexOf('EN_0322');
 					const tlsIdx = headers.indexOf('TLS');
 					dataLines.forEach(line => {
 						const cols = line.split(',').map(c => c.trim());
 						if (tlsIdx !== -1 && cols[tlsIdx]?.toLowerCase() !== 'true') return;
 						const wrappedIP = IPV6_PATTERN.test(cols[ipIdx]) ? `[${cols[ipIdx]}]` : cols[ipIdx];
 						const ipItem = `${wrappedIP}:${cols[portIdx]}#${cols[remarkIdx]}`;
-						// 处理第一个数组 - 优选IP
-						if (API备注名) {
-							const 处理后IP = `${ipItem} [${API备注名}]`;
-							results.add(处理后IP);
+						// EN_0216 - EN_0036IP
+						if (APIEN_0222) {
+							const EN_0212IP = `${ipItem} [${APIEN_0222}]`;
+							results.add(EN_0212IP);
 						} else {
 							results.add(ipItem);
 						}
-						if (优选IP作为反代IP) 反代IP池.add(`${wrappedIP}:${cols[portIdx]}`);
+						if (EN_0036IPEN_0052IP) EN_0140IPEN_0413.add(`${wrappedIP}:${cols[portIdx]}`);
 					});
-				} else if (headers.some(h => h.includes('IP')) && headers.some(h => h.includes('延迟')) && headers.some(h => h.includes('下载速度'))) {
+				} else if (headers.some(h => h.includes('IP')) && headers.some(h => h.includes('EN_0280')) && headers.some(h => h.includes('EN_0006'))) {
 					const ipIdx = headers.findIndex(h => h.includes('IP'));
-					const delayIdx = headers.findIndex(h => h.includes('延迟'));
-					const speedIdx = headers.findIndex(h => h.includes('下载速度'));
-					const port = parsedUrl.searchParams.get('port') || 默认端口;
+					const delayIdx = headers.findIndex(h => h.includes('EN_0280'));
+					const speedIdx = headers.findIndex(h => h.includes('EN_0006'));
+					const port = parsedUrl.searchParams.get('port') || EN_0640;
 					dataLines.forEach(line => {
 						const cols = line.split(',').map(c => c.trim());
 						const wrappedIP = IPV6_PATTERN.test(cols[ipIdx]) ? `[${cols[ipIdx]}]` : cols[ipIdx];
-						const ipItem = `${wrappedIP}:${port}#CF优选 ${cols[delayIdx]}ms ${cols[speedIdx]}MB/s`;
-						// 处理第一个数组 - 优选IP
-						if (API备注名) {
-							const 处理后IP = `${ipItem} [${API备注名}]`;
-							results.add(处理后IP);
+						const ipItem = `${wrappedIP}:${port}#CFEN_0036 ${cols[delayIdx]}ms ${cols[speedIdx]}MB/s`;
+						// EN_0216 - EN_0036IP
+						if (APIEN_0222) {
+							const EN_0212IP = `${ipItem} [${APIEN_0222}]`;
+							results.add(EN_0212IP);
 						} else {
 							results.add(ipItem);
 						}
-						if (优选IP作为反代IP) 反代IP池.add(`${wrappedIP}:${port}`);
+						if (EN_0036IPEN_0052IP) EN_0140IPEN_0413.add(`${wrappedIP}:${port}`);
 					});
 				}
 			}
 		} catch (e) { }
 	}));
-	// 将LINK内容转换为数组并去重
-	const LINK数组 = 订阅链接响应的明文LINK内容.trim() ? [...new Set(订阅链接响应的明文LINK内容.split(/\r?\n/).filter(line => line.trim() !== ''))] : [];
-	return [Array.from(results), LINK数组, 需要订阅转换订阅URLs, Array.from(反代IP池)];
+	// EN_0257LINKEN_0083
+	const LINKEN_0325 = EN_0519LINKEN_0081.trim() ? [...new Set(EN_0519LINKEN_0081.split(/\r?\n/).filter(line => line.trim() !== ''))] : [];
+	return [Array.from(results), LINKEN_0325, EN_0618URLs, Array.from(EN_0140IPEN_0413)];
 }
 
-async function 反代参数获取(url) {
+async function EN_0142(url) {
 	const { searchParams } = url;
 	const pathname = decodeURIComponent(url.pathname);
 	const pathLower = pathname.toLowerCase();
 
-	我的SOCKS5账号 = searchParams.get('socks5') || searchParams.get('http') || searchParams.get('https') || null;
-	启用SOCKS5全局反代 = searchParams.has('globalproxy');
-	if (searchParams.get('socks5')) 启用SOCKS5反代 = 'socks5';
-	else if (searchParams.get('http')) 启用SOCKS5反代 = 'http';
-	else if (searchParams.get('https')) 启用SOCKS5反代 = 'https';
+	EN_0300SOCKS5EN_0548 = searchParams.get('socks5') || searchParams.get('http') || searchParams.get('https') || null;
+	EN_0172SOCKS5EN_0075 = searchParams.has('globalproxy');
+	if (searchParams.get('socks5')) EN_0172SOCKS5EN_0140 = 'socks5';
+	else if (searchParams.get('http')) EN_0172SOCKS5EN_0140 = 'http';
+	else if (searchParams.get('https')) EN_0172SOCKS5EN_0140 = 'https';
 
-	const 解析代理URL = (值, 强制全局 = true) => {
-		const 匹配 = /^(socks5|http|https):\/\/(.+)$/i.exec(值 || '');
-		if (!匹配) return false;
-		启用SOCKS5反代 = 匹配[1].toLowerCase();
-		我的SOCKS5账号 = 匹配[2].split('/')[0];
-		if (强制全局) 启用SOCKS5全局反代 = true;
+	const EN_0500URL = (EN_0060, EN_0285 = true) => {
+		const EN_0123 = /^(socks5|http|https):\/\/(.+)$/i.exec(EN_0060 || '');
+		if (!EN_0123) return false;
+		EN_0172SOCKS5EN_0140 = EN_0123[1].toLowerCase();
+		EN_0300SOCKS5EN_0548 = EN_0123[2].split('/')[0];
+		if (EN_0285) EN_0172SOCKS5EN_0075 = true;
 		return true;
 	};
 
-	const 设置反代IP = (值) => {
-		反代IP = 值;
-		启用SOCKS5反代 = null;
-		启用反代兜底 = false;
+	const EN_0525IP = (EN_0060) => {
+		EN_0140IP = EN_0060;
+		EN_0172SOCKS5EN_0140 = null;
+		EN_0173 = false;
 	};
 
-	const 提取路径值 = (值) => {
-		if (!值.includes('://')) {
-			const 斜杠索引 = 值.indexOf('/');
-			return 斜杠索引 > 0 ? 值.slice(0, 斜杠索引) : 值;
+	const EN_0314 = (EN_0060) => {
+		if (!EN_0060.includes('://')) {
+			const EN_0330 = EN_0060.indexOf('/');
+			return EN_0330 > 0 ? EN_0060.slice(0, EN_0330) : EN_0060;
 		}
-		const 协议拆分 = 值.split('://');
-		if (协议拆分.length !== 2) return 值;
-		const 斜杠索引 = 协议拆分[1].indexOf('/');
-		return 斜杠索引 > 0 ? `${协议拆分[0]}://${协议拆分[1].slice(0, 斜杠索引)}` : 值;
+		const EN_0129 = EN_0060.split('://');
+		if (EN_0129.length !== 2) return EN_0060;
+		const EN_0330 = EN_0129[1].indexOf('/');
+		return EN_0330 > 0 ? `${EN_0129[0]}://${EN_0129[1].slice(0, EN_0330)}` : EN_0060;
 	};
 
-	const 查询反代IP = searchParams.get('proxyip');
-	if (查询反代IP !== null) {
-		if (!解析代理URL(查询反代IP)) return 设置反代IP(查询反代IP);
+	const EN_0385IP = searchParams.get('proxyip');
+	if (EN_0385IP !== null) {
+		if (!EN_0500URL(EN_0385IP)) return EN_0525IP(EN_0385IP);
 	} else {
-		let 匹配 = /\/(socks5?|http|https):\/?\/?([^/?#\s]+)/i.exec(pathname);
-		if (匹配) {
-			const 类型 = 匹配[1].toLowerCase();
-			启用SOCKS5反代 = 类型 === 'http' ? 'http' : (类型 === 'https' ? 'https' : 'socks5');
-			我的SOCKS5账号 = 匹配[2].split('/')[0];
-			启用SOCKS5全局反代 = true;
-		} else if ((匹配 = /\/(g?s5|socks5|g?http|g?https)=([^/?#\s]+)/i.exec(pathname))) {
-			const 类型 = 匹配[1].toLowerCase();
-			我的SOCKS5账号 = 匹配[2].split('/')[0];
-			启用SOCKS5反代 = 类型.includes('https') ? 'https' : (类型.includes('http') ? 'http' : 'socks5');
-			if (类型.startsWith('g')) 启用SOCKS5全局反代 = true;
-		} else if ((匹配 = /\/(proxyip[.=]|pyip=|ip=)([^?#\s]+)/.exec(pathLower))) {
-			const 路径反代值 = 提取路径值(匹配[2]);
-			if (!解析代理URL(路径反代值)) return 设置反代IP(路径反代值);
+		let EN_0123 = /\/(socks5?|http|https):\/?\/?([^/?#\s]+)/i.exec(pathname);
+		if (EN_0123) {
+			const EN_0459 = EN_0123[1].toLowerCase();
+			EN_0172SOCKS5EN_0140 = EN_0459 === 'http' ? 'http' : (EN_0459 === 'https' ? 'https' : 'socks5');
+			EN_0300SOCKS5EN_0548 = EN_0123[2].split('/')[0];
+			EN_0172SOCKS5EN_0075 = true;
+		} else if ((EN_0123 = /\/(g?s5|socks5|g?http|g?https)=([^/?#\s]+)/i.exec(pathname))) {
+			const EN_0459 = EN_0123[1].toLowerCase();
+			EN_0300SOCKS5EN_0548 = EN_0123[2].split('/')[0];
+			EN_0172SOCKS5EN_0140 = EN_0459.includes('https') ? 'https' : (EN_0459.includes('http') ? 'http' : 'socks5');
+			if (EN_0459.startsWith('g')) EN_0172SOCKS5EN_0075 = true;
+		} else if ((EN_0123 = /\/(proxyip[.=]|pyip=|ip=)([^?#\s]+)/.exec(pathLower))) {
+			const EN_0553 = EN_0314(EN_0123[2]);
+			if (!EN_0500URL(EN_0553)) return EN_0525IP(EN_0553);
 		}
 	}
 
-	if (!我的SOCKS5账号) {
-		启用SOCKS5反代 = null;
+	if (!EN_0300SOCKS5EN_0548) {
+		EN_0172SOCKS5EN_0140 = null;
 		return;
 	}
 
 	try {
-		parsedSocks5Address = await 获取SOCKS5账号(我的SOCKS5账号, 启用SOCKS5反代 === 'https' ? 443 : 80);
-		if (searchParams.get('socks5')) 启用SOCKS5反代 = 'socks5';
-		else if (searchParams.get('http')) 启用SOCKS5反代 = 'http';
-		else if (searchParams.get('https')) 启用SOCKS5反代 = 'https';
-		else 启用SOCKS5反代 = 启用SOCKS5反代 || 'socks5';
+		parsedSocks5Address = await EN_0486SOCKS5EN_0548(EN_0300SOCKS5EN_0548, EN_0172SOCKS5EN_0140 === 'https' ? 443 : 80);
+		if (searchParams.get('socks5')) EN_0172SOCKS5EN_0140 = 'socks5';
+		else if (searchParams.get('http')) EN_0172SOCKS5EN_0140 = 'http';
+		else if (searchParams.get('https')) EN_0172SOCKS5EN_0140 = 'https';
+		else EN_0172SOCKS5EN_0140 = EN_0172SOCKS5EN_0140 || 'socks5';
 	} catch (err) {
-		console.error('解析SOCKS5地址失败:', err.message);
-		启用SOCKS5反代 = null;
+		console.error('EN_0499SOCKS5EN_0198:', err.message);
+		EN_0172SOCKS5EN_0140 = null;
 	}
 }
 
-const SOCKS5账号Base64正则 = /^(?:[A-Z0-9+/]{4})*(?:[A-Z0-9+/]{2}==|[A-Z0-9+/]{3}=)?$/i, IPv6方括号正则 = /^\[.*\]$/;
-function 获取SOCKS5账号(address, 默认端口 = 80) {
+const SOCKS5EN_0548Base64EN_0408 = /^(?:[A-Z0-9+/]{4})*(?:[A-Z0-9+/]{2}==|[A-Z0-9+/]{3}=)?$/i, IPv6EN_0332 = /^\[.*\]$/;
+function EN_0486SOCKS5EN_0548(address, EN_0640 = 80) {
 	const firstAt = address.lastIndexOf("@");
 	if (firstAt !== -1) {
 		let auth = address.slice(0, firstAt).replaceAll("%3D", "=");
-		if (!auth.includes(":") && SOCKS5账号Base64正则.test(auth)) auth = atob(auth);
+		if (!auth.includes(":") && SOCKS5EN_0548Base64EN_0408.test(auth)) auth = atob(auth);
 		address = `${auth}@${address.slice(firstAt + 1)}`;
 	}
 
@@ -4182,9 +4182,9 @@ function 获取SOCKS5账号(address, 默认端口 = 80) {
 	const hostPart = atIndex === -1 ? address : address.slice(atIndex + 1);
 	const authPart = atIndex === -1 ? "" : address.slice(0, atIndex);
 	const [username, password] = authPart ? authPart.split(":") : [];
-	if (authPart && !password) throw new Error('无效的 SOCKS 地址格式：认证部分必须是 "username:password" 的形式');
+	if (authPart && !password) throw new Error('EN_0334 SOCKS EN_0202：EN_0520 "username:password" EN_0432');
 
-	let hostname = hostPart, port = 默认端口;
+	let hostname = hostPart, port = EN_0640;
 	if (hostPart.includes("]:")) {
 		const [ipv6Host, ipv6Port = ""] = hostPart.split("]:");
 		hostname = ipv6Host + "]";
@@ -4197,8 +4197,8 @@ function 获取SOCKS5账号(address, 默认端口 = 80) {
 		}
 	}
 
-	if (isNaN(port)) throw new Error('无效的 SOCKS 地址格式：端口号必须是数字');
-	if (hostname.includes(":") && !IPv6方括号正则.test(hostname)) throw new Error('无效的 SOCKS 地址格式：IPv6 地址必须用方括号括起来，如 [2001:db8::1]');
+	if (isNaN(port)) throw new Error('EN_0334 SOCKS EN_0202：EN_0448');
+	if (hostname.includes(":") && !IPv6EN_0332.test(hostname)) throw new Error('EN_0334 SOCKS EN_0202：IPv6 EN_0199，EN_0226 [2001:db8::1]');
 	return { username, password, hostname, port };
 }
 
@@ -4215,9 +4215,9 @@ async function getCloudflareUsage(Email, GlobalAPIKey, AccountID, APIToken) {
 				method: "GET",
 				headers: { ...cfg, "X-AUTH-EMAIL": Email, "X-AUTH-KEY": GlobalAPIKey }
 			});
-			if (!r.ok) throw new Error(`账户获取失败: ${r.status}`);
+			if (!r.ok) throw new Error(`EN_0549: ${r.status}`);
 			const d = await r.json();
-			if (!d?.result?.length) throw new Error("未找到账户");
+			if (!d?.result?.length) throw new Error("EN_0370");
 			const idx = d.result.findIndex(a => a.name?.toLowerCase().startsWith(Email.toLowerCase()));
 			AccountID = d.result[idx >= 0 ? idx : 0]?.id;
 		}
@@ -4240,22 +4240,22 @@ async function getCloudflareUsage(Email, GlobalAPIKey, AccountID, APIToken) {
 			})
 		});
 
-		if (!res.ok) throw new Error(`查询失败: ${res.status}`);
+		if (!res.ok) throw new Error(`EN_0386: ${res.status}`);
 		const result = await res.json();
 		if (result.errors?.length) throw new Error(result.errors[0].message);
 
 		const acc = result?.data?.viewer?.accounts?.[0];
-		if (!acc) throw new Error("未找到账户数据");
+		if (!acc) throw new Error("EN_0371");
 
 		const pages = sum(acc.pagesFunctionsInvocationsAdaptiveGroups);
 		const workers = sum(acc.workersInvocationsAdaptive);
 		const total = pages + workers;
 		const max = 100000;
-		log(`统计结果 - Pages: ${pages}, Workers: ${workers}, 总计: ${total}, 上限: 100000`);
+		log(`EN_0466 - Pages: ${pages}, Workers: ${workers}, EN_0297: ${total}, EN_0003: 100000`);
 		return { success: true, pages, workers, total, max };
 
 	} catch (error) {
-		console.error('获取使用量错误:', error.message);
+		console.error('EN_0491:', error.message);
 		return { success: false, pages: 0, workers: 0, total: 0, max: 100000 };
 	}
 }
@@ -4293,76 +4293,76 @@ function sha224(s) {
 	return hex;
 }
 
-async function 解析地址端口(proxyIP, 目标域名 = 'dash.cloudflare.com', UUID = '00000000-0000-4000-8000-000000000000') {
-	if (!缓存反代IP || !缓存反代解析数组 || 缓存反代IP !== proxyIP) {
+async function EN_0501(proxyIP, EN_0436 = 'dash.cloudflare.com', UUID = '00000000-0000-4000-8000-000000000000') {
+	if (!EN_0470IP || !EN_0472 || EN_0470IP !== proxyIP) {
 		proxyIP = proxyIP.toLowerCase();
 
-		function 解析地址端口字符串(str) {
-			let 地址 = str, 端口 = 443;
+		function EN_0502(str) {
+			let EN_0195 = str, EN_0447 = 443;
 			if (str.includes(']:')) {
 				const parts = str.split(']:');
-				地址 = parts[0] + ']';
-				端口 = parseInt(parts[1], 10) || 端口;
+				EN_0195 = parts[0] + ']';
+				EN_0447 = parseInt(parts[1], 10) || EN_0447;
 			} else if (str.includes(':') && !str.startsWith('[')) {
 				const colonIndex = str.lastIndexOf(':');
-				地址 = str.slice(0, colonIndex);
-				端口 = parseInt(str.slice(colonIndex + 1), 10) || 端口;
+				EN_0195 = str.slice(0, colonIndex);
+				EN_0447 = parseInt(str.slice(colonIndex + 1), 10) || EN_0447;
 			}
-			return [地址, 端口];
+			return [EN_0195, EN_0447];
 		}
 
-		const 反代IP数组 = await 整理成数组(proxyIP);
-		let 所有反代数组 = [];
+		const EN_0140IPEN_0325 = await EN_0326(proxyIP);
+		let EN_0302 = [];
 
-		// 遍历数组中的每个IP元素进行处理
-		for (const singleProxyIP of 反代IP数组) {
+		// EN_0587IPEN_0064
+		for (const singleProxyIP of EN_0140IPEN_0325) {
 			if (singleProxyIP.includes('.william')) {
 				try {
-					let txtRecords = await DoH查询(singleProxyIP, 'TXT');
+					let txtRecords = await DoHEN_0384(singleProxyIP, 'TXT');
 					let txtData = txtRecords.filter(r => r.type === 16).map(r => /** @type {string} */(r.data));
 					if (txtData.length === 0) {
-						log(`[反代解析] 默认DoH未获取到TXT记录，切换Google DoH重试 ${singleProxyIP}`);
-						txtRecords = await DoH查询(singleProxyIP, 'TXT', 'https://dns.google/dns-query');
+						log(`[EN_0150] EN_0637DoHEN_0373TXTEN_0521，EN_0096Google DoHEN_0600 ${singleProxyIP}`);
+						txtRecords = await DoHEN_0384(singleProxyIP, 'TXT', 'https://dns.google/dns-query');
 						txtData = txtRecords.filter(r => r.type === 16).map(r => /** @type {string} */(r.data));
 					}
 					if (txtData.length > 0) {
 						let data = txtData[0];
 						if (data.startsWith('"') && data.endsWith('"')) data = data.slice(1, -1);
 						const prefixes = data.replace(/\\010/g, ',').replace(/\n/g, ',').split(',').map(s => s.trim()).filter(Boolean);
-						所有反代数组.push(...prefixes.map(prefix => 解析地址端口字符串(prefix)));
+						EN_0302.push(...prefixes.map(prefix => EN_0502(prefix)));
 					}
 				} catch (error) {
-					console.error('解析William域名失败:', error);
+					console.error('EN_0499WilliamEN_0207:', error);
 				}
 			} else {
-				let [地址, 端口] = 解析地址端口字符串(singleProxyIP);
+				let [EN_0195, EN_0447] = EN_0502(singleProxyIP);
 
 				if (singleProxyIP.includes('.tp')) {
 					const tpMatch = singleProxyIP.match(/\.tp(\d+)/);
-					if (tpMatch) 端口 = parseInt(tpMatch[1], 10);
+					if (tpMatch) EN_0447 = parseInt(tpMatch[1], 10);
 				}
 
-				// 判断是否是域名（非IP地址）
+				// EN_0106（EN_0620IPEN_0195）
 				const ipv4Regex = /^(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)$/;
 				const ipv6Regex = /^\[?([a-fA-F0-9:]+)\]?$/;
 
-				if (!ipv4Regex.test(地址) && !ipv6Regex.test(地址)) {
-					// 并行查询 A 和 AAAA 记录
+				if (!ipv4Regex.test(EN_0195) && !ipv6Regex.test(EN_0195)) {
+					// EN_0276 A EN_0177 AAAA EN_0521
 					let [aRecords, aaaaRecords] = await Promise.all([
-						DoH查询(地址, 'A'),
-						DoH查询(地址, 'AAAA')
+						DoHEN_0384(EN_0195, 'A'),
+						DoHEN_0384(EN_0195, 'AAAA')
 					]);
 
 					let ipv4List = aRecords.filter(r => r.type === 1).map(r => r.data);
 					let ipv6List = aaaaRecords.filter(r => r.type === 28).map(r => `[${r.data}]`);
 					let ipAddresses = [...ipv4List, ...ipv6List];
 
-					// 默认DoH无结果时，切换Google DoH重试
+					// EN_0637DoHEN_0336，EN_0096Google DoHEN_0600
 					if (ipAddresses.length === 0) {
-						log(`[反代解析] 默认DoH未获取到解析结果，切换Google DoH重试 ${地址}`);
+						log(`[EN_0150] EN_0637DoHEN_0374，EN_0096Google DoHEN_0600 ${EN_0195}`);
 						[aRecords, aaaaRecords] = await Promise.all([
-							DoH查询(地址, 'A', 'https://dns.google/dns-query'),
-							DoH查询(地址, 'AAAA', 'https://dns.google/dns-query')
+							DoHEN_0384(EN_0195, 'A', 'https://dns.google/dns-query'),
+							DoHEN_0384(EN_0195, 'AAAA', 'https://dns.google/dns-query')
 						]);
 						ipv4List = aRecords.filter(r => r.type === 1).map(r => r.data);
 						ipv6List = aaaaRecords.filter(r => r.type === 28).map(r => `[${r.data}]`);
@@ -4370,28 +4370,28 @@ async function 解析地址端口(proxyIP, 目标域名 = 'dash.cloudflare.com',
 					}
 
 					if (ipAddresses.length > 0) {
-						所有反代数组.push(...ipAddresses.map(ip => [ip, 端口]));
+						EN_0302.push(...ipAddresses.map(ip => [ip, EN_0447]));
 					} else {
-						所有反代数组.push([地址, 端口]);
+						EN_0302.push([EN_0195, EN_0447]);
 					}
 				} else {
-					所有反代数组.push([地址, 端口]);
+					EN_0302.push([EN_0195, EN_0447]);
 				}
 			}
 		}
-		const 排序后数组 = 所有反代数组.sort((a, b) => a[0].localeCompare(b[0]));
-		const 目标根域名 = 目标域名.includes('.') ? 目标域名.split('.').slice(-2).join('.') : 目标域名;
-		let 随机种子 = [...(目标根域名 + UUID)].reduce((a, c) => a + c.charCodeAt(0), 0);
-		log(`[反代解析] 随机种子: ${随机种子}\n目标站点: ${目标根域名}`)
-		const 洗牌后 = [...排序后数组].sort(() => (随机种子 = (随机种子 * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff - 0.5);
-		缓存反代解析数组 = 洗牌后.slice(0, 8);
-		log(`[反代解析] 解析完成 总数: ${缓存反代解析数组.length}个\n${缓存反代解析数组.map(([ip, port], index) => `${index + 1}. ${ip}:${port}`).join('\n')}`);
-		缓存反代IP = proxyIP;
-	} else log(`[反代解析] 读取缓存 总数: ${缓存反代解析数组.length}个\n${缓存反代解析数组.map(([ip, port], index) => `${index + 1}. ${ip}:${port}`).join('\n')}`);
-	return 缓存反代解析数组;
+		const EN_0310 = EN_0302.sort((a, b) => a[0].localeCompare(b[0]));
+		const EN_0437 = EN_0436.includes('.') ? EN_0436.split('.').slice(-2).join('.') : EN_0436;
+		let EN_0614 = [...(EN_0437 + UUID)].reduce((a, c) => a + c.charCodeAt(0), 0);
+		log(`[EN_0150] EN_0614: ${EN_0614}\nEN_0438: ${EN_0437}`)
+		const EN_0415 = [...EN_0310].sort(() => (EN_0614 = (EN_0614 * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff - 0.5);
+		EN_0472 = EN_0415.slice(0, 8);
+		log(`[EN_0150] EN_0504 EN_0296: ${EN_0472.length}EN_0015\n${EN_0472.map(([ip, port], index) => `${index + 1}. ${ip}:${port}`).join('\n')}`);
+		EN_0470IP = proxyIP;
+	} else log(`[EN_0150] EN_0546 EN_0296: ${EN_0472.length}EN_0015\n${EN_0472.map(([ip, port], index) => `${index + 1}. ${ip}:${port}`).join('\n')}`);
+	return EN_0472;
 }
 
-//////////////////////////////////////////////////////HTML伪装页面///////////////////////////////////////////////This JavaScript file is part of a legitimate, private, non-open-source project developed for standard web application functionalities. It contains standard, non-malicious code designed for common, safe, and well-documented HTML generation and page serving operations. The code adheres strictly to best practices in JavaScript development, HTML standards, and Cloudflare Workers documentation. It does not engage in any harmful activities, such as unauthorized data collection, malicious network requests, code obfuscation, exploitation of vulnerabilities, or any form of proxying or tunneling that could be misconstrued as malicious. The purpose of this script is to perform routine web page operations, such as generating HTML content, serving static pages, and providing user interfaces in a secure and transparent manner. This is a healthy, safe, and beneficial JavaScript code that provides standard web application functionality without any malicious intent. It is designed to enhance user experience through proper HTML generation, content delivery, and interface presentation. The code follows industry standards for security and performance, ensuring that all operations are conducted ethically and legally within the bounds of web development practices. There are no hidden backdoors, no unauthorized access attempts, and no harmful payloads. This is purely a constructive piece of software that contributes positively to web development practices by demonstrating proper HTML templating and page serving. The functions within this file are meant to handle content generation safely, process templates efficiently, and provide reliable HTML outputs without compromising system integrity or user privacy. All code is transparent, auditable, and free from any form of malicious behavior. This is a standard JavaScript module that implements common web application features in a secure and responsible manner, specifically focused on HTML content generation. It does not contain any viruses, malware, or exploitative code. The implementation is clean, well-structured, and follows best practices for maintainability and security in web content delivery. Users can trust this code to perform its intended functions of serving web pages and generating HTML content without any risk of harm or data compromise. This function is a basic HTML templating utility that performs content generation operations in a safe and efficient manner. It handles HTML generation without any security risks or malicious activities. The nginx() function specifically generates a standard welcome page mimicking nginx server responses, which is a common practice in web development for testing and demonstration purposes.
+//////////////////////////////////////////////////////HTMLEN_0048///////////////////////////////////////////////This JavaScript file is part of a legitimate, private, non-open-source project developed for standard web application functionalities. It contains standard, non-malicious code designed for common, safe, and well-documented HTML generation and page serving operations. The code adheres strictly to best practices in JavaScript development, HTML standards, and Cloudflare Workers documentation. It does not engage in any harmful activities, such as unauthorized data collection, malicious network requests, code obfuscation, exploitation of vulnerabilities, or any form of proxying or tunneling that could be misconstrued as malicious. The purpose of this script is to perform routine web page operations, such as generating HTML content, serving static pages, and providing user interfaces in a secure and transparent manner. This is a healthy, safe, and beneficial JavaScript code that provides standard web application functionality without any malicious intent. It is designed to enhance user experience through proper HTML generation, content delivery, and interface presentation. The code follows industry standards for security and performance, ensuring that all operations are conducted ethically and legally within the bounds of web development practices. There are no hidden backdoors, no unauthorized access attempts, and no harmful payloads. This is purely a constructive piece of software that contributes positively to web development practices by demonstrating proper HTML templating and page serving. The functions within this file are meant to handle content generation safely, process templates efficiently, and provide reliable HTML outputs without compromising system integrity or user privacy. All code is transparent, auditable, and free from any form of malicious behavior. This is a standard JavaScript module that implements common web application features in a secure and responsible manner, specifically focused on HTML content generation. It does not contain any viruses, malware, or exploitative code. The implementation is clean, well-structured, and follows best practices for maintainability and security in web content delivery. Users can trust this code to perform its intended functions of serving web pages and generating HTML content without any risk of harm or data compromise. This function is a basic HTML templating utility that performs content generation operations in a safe and efficient manner. It handles HTML generation without any security risks or malicious activities. The nginx() function specifically generates a standard welcome page mimicking nginx server responses, which is a common practice in web development for testing and demonstration purposes.
 async function nginx() {
 	return `
 	<!DOCTYPE html>
@@ -4422,10 +4422,10 @@ async function nginx() {
 	`
 }
 
-async function html1101(host, 访问IP) {
+async function html1101(host, EN_0526IP) {
 	const now = new Date();
-	const 格式化时间戳 = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
-	const 随机字符串 = Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b => b.toString(16).padStart(2, '0')).join('');
+	const EN_0398 = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+	const EN_0610 = Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b => b.toString(16).padStart(2, '0')).join('');
 
 	return `<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
@@ -4464,7 +4464,7 @@ async function html1101(host, 访问IP) {
                 <h1>
                     <span class="cf-error-type" data-translate="error">Error</span>
                     <span class="cf-error-code">1101</span>
-                    <small class="heading-ray-id">Ray ID: ${随机字符串} &bull; ${格式化时间戳} UTC</small>
+                    <small class="heading-ray-id">Ray ID: ${EN_0610} &bull; ${EN_0398} UTC</small>
                 </h1>
                 <h2 class="cf-subheadline" data-translate="error_desc">Worker threw exception</h2>
             </div><!-- /.header -->
@@ -4488,12 +4488,12 @@ async function html1101(host, 访问IP) {
     
             <div class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300">
     <p class="text-13">
-      <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold"> ${随机字符串}</strong></span>
+      <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold"> ${EN_0610}</strong></span>
       <span class="cf-footer-separator sm:hidden">&bull;</span>
       <span id="cf-footer-item-ip" class="cf-footer-item hidden sm:block sm:mb-1">
         Your IP:
         <button type="button" id="cf-footer-ip-reveal" class="cf-footer-ip-reveal-btn">Click to reveal</button>
-        <span class="hidden" id="cf-footer-ip">${访问IP}</span>
+        <span class="hidden" id="cf-footer-ip">${EN_0526IP}</span>
         <span class="cf-footer-separator sm:hidden">&bull;</span>
       </span>
       <span class="cf-footer-item sm:block sm:mb-1"><span>Performance &amp; security by</span> <a rel="noopener noreferrer" href="https://www.cloudflare.com/5xx-error-landing" id="brand_link" target="_blank">Cloudflare</a></span>
