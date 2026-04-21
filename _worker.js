@@ -3321,7 +3321,7 @@ async function EN_0538(env, request, EN_0526IP, EN_0541 = "Get_SUB", config_JSON
 				const TG_TXT = await env.KV.get('tg.json');
 				const TG_JSON = JSON.parse(TG_TXT);
 				if (TG_JSON?.BotToken && TG_JSON?.ChatID) {
-					const EN_0539 = new Date(EN_0338.TIME).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
+					const EN_0539 = new Date(EN_0338.TIME).toLocaleString('en-US', { timeZone: 'UTC' });
 					const EN_0531URL = new URL(EN_0338.URL);
 					const msg = `<b>#${config_JSON.EN_0039.SUBNAME} EN_0341</b>\n\n` +
 						`📌 <b>EN_0459：</b>#${EN_0338.TYPE}\n` +
@@ -4496,8 +4496,6 @@ async function html1101(host, EN_0526IP) {
         <span class="hidden" id="cf-footer-ip">${EN_0526IP}</span>
         <span class="cf-footer-separator sm:hidden">&bull;</span>
       </span>
-      <span class="cf-footer-item sm:block sm:mb-1"><span>Performance &amp; security by</span> <a rel="noopener noreferrer" href="https://www.cloudflare.com/5xx-error-landing" id="brand_link" target="_blank">Cloudflare</a></span>
-      
     </p>
     <script>(function(){function d(){var b=a.getElementById("cf-footer-item-ip"),c=a.getElementById("cf-footer-ip-reveal");b&&"classList"in b&&(b.classList.remove("hidden"),c.addEventListener("click",function(){c.classList.add("hidden");a.getElementById("cf-footer-ip").classList.remove("hidden")}))}var a=document;document.addEventListener&&a.addEventListener("DOMContentLoaded",d)})();</script>
   </div><!-- /.error-footer -->
