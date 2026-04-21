@@ -14,7 +14,7 @@ export default {
 		const UA = request.headers.get('User-Agent') || 'null';
 		const upgradeHeader = (request.headers.get('Upgrade') || '').toLowerCase(), contentType = (request.headers.get('content-type') || '').toLowerCase();
 		const EN_0458 = env.ADMIN || env.admin || env.PASSWORD || env.password || env.pswd || env.TOKEN || env.KEY || env.UUID || env.uuid;
-		const EN_0119 = env.KEY || 'EN_0122，EN_0366KEYEN_0575';
+		const EN_0119 = env.KEY || 'EN_0122,EN_0366KEYEN_0575';
 		const userIDMD5 = await MD5MD5(EN_0458 + EN_0119);
 		const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 		const envUUID = env.UUID || env.uuid;
@@ -51,7 +51,7 @@ export default {
 			if (!EN_0458) return fetch(PagesEN_0619 + '/noADMIN').then(r => { const headers = new Headers(r.headers); headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate'); headers.set('Pragma', 'no-cache'); headers.set('Expires', '0'); return new Response(r.body, { status: 404, statusText: r.statusText, headers }) });
 			if (env.KV && typeof env.KV.get === 'function') {
 				const EN_0127 = url.pathname.slice(1);
-				if (EN_0127 === EN_0119 && EN_0119 !== 'EN_0122，EN_0366KEYEN_0575') {//EN_0295
+				if (EN_0127 === EN_0119 && EN_0119 !== 'EN_0122,EN_0366KEYEN_0575') {//EN_0295
 					const params = new URLSearchParams(url.search);
 					params.set('token', await MD5MD5(host + userID));
 					return new Response('EN_0597...', { status: 302, headers: { 'Location': `/sub?${params.toString()}` } });
@@ -64,7 +64,7 @@ export default {
 						const params = new URLSearchParams(formData);
 						const EN_0568 = params.get('password');
 						if (EN_0568 === EN_0458) {
-							// EN_0254，EN_0524cookieEN_0278
+							// EN_0254,EN_0524cookieEN_0278
 							const EN_0178 = new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							EN_0178.headers.set('Set-Cookie', `auth=${await MD5MD5(UA + EN_0119 + EN_0458)}; Path=/; Max-Age=86400; HttpOnly; Secure; SameSite=Strict`);
 							return EN_0178;
@@ -74,7 +74,7 @@ export default {
 				} else if (EN_0527 === 'admin' || EN_0527.startsWith('admin/')) {//EN_0629cookieEN_0167
 					const cookies = request.headers.get('Cookie') || '';
 					const authCookie = cookies.split(';').find(c => c.trim().startsWith('auth='))?.split('=')[1];
-					// EN_0414cookieEN_0301cookieEN_0601，EN_0558/loginEN_0621
+					// EN_0414cookieEN_0301cookieEN_0601,EN_0558/loginEN_0621
 					if (!authCookie || authCookie !== await MD5MD5(UA + EN_0119 + EN_0458)) return new Response('EN_0597...', { status: 302, headers: { 'Location': '/login' } });
 					if (EN_0527 === 'admin/log.json') {// EN_0545
 						const EN_0545 = await env.KV.get('log.json') || '[]';
@@ -84,7 +84,7 @@ export default {
 							const Usage_JSON = await getCloudflareUsage(url.searchParams.get('Email'), url.searchParams.get('GlobalAPIKey'), url.searchParams.get('AccountID'), url.searchParams.get('APIToken'));
 							return new Response(JSON.stringify(Usage_JSON, null, 2), { status: 200, headers: { 'Content-Type': 'application/json' } });
 						} catch (err) {
-							const errorResponse = { msg: 'EN_0391，EN_0224：' + err.message, error: err.message };
+							const errorResponse = { msg: 'EN_0391,EN_0224:' + err.message, error: err.message };
 							return new Response(JSON.stringify(errorResponse, null, 2), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 						}
 					} else if (EN_0127 === 'admin/getADDAPI') {// EN_0630API
@@ -97,7 +97,7 @@ export default {
 								EN_0036APIEN_0431IP = EN_0036APIEN_0431IP.map(item => item.replace(/#(.+)$/, (_, remark) => '#' + decodeURIComponent(remark)));
 								return new Response(JSON.stringify({ success: true, data: EN_0036APIEN_0431IP }, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							} catch (err) {
-								const errorResponse = { msg: 'EN_0630APIEN_0223，EN_0224：' + err.message, error: err.message };
+								const errorResponse = { msg: 'EN_0630APIEN_0223,EN_0224:' + err.message, error: err.message };
 								return new Response(JSON.stringify(errorResponse, null, 2), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
 						}
@@ -176,10 +176,10 @@ export default {
 							config_JSON.init = 'EN_0593';
 							return new Response(JSON.stringify(config_JSON, null, 2), { status: 200, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 						} catch (err) {
-							const errorResponse = { msg: 'EN_0595，EN_0224：' + err.message, error: err.message };
+							const errorResponse = { msg: 'EN_0595,EN_0224:' + err.message, error: err.message };
 							return new Response(JSON.stringify(errorResponse, null, 2), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 						}
-					} else if (request.method === 'POST') {// EN_0211 KV EN_0317（POST EN_0531）
+					} else if (request.method === 'POST') {// EN_0211 KV EN_0317(POST EN_0531)
 						if (EN_0527 === 'admin/config.json') { // EN_0053config.jsonEN_0590
 							try {
 								const newConfig = await request.json();
@@ -247,9 +247,9 @@ export default {
 								return new Response(JSON.stringify({ error: 'EN_0055IPEN_0223: ' + error.message }), { status: 500, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
 							}
 						} else return new Response(JSON.stringify({ error: 'EN_0008POSTEN_0542' }), { status: 404, headers: { 'Content-Type': 'application/json;charset=utf-8' } });
-					} else if (EN_0527 === 'admin/config.json') {// EN_0211 admin/config.json EN_0531，EN_0571JSON
+					} else if (EN_0527 === 'admin/config.json') {// EN_0211 admin/config.json EN_0531,EN_0571JSON
 						return new Response(JSON.stringify(config_JSON, null, 2), { status: 200, headers: { 'Content-Type': 'application/json' } });
-					} else if (EN_0127 === 'admin/ADD.txt') {// EN_0211 admin/ADD.txt EN_0531，EN_0572IP
+					} else if (EN_0127 === 'admin/ADD.txt') {// EN_0211 admin/ADD.txt EN_0531,EN_0572IP
 						let EN_0376IP = await env.KV.get('ADD.txt') || 'null';
 						if (EN_0376IP == 'null') EN_0376IP = (await EN_0428IP(request, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0613, config_JSON.EN_0039.EN_0375IPEN_0279.EN_0309, (config_JSON.EN_0130 === 'ss' ? config_JSON.SS.TLS : true)))[1];
 						return new Response(EN_0376IP, { status: 200, headers: { 'Content-Type': 'text/plain;charset=utf-8', 'asn': request.cf.asn } });
@@ -371,7 +371,7 @@ export default {
 									EN_0484 = match[2] ? match[2] : (EN_0130 === 'ss' && !config_JSON.SS.TLS) ? '80' : '443';  // EN_0447,TLSEN_0637443 noTLSEN_063780
 									EN_0483 = match[3] || EN_0482;  // EN_0220,EN_0638
 								} else {
-									// EN_0010，EN_0560null
+									// EN_0010,EN_0560null
 									console.warn(`[EN_0511] EN_0009IPEN_0399: ${EN_0136}`);
 									return null;
 								}
@@ -399,9 +399,9 @@ export default {
 								if (response.ok) {
 									EN_0511 = await response.text();
 									if (url.searchParams.has('surge') || ua.includes('surge')) EN_0511 = SurgeEN_0518(EN_0511, url.protocol + '//' + url.host + '/sub?token=' + EN_0510TOKEN + '&surge', config_JSON);
-								} else return new Response('EN_0516：' + response.statusText, { status: response.status });
+								} else return new Response('EN_0516:' + response.statusText, { status: response.status });
 							} catch (error) {
-								return new Response('EN_0516：' + error.message, { status: 403 });
+								return new Response('EN_0516:' + error.message, { status: 403 });
 							}
 						}
 
@@ -1045,7 +1045,7 @@ async function EN_0211WSEN_0531(request, yourUUID, url) {
 				closeSocketQuietly(serverSock);
 			});
 
-			// SS EN_0406 sec-websocket-protocol early-data，EN_0588（EN_0226 "binary"）EN_0529 base64 EN_0323 AEAD EN_0498。
+			// SS EN_0406 sec-websocket-protocol early-data,EN_0588(EN_0226 "binary")EN_0529 base64 EN_0323 AEAD EN_0498.
 			if (SSEN_0407EarlyData || !earlyDataHeader) return;
 			try {
 				const binaryString = atob(earlyDataHeader.replace(/-/g, '+').replace(/_/g, '/'));
@@ -1135,8 +1135,8 @@ async function EN_0211WSEN_0531(request, yourUUID, url) {
 								if (lengthPlain.byteLength !== 2) continue;
 								const payloadLength = (lengthPlain[0] << 8) | lengthPlain[1];
 								if (payloadLength < 0 || payloadLength > EN_0120.maxChunk) continue;
-								if (offset > 0) log(`[SSEN_0066] EN_0403 ${offset}B，EN_0273`);
-								if (EN_0120.method !== EN_0628.method) log(`[SSEN_0066] URL enc=${EN_0533 || EN_0628.method} EN_0012 ${EN_0120.method} EN_0007，EN_0272`);
+								if (offset > 0) log(`[SSEN_0066] EN_0403 ${offset}B,EN_0273`);
+								if (EN_0120.method !== EN_0628.method) log(`[SSEN_0066] URL enc=${EN_0533 || EN_0628.method} EN_0012 ${EN_0120.method} EN_0007,EN_0272`);
 								EN_0069.buffer = EN_0069.buffer.subarray(EN_0104);
 								EN_0069.decryptKey = decryptKey;
 								EN_0069.nonceCounter = nonceCounter;
@@ -1278,7 +1278,7 @@ async function EN_0211WSEN_0531(request, yourUUID, url) {
 		} catch (err) {
 			const msg = err?.message || `${err}`;
 			if (msg.includes('Decryption failed') || msg.includes('SS handshake decrypt failed') || msg.includes('SS length decrypt failed')) {
-				log(`[SSEN_0066] EN_0498，EN_0577: ${msg}`);
+				log(`[SSEN_0066] EN_0498,EN_0577: ${msg}`);
 				closeSocketQuietly(serverSock);
 				return;
 			}
@@ -1711,7 +1711,7 @@ async function forwardataTCP(host, portNum, rawData, ws, respHeader, remoteConnW
 			return remoteSock;
 		} else {
 			closeSocketQuietly(ws);
-			throw new Error('[EN_0152] EN_0303，EN_0014，EN_0579。');
+			throw new Error('[EN_0152] EN_0303,EN_0014,EN_0579.');
 		}
 	}
 
@@ -2051,7 +2051,7 @@ async function httpConnect(targetHost, targetPort, initialData, HTTPSEN_0023 = f
 			EN_0576.releaseLock();
 		}
 
-		// CONNECT EN_0184，EN_0065，EN_0589。
+		// CONNECT EN_0184,EN_0065,EN_0589.
 		if (bytesRead > headerEndIndex) {
 			const { readable, writable } = new TransformStream();
 			const transformWriter = writable.getWriter();
@@ -2095,7 +2095,7 @@ async function httpsConnect(targetHost, targetPort, initialData) {
 			tlsSocket = await EN_0305HTTPSEN_0023TLS(false);
 		} catch (error) {
 			if (!EN_0616ChaChaEN_0191(error)) throw error;
-			log(`[HTTPSEN_0023] AES-GCM TLS EN_0316，EN_0191 ChaCha20 EN_0080: ${error?.message || error}`);
+			log(`[HTTPSEN_0023] AES-GCM TLS EN_0316,EN_0191 ChaCha20 EN_0080: ${error?.message || error}`);
 			tlsSocket = await EN_0305HTTPSEN_0023TLS(true);
 		}
 
@@ -3214,7 +3214,7 @@ async function SingboxEN_0518(SingBox_EN_0137, config_JSON = {}) {
 		// EN_0049 DIRECT EN_0574
 		config.outbounds = config.outbounds.filter(o => {
 			if (o.tag === 'REJECT' || o.tag === 'block') {
-				return false; // EN_0446，EN_0192 action: reject EN_0021
+				return false; // EN_0446,EN_0192 action: reject EN_0021
 			}
 			return true;
 		});
@@ -3245,8 +3245,8 @@ async function SingboxEN_0518(SingBox_EN_0137, config_JSON = {}) {
 		config.outbounds.forEach(outbound => {
 			if (outbound.type === 'selector' || outbound.type === 'urltest') {
 				if (Array.isArray(outbound.outbounds)) {
-					// EN_0058：EN_0233 REJECT/block，EN_0440
-					// EN_0193 action EN_0307，EN_0011
+					// EN_0058:EN_0233 REJECT/block,EN_0440
+					// EN_0193 action EN_0307,EN_0011
 					outbound.outbounds = outbound.outbounds.filter(tag => {
 						const upperTag = tag.toUpperCase();
 						return existingOutboundTags.has(tag) && upperTag !== 'REJECT' && upperTag !== 'BLOCK';
@@ -3274,7 +3274,7 @@ async function SingboxEN_0518(SingBox_EN_0137, config_JSON = {}) {
 						};
 					}
 
-					// EN_0229 ech_config，EN_0418/EN_0354 ech EN_0590
+					// EN_0229 ech_config,EN_0418/EN_0354 ech EN_0590
 					if (ech_config) {
 						outbound.tls.ech = {
 							enabled: true,
@@ -3324,15 +3324,15 @@ async function EN_0538(env, request, EN_0526IP, EN_0541 = "Get_SUB", config_JSON
 					const EN_0539 = new Date(EN_0338.TIME).toLocaleString('en-US', { timeZone: 'UTC' });
 					const EN_0531URL = new URL(EN_0338.URL);
 					const msg = `<b>#${config_JSON.EN_0039.SUBNAME} EN_0341</b>\n\n` +
-						`📌 <b>EN_0459：</b>#${EN_0338.TYPE}\n` +
-						`🌐 <b>IP：</b><code>${EN_0338.IP}</code>\n` +
-						`📍 <b>EN_0050：</b>${EN_0338.CC}\n` +
-						`🏢 <b>ASN：</b>${EN_0338.ASN}\n` +
-						`🔗 <b>EN_0206：</b><code>${EN_0531URL.host}</code>\n` +
-						`🔍 <b>EN_0551：</b><code>${EN_0531URL.pathname + EN_0531URL.search}</code>\n` +
-						`🤖 <b>UA：</b><code>${EN_0338.UA}</code>\n` +
-						`📅 <b>EN_0343：</b>${EN_0539}\n` +
-						`${config_JSON.CF.Usage.success ? `📊 <b>EN_0540：</b>${config_JSON.CF.Usage.total}/${config_JSON.CF.Usage.max} <b>${((config_JSON.CF.Usage.total / config_JSON.CF.Usage.max) * 100).toFixed(2)}%</b>\n` : ''}`;
+						`📌 <b>EN_0459:</b>#${EN_0338.TYPE}\n` +
+						`🌐 <b>IP:</b><code>${EN_0338.IP}</code>\n` +
+						`📍 <b>EN_0050:</b>${EN_0338.CC}\n` +
+						`🏢 <b>ASN:</b>${EN_0338.ASN}\n` +
+						`🔗 <b>EN_0206:</b><code>${EN_0531URL.host}</code>\n` +
+						`🔍 <b>EN_0551:</b><code>${EN_0531URL.pathname + EN_0531URL.search}</code>\n` +
+						`🤖 <b>UA:</b><code>${EN_0338.UA}</code>\n` +
+						`📅 <b>EN_0343:</b>${EN_0539}\n` +
+						`${config_JSON.CF.Usage.success ? `📊 <b>EN_0540:</b>${config_JSON.CF.Usage.total}/${config_JSON.CF.Usage.max} <b>${((config_JSON.CF.Usage.total / config_JSON.CF.Usage.max) * 100).toFixed(2)}%</b>\n` : ''}`;
 					await fetch(`https://api.telegram.org/bot${TG_JSON.BotToken}/sendMessage?chat_id=${TG_JSON.ChatID}&parse_mode=HTML&text=${encodeURIComponent(msg)}`, {
 						method: 'GET',
 						headers: {
@@ -3369,7 +3369,7 @@ async function EN_0538(env, request, EN_0526IP, EN_0541 = "Get_SUB", config_JSON
 
 function EN_0312(EN_0327, EN_0113 = 3, EN_0169 = 2) {
 	if (!EN_0327 || typeof EN_0327 !== 'string') return EN_0327;
-	if (EN_0327.length <= EN_0113 + EN_0169) return EN_0327; // EN_0234，EN_0441
+	if (EN_0327.length <= EN_0113 + EN_0169) return EN_0327; // EN_0234,EN_0441
 
 	const EN_0112 = EN_0327.slice(0, EN_0113);
 	const EN_0168 = EN_0327.slice(-EN_0169);
@@ -3476,7 +3476,7 @@ async function DoHEN_0384(EN_0206, EN_0522, DoHEN_0505 = "https://cloudflare-dns
 		const ancount = dv.getUint16(6);
 		log(`[DoHEN_0384] EN_0320 ${EN_0206} ${EN_0522} via ${DoHEN_0505} (${buf.length}EN_0238, ${ancount}EN_0380)`);
 
-		// EN_0503（EN_0214）
+		// EN_0503(EN_0214)
 		const EN_0503 = (pos) => {
 			const labels = [];
 			let p = pos, jumped = false, endPos = -1, safe = 128;
@@ -3613,13 +3613,13 @@ async function EN_0543config_JSON(env, hostname, userID, UA = "Mozilla/5.0", EN_
 		EN_0039: {
 			local: true, // true: EN_0210  false: EN_0040
 			EN_0375IPEN_0279: {
-				EN_0609IP: true, // EN_0286 EN_0609IP EN_0017trueEN_0342，EN_0174IPEN_0433，EN_0171KVEN_0084ADD.txt
+				EN_0609IP: true, // EN_0286 EN_0609IP EN_0017trueEN_0342,EN_0174IPEN_0433,EN_0171KVEN_0084ADD.txt
 				EN_0613: 16,
 				EN_0309: -1,
 			},
 			SUB: null,
 			SUBNAME: "edge" + "tunnel",
-			SUBUpdateTime: 3, // EN_0512（EN_0258）
+			SUBUpdateTime: 3, // EN_0512(EN_0258)
 			TOKEN: await MD5MD5(hostname + userID),
 		},
 		EN_0517: {
@@ -3871,7 +3871,7 @@ async function EN_0488(EN_0040HOST) {
 		for (const EN_0496 of EN_0514) {
 			if (!EN_0496.trim()) continue; // EN_0561
 			if (EN_0496.includes('00000000-0000-4000-8000-000000000000') && EN_0496.includes('example.com')) {
-				// EN_0573IPEN_0495，EN_0313 EN_0206:EN_0447#EN_0220
+				// EN_0573IPEN_0495,EN_0313 EN_0206:EN_0447#EN_0220
 				const EN_0196 = EN_0496.match(/:\/\/[^@]+@([^?]+)/);
 				if (EN_0196) {
 					let EN_0203 = EN_0196[1], EN_0220 = ''; // EN_0206:EN_0447 EN_0301 IP:EN_0447
@@ -3946,10 +3946,7 @@ async function EN_0532API(urls, EN_0640 = '443', EN_0550 = 3000) {
 				const charset = contentType.match(/charset=([^\s;]+)/i)?.[1]?.toLowerCase() || '';
 
 				// EN_0395 Content-Type EN_0183
-				let decoders = ['utf-8', 'gb2312']; // EN_0639 UTF-8
-				if (charset.includes('gb') || charset.includes('gbk') || charset.includes('gb2312')) {
-					decoders = ['gb2312', 'utf-8']; // EN_0230 GB EN_0462，EN_0035 GB2312
-				}
+				const decoders = ['utf-8']; // English-only decoding support
 
 				// EN_0261
 				let decodeSuccess = false;
@@ -3962,21 +3959,21 @@ async function EN_0532API(urls, EN_0640 = '443', EN_0550 = 3000) {
 							decodeSuccess = true;
 							break;
 						} else if (decoded && decoded.length > 0) {
-							// EN_0231 (U+FFFD)，EN_0530，EN_0467
+							// EN_0231 (U+FFFD),EN_0530,EN_0467
 							continue;
 						}
 					} catch (e) {
-						// EN_0528，EN_0260
+						// EN_0528,EN_0260
 						continue;
 					}
 				}
 
-				// EN_0228，EN_0259 response.text()
+				// EN_0228,EN_0259 response.text()
 				if (!decodeSuccess) {
 					text = await response.text();
 				}
 
-				// EN_0232，EN_0571
+				// EN_0232,EN_0571
 				if (!text || text.trim().length === 0) {
 					return;
 				}
@@ -4182,7 +4179,7 @@ function EN_0486SOCKS5EN_0548(address, EN_0640 = 80) {
 	const hostPart = atIndex === -1 ? address : address.slice(atIndex + 1);
 	const authPart = atIndex === -1 ? "" : address.slice(0, atIndex);
 	const [username, password] = authPart ? authPart.split(":") : [];
-	if (authPart && !password) throw new Error('EN_0334 SOCKS EN_0202：EN_0520 "username:password" EN_0432');
+	if (authPart && !password) throw new Error('EN_0334 SOCKS EN_0202:EN_0520 "username:password" EN_0432');
 
 	let hostname = hostPart, port = EN_0640;
 	if (hostPart.includes("]:")) {
@@ -4197,8 +4194,8 @@ function EN_0486SOCKS5EN_0548(address, EN_0640 = 80) {
 		}
 	}
 
-	if (isNaN(port)) throw new Error('EN_0334 SOCKS EN_0202：EN_0448');
-	if (hostname.includes(":") && !IPv6EN_0332.test(hostname)) throw new Error('EN_0334 SOCKS EN_0202：IPv6 EN_0199，EN_0226 [2001:db8::1]');
+	if (isNaN(port)) throw new Error('EN_0334 SOCKS EN_0202:EN_0448');
+	if (hostname.includes(":") && !IPv6EN_0332.test(hostname)) throw new Error('EN_0334 SOCKS EN_0202:IPv6 EN_0199,EN_0226 [2001:db8::1]');
 	return { username, password, hostname, port };
 }
 
@@ -4321,7 +4318,7 @@ async function EN_0501(proxyIP, EN_0436 = 'dash.cloudflare.com', UUID = '0000000
 					let txtRecords = await DoHEN_0384(singleProxyIP, 'TXT');
 					let txtData = txtRecords.filter(r => r.type === 16).map(r => /** @type {string} */(r.data));
 					if (txtData.length === 0) {
-						log(`[EN_0150] EN_0637DoHEN_0373TXTEN_0521，EN_0096Google DoHEN_0600 ${singleProxyIP}`);
+						log(`[EN_0150] EN_0637DoHEN_0373TXTEN_0521,EN_0096Google DoHEN_0600 ${singleProxyIP}`);
 						txtRecords = await DoHEN_0384(singleProxyIP, 'TXT', 'https://dns.google/dns-query');
 						txtData = txtRecords.filter(r => r.type === 16).map(r => /** @type {string} */(r.data));
 					}
@@ -4342,7 +4339,7 @@ async function EN_0501(proxyIP, EN_0436 = 'dash.cloudflare.com', UUID = '0000000
 					if (tpMatch) EN_0447 = parseInt(tpMatch[1], 10);
 				}
 
-				// EN_0106（EN_0620IPEN_0195）
+				// EN_0106(EN_0620IPEN_0195)
 				const ipv4Regex = /^(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)$/;
 				const ipv6Regex = /^\[?([a-fA-F0-9:]+)\]?$/;
 
@@ -4357,9 +4354,9 @@ async function EN_0501(proxyIP, EN_0436 = 'dash.cloudflare.com', UUID = '0000000
 					let ipv6List = aaaaRecords.filter(r => r.type === 28).map(r => `[${r.data}]`);
 					let ipAddresses = [...ipv4List, ...ipv6List];
 
-					// EN_0637DoHEN_0336，EN_0096Google DoHEN_0600
+					// EN_0637DoHEN_0336,EN_0096Google DoHEN_0600
 					if (ipAddresses.length === 0) {
-						log(`[EN_0150] EN_0637DoHEN_0374，EN_0096Google DoHEN_0600 ${EN_0195}`);
+						log(`[EN_0150] EN_0637DoHEN_0374,EN_0096Google DoHEN_0600 ${EN_0195}`);
 						[aRecords, aaaaRecords] = await Promise.all([
 							DoHEN_0384(EN_0195, 'A', 'https://dns.google/dns-query'),
 							DoHEN_0384(EN_0195, 'AAAA', 'https://dns.google/dns-query')
