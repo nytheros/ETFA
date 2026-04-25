@@ -16,7 +16,10 @@ if ! id -u v2ray >/dev/null 2>&1; then
 fi
 
 install -m 0600 "$STACK_ROOT/vpn/openconnect.env.example" /etc/tunnel-stack/openconnect.env
-install -m 0640 "$STACK_ROOT/v2ray/config.json.example" /etc/v2ray/config.json
+install -m 0600 "$STACK_ROOT/v2ray/v2ray.env.example" /etc/tunnel-stack/v2ray.env
+install -m 0755 "$STACK_ROOT/v2ray/render-config.sh" /opt/tunnel-stack/v2ray/render-config.sh
+/opt/tunnel-stack/v2ray/render-config.sh
+
 chown -R v2ray:v2ray /var/log/v2ray
 chown v2ray:v2ray /etc/v2ray/config.json
 
@@ -32,4 +35,4 @@ chmod 0755 "$STACK_ROOT"/vpn/*.sh "$STACK_ROOT"/routing/*.sh "$STACK_ROOT/system
 
 systemctl daemon-reload
 
-echo "Bootstrap complete. Edit /etc/tunnel-stack/openconnect.env and /etc/v2ray/config.json, then run: tunnelctl start"
+echo "Bootstrap complete. Edit /etc/tunnel-stack/openconnect.env and /etc/tunnel-stack/v2ray.env, then run: tunnelctl start"

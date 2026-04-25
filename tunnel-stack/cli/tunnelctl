@@ -3,7 +3,7 @@ set -euo pipefail
 
 usage() {
   cat <<USAGE
-Usage: tunnelctl {start|stop|restart|status|logs vpn|logs v2ray|diag}
+Usage: tunnelctl {start|stop|restart|status|logs vpn|logs v2ray|diag|render-config}
 USAGE
 }
 
@@ -24,6 +24,9 @@ case "$cmd" in
   status)
     systemctl --no-pager --full status openconnect.service tunnel-routing.service v2ray.service tunnel-watchdog.service
     ;;
+  render-config)
+    /opt/tunnel-stack/v2ray/render-config.sh
+    ;;
   logs)
     case "$arg" in
       vpn) journalctl -u openconnect.service -n 200 -f ;;
@@ -33,6 +36,7 @@ case "$cmd" in
     ;;
   diag)
     VPN_INTERFACE="${VPN_INTERFACE:-tun0}"
+    V2RAY_PORT="${V2RAY_LISTEN_PORT:-10808}"
     echo "== tun interface =="
     ip -o link show "$VPN_INTERFACE" || true
     echo
@@ -49,7 +53,7 @@ case "$cmd" in
     iptables -t filter -S TS_DNS_GUARD 2>/dev/null || true
     echo
     echo "== v2ray listening =="
-    ss -lntp | grep -E 'v2ray|:10808' || true
+    ss -lntp | grep -E "v2ray|:${V2RAY_PORT}" || true
     echo
     echo "== VPN connectivity test (curl via tun) =="
     curl --interface "$VPN_INTERFACE" --max-time 10 -4 https://api.ipify.org && echo || echo "curl test failed"
