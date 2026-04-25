@@ -1,8 +1,0 @@
-name = "etfa"
-main = "_worker.js"
-compatibility_date = "2025-11-04"
-keep_vars = true
-
-#[[kv_namespaces]]
-#binding = "KV"            # default KV binding name (do not change)
-#id = ""                # KV namespace id
