@@ -1,0 +1,15 @@
+[Unit]
+Description=Apply tunnel-stack policy routing and kill-switch
+After=network-online.target
+Wants=network-online.target
+Before=v2ray.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=-/etc/tunnel-stack/openconnect.env
+ExecStart=/opt/tunnel-stack/routing/apply-routing.sh
+ExecStop=/opt/tunnel-stack/routing/flush-routing.sh
+
+[Install]
+WantedBy=multi-user.target
