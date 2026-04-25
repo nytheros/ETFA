@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenConnect upstream VPN (tunnel-stack)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/tunnel-stack/openconnect.env
+ExecStart=/opt/tunnel-stack/vpn/openconnect-run.sh
+Restart=always
+RestartSec=3
+KillMode=process
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

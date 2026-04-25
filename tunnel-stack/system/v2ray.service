@@ -1,0 +1,20 @@
+[Unit]
+Description=V2Ray local proxy (forced via VPN)
+After=openconnect.service tunnel-routing.service
+Requires=tunnel-routing.service
+PartOf=tunnel-routing.service
+
+[Service]
+Type=simple
+User=v2ray
+Group=v2ray
+NoNewPrivileges=true
+LimitNOFILE=1048576
+EnvironmentFile=-/etc/tunnel-stack/openconnect.env
+ExecStartPre=/opt/tunnel-stack/routing/check-routing.sh --strict
+ExecStart=/usr/local/bin/v2ray run -config /etc/v2ray/config.json
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

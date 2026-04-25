@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<USAGE
+Usage: tunnelctl {start|stop|restart|status|logs vpn|logs v2ray|diag}
+USAGE
+}
+
+cmd="${1:-}"
+arg="${2:-}"
+
+case "$cmd" in
+  start)
+    systemctl daemon-reload
+    systemctl enable --now sysctl-apply.service tunnel-routing.service openconnect.service tunnel-watchdog.service v2ray.service
+    ;;
+  stop)
+    systemctl stop v2ray.service tunnel-watchdog.service openconnect.service tunnel-routing.service
+    ;;
+  restart)
+    systemctl restart tunnel-routing.service openconnect.service tunnel-watchdog.service v2ray.service
+    ;;
+  status)
+    systemctl --no-pager --full status openconnect.service tunnel-routing.service v2ray.service tunnel-watchdog.service
+    ;;
+  logs)
+    case "$arg" in
+      vpn) journalctl -u openconnect.service -n 200 -f ;;
+      v2ray) journalctl -u v2ray.service -n 200 -f ;;
+      *) usage; exit 1 ;;
+    esac
+    ;;
+  diag)
+    VPN_INTERFACE="${VPN_INTERFACE:-tun0}"
+    echo "== tun interface =="
+    ip -o link show "$VPN_INTERFACE" || true
+    echo
+    echo "== routing table vpnroute =="
+    ip route show table vpnroute || true
+    echo
+    echo "== ip rules =="
+    ip rule show
+    echo
+    echo "== iptables mark/kill rules =="
+    iptables -t mangle -S TS_V2RAY_MARK 2>/dev/null || true
+    iptables -t mangle -S OUTPUT | grep TS_V2RAY_MARK || true
+    iptables -t filter -S TS_V2RAY_KILL 2>/dev/null || true
+    iptables -t filter -S TS_DNS_GUARD 2>/dev/null || true
+    echo
+    echo "== v2ray listening =="
+    ss -lntp | grep -E 'v2ray|:10808' || true
+    echo
+    echo "== VPN connectivity test (curl via tun) =="
+    curl --interface "$VPN_INTERFACE" --max-time 10 -4 https://api.ipify.org && echo || echo "curl test failed"
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac

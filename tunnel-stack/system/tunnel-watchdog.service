@@ -1,0 +1,14 @@
+[Unit]
+Description=Tunnel-stack VPN watchdog
+After=openconnect.service tunnel-routing.service
+Wants=openconnect.service
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/tunnel-stack/openconnect.env
+ExecStart=/opt/tunnel-stack/system/watchdog.sh
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
